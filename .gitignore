@@ -16,3 +16,18 @@
 /web/bundles/
 .idea/
 composer.phar
+=======
+
+# Managed by Composer
+/app/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+
+/web/uploads/
+
+# Assets managed by Bower
+/web/assets/vendor/
+
+# PHPUnit
+/app/phpunit.xml
