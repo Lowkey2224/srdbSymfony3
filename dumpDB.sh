@@ -14,7 +14,7 @@ filename="~/mysql_dumps/${config_parameters_database_name}_`date +"%s"`.sql"
 echo "Dumping Database ${config_parameters_database_name} to ${filename} ."
 #mysqldump -u "$config_parameters_database_user" --password="$config_parameters_database_password" "$config_parameters_database_name" > "./mysql_dumps/"${config_parameters_database_name}"_`date +"%s"`.sql"
 
-mysqldump -u "$config_parameters_database_user" --password="$config_parameters_database_password" "$config_parameters_database_name" > {$filename}
+mysqldump -u "$config_parameters_database_user" --password="$config_parameters_database_password" "$config_parameters_database_name" > $filename
 res=$?
 echo "Finished with Code $res"
 exit $res
