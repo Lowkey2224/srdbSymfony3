@@ -1,0 +1,3 @@
+character_database_homepage:
+    path:     /
+    defaults: { _controller: CharacterDatabaseBundle:Default:index }
