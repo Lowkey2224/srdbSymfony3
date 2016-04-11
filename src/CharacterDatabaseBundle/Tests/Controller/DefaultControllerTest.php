@@ -13,8 +13,7 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-//        $crawler->count();
-        echo "\n".$client->getResponse()->getContent()."\n";
+        $crawler->count();
         $this->assertContains('Hello World', $client->getResponse()->getContent());
     }
 }
