@@ -1,3 +1,7 @@
+loki_user:
+    resource: "@LokiUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 character_database:
     resource: "@CharacterDatabaseBundle/Resources/config/routing.yml"
     prefix:   /

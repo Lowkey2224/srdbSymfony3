@@ -1,0 +1,4 @@
+loki_user_homepage:
+    resource:     '@LokiUserBundle/Controller/'
+    type: Annotation
+#    defaults: { _controller: LokiUserBundle:Default:index }
