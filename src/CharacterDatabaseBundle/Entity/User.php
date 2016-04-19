@@ -3,6 +3,7 @@
 namespace CharacterDatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -11,8 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends AbstractEntity
+class User extends BaseUser
 {
+
+    /**
+     * @var integer
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 
     /**
      * Correlation to a user, who should be a partner.
