@@ -3,5 +3,9 @@ character_database_homepage:
     defaults: { _controller: CharacterDatabaseBundle:Default:index }
 
 character_list:
-    path:     /character/list
+    path:     /character
     defaults: { _controller: CharacterDatabaseBundle:Character:index }
+
+character_show:
+    path:     /character/{id}
+    defaults: { _controller: CharacterDatabaseBundle:Character:show }
