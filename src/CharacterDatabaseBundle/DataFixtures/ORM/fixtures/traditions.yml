@@ -1,0 +1,8 @@
+CharacterDatabaseBundle\Entity\MagicalTradition:
+    Hermetic:
+        name: Hermetiker
+        description: Zahlenzauberer
+
+    Schaman:
+        name: Schamane
+        description: Regentanz etc.

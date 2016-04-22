@@ -1,0 +1,16 @@
+CharacterDatabaseBundle\Entity\CharacterToSkill:
+
+    ath{Lodur, Nigel}:
+        character: "@<current()>"
+        skill: "@ath"
+        level: <numberBetween(1,6)>
+
+    sth{Lodur, Nigel}:
+        character: "@<current()>"
+        skill: "@sth"
+        level: <numberBetween(1,6)>
+
+    ett{Lodur, Nigel}:
+        character: "@<current()>"
+        skill: "@ett"
+        level: <numberBetween(1,6)>

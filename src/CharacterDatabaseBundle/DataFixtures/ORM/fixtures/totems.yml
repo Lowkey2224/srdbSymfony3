@@ -1,0 +1,12 @@
+CharacterDatabaseBundle\Entity\Totem:
+    Gargoyle:
+        name: Gargyle
+        tradition: "@Schaman"
+        description: paragraph($nbSentences = 2)
+        ruleText: paragraph($nbSentences = 3)
+
+    Snake:
+        name: Schlange
+        tradition: "@Schaman"
+        description: paragraph($nbSentences = 2)
+        ruleText: paragraph($nbSentences = 3)

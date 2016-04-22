@@ -1,0 +1,16 @@
+CharacterDatabaseBundle\Entity\Specialization:
+    hiding:
+        name: verstecken
+        skill: "@sth"
+
+    sprinting:
+        name: sprinten
+        skill: "@ath"
+
+    street:
+        name: Straße
+        skill: "@ett"
+
+    corporate:
+        name: Konzern
+        skill: "@ett"

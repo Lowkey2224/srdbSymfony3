@@ -1,0 +1,11 @@
+CharacterDatabaseBundle\Entity\ConnectionNotInDB:
+
+    connLodur{1..5}:
+        target: <en_US:name()>
+        level: <numberBetween(1,2)>
+        character: "@Lodur"
+
+    connNigel{1..5}:
+        target: <en_US:name()>
+        level: <numberBetween(1,2)>
+        character: "@Nigel"

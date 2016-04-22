@@ -30,5 +30,9 @@ class User extends BaseUser
      */
     protected $characters;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isDeleted;
 }
 

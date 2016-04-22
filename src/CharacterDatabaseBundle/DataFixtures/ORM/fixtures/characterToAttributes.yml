@@ -1,0 +1,70 @@
+CharacterDatabaseBundle\Entity\CharacterToAttribute:
+    con{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@con"
+        level: <numberBetween(1,6)>
+
+    qck{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@qck"
+        level: <numberBetween(1,6)>
+
+    str{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@str"
+        level: <numberBetween(1,6)>
+
+    cha{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@cha"
+        level: <numberBetween(1,6)>
+
+    int{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@int"
+        level: <numberBetween(1,6)>
+
+    will{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@will"
+        level: <numberBetween(1,6)>
+
+    ess{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@ess"
+        level: <numberBetween(1,6)>
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@mag"
+        level: 0
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@kp"
+        level: 0
+    mag{Lodur, Nigel}:
+
+        character: "@<current()>"
+        attribute: "@akp"
+        level: 0
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@tp"
+        level: 0
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@hp"
+        level: 0
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@hackingpool"
+        level: 0
+
+    mag{Lodur, Nigel}:
+        character: "@<current()>"
+        attribute: "@sp"
+        level: 0

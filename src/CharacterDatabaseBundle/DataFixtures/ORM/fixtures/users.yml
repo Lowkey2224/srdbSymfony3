@@ -1,0 +1,16 @@
+CharacterDatabaseBundle\Entity\User:
+    superadmin-loki:
+        username (unique): Loki
+        email (unique): jenz@silpion.de
+        plainpassword: wuseldusel
+        enabled: true
+        isDeleted: false
+        roles: [ROLE_SUPERADMIN]
+
+    user-loki2:
+        username (unique): Loki2
+        email (unique): loki@silpion.de
+        plainpassword: wuseldusel
+        enabled: true
+        isDeleted: false
+        roles: [ROLE_USER]

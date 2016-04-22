@@ -1,0 +1,37 @@
+CharacterDatabaseBundle\Entity\Attribute:
+    con:
+        name: Konstitution
+
+    qck:
+        name: Schnelligkeit
+
+    str:
+        name: Stärke
+
+    cha:
+        name: Charisma
+
+    int:
+        name: Intelligenz
+
+    will:
+        name: Willenskraft
+
+    ess:
+        name: Essenz
+
+    mag:
+        name: Magie
+
+    kp:
+        name: Kampfpool
+    akp:
+        name: Astralkampfpool
+    tp:
+        name: Taskpool
+    hp:
+        name: Hexereipool
+    hackingpool:
+        name: Hackingpool
+    sp:
+        name: Steuerpool

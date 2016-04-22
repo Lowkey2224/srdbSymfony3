@@ -1,0 +1,15 @@
+CharacterDatabaseBundle\Entity\Skill:
+    ett:
+        name: Gebräuche
+        type: 1
+        attribute: "@cha"
+
+    ath:
+        name: Athletik
+        type: 1
+        attribute: "@con"
+
+    sth:
+        name: Heimlichkeit
+        type: 1
+        attribute: "@qck"

@@ -1,0 +1,21 @@
+CharacterDatabaseBundle\Entity\MagicalCapability:
+    FullMagician:
+        name: Vollmagier
+
+    Ki-Adept:
+        name: Ki-Adept
+
+    Ki-Mage:
+        name: Ki-Magier
+
+    Summoner:
+        name: Beschwörer
+
+    Elementarist:
+        name: Elementarist
+
+    Schamanist:
+        name: Schamanist
+
+    Sorcerer:
+        name: Hexer

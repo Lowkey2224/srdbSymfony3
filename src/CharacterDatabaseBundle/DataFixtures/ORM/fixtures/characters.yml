@@ -1,0 +1,19 @@
+CharacterDatabaseBundle\Entity\Character:
+    Lodur:
+        name: Lodur
+        race: HSS
+        occupation: Decker/Rigger
+        description: <text(100)>
+        type: 1
+        user: "@superadmin-loki"
+
+    Nigel:
+        name: Nigel
+        race: HSN
+        occupation: Schamane
+        description: <text(30)>
+        type: 1
+        user: "@user-loki2"
+        magicalTradition: "@Schaman"
+        magicalCapability: "@FullMagician"
+        totem: "@Gargoyle"
