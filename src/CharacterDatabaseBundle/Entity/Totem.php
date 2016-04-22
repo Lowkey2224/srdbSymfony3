@@ -40,4 +40,70 @@ class Totem extends AbstractEntity
      */
     protected $ruleText;
 
+    /**
+     * @return MagicalTradition
+     */
+    public function getTradition()
+    {
+        return $this->tradition;
+    }
+
+    /**
+     * @param MagicalTradition $tradition
+     */
+    public function setTradition($tradition)
+    {
+        $this->tradition = $tradition;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRuleText()
+    {
+        return $this->ruleText;
+    }
+
+    /**
+     * @param string $ruleText
+     */
+    public function setRuleText($ruleText)
+    {
+        $this->ruleText = $ruleText;
+    }
+
+
+
 }

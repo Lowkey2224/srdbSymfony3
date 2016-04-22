@@ -146,5 +146,295 @@ class Character extends AbstractEntity
         $this->goodKarma = 0;
         $this->karmapool = 0;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRace()
+    {
+        return $this->race;
+    }
+
+    /**
+     * @param string $race
+     */
+    public function setRace($race)
+    {
+        $this->race = $race;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOccupation()
+    {
+        return $this->occupation;
+    }
+
+    /**
+     * @param string $occupation
+     */
+    public function setOccupation($occupation)
+    {
+        $this->occupation = $occupation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReputation()
+    {
+        return $this->reputation;
+    }
+
+    /**
+     * @param int $reputation
+     */
+    public function setReputation($reputation)
+    {
+        $this->reputation = $reputation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGoodKarma()
+    {
+        return $this->goodKarma;
+    }
+
+    /**
+     * @param int $goodKarma
+     */
+    public function setGoodKarma($goodKarma)
+    {
+        $this->goodKarma = $goodKarma;
+    }
+
+    /**
+     * @return int
+     */
+    public function getKarmapool()
+    {
+        return $this->karmapool;
+    }
+
+    /**
+     * @param int $karmapool
+     */
+    public function setKarmapool($karmapool)
+    {
+        $this->karmapool = $karmapool;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return MagicalCapability
+     */
+    public function getMagicalCapability()
+    {
+        return $this->magicalCapability;
+    }
+
+    /**
+     * @param MagicalCapability $magicalCapability
+     */
+    public function setMagicalCapability($magicalCapability)
+    {
+        $this->magicalCapability = $magicalCapability;
+    }
+
+    /**
+     * @return MagicalTradition
+     */
+    public function getMagicalTradition()
+    {
+        return $this->magicalTradition;
+    }
+
+    /**
+     * @param MagicalTradition $magicalTradition
+     */
+    public function setMagicalTradition($magicalTradition)
+    {
+        $this->magicalTradition = $magicalTradition;
+    }
+
+    /**
+     * @return Totem
+     */
+    public function getTotem()
+    {
+        return $this->totem;
+    }
+
+    /**
+     * @param Totem $totem
+     */
+    public function setTotem($totem)
+    {
+        $this->totem = $totem;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param mixed $attributes
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * @param Collection $skills
+     */
+    public function setSkills($skills)
+    {
+        $this->skills = $skills;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Collection $items
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getConnectionsNotInDB()
+    {
+        return $this->connectionsNotInDB;
+    }
+
+    /**
+     * @param Collection $connectionsNotInDB
+     */
+    public function setConnectionsNotInDB($connectionsNotInDB)
+    {
+        $this->connectionsNotInDB = $connectionsNotInDB;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getConnectionsInDB()
+    {
+        return $this->connectionsInDB;
+    }
+
+    /**
+     * @param Collection $connectionsInDB
+     */
+    public function setConnectionsInDB($connectionsInDB)
+    {
+        $this->connectionsInDB = $connectionsInDB;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getConnectionsInDBTarget()
+    {
+        return $this->connectionsInDBTarget;
+    }
+
+    /**
+     * @param Collection $connectionsInDBTarget
+     */
+    public function setConnectionsInDBTarget($connectionsInDBTarget)
+    {
+        $this->connectionsInDBTarget = $connectionsInDBTarget;
+    }
+
+
 }
 

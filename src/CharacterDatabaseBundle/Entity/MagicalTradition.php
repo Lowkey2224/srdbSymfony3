@@ -30,4 +30,54 @@ class MagicalTradition extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Totem", mappedBy="tradition")
      */
     protected $totems;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return Totem
+     */
+    public function getTotems()
+    {
+        return $this->totems;
+    }
+
+    /**
+     * @param Totem $totems
+     */
+    public function setTotems($totems)
+    {
+        $this->totems = $totems;
+    }
+
+
 }

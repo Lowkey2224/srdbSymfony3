@@ -34,5 +34,55 @@ class User extends BaseUser
      * @ORM\Column(type="boolean")
      */
     protected $isDeleted;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getCharacters()
+    {
+        return $this->characters;
+    }
+
+    /**
+     * @param User $characters
+     */
+    public function setCharacters($characters)
+    {
+        $this->characters = $characters;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsDeleted()
+    {
+        return $this->isDeleted;
+    }
+
+    /**
+     * @param mixed $isDeleted
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+    }
+
+
 }
 
