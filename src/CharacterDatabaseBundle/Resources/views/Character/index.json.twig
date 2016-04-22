@@ -18,10 +18,55 @@
         ],
         "magical": "{{ (char.magicalCapability is not null)?  char.magicalCapability.name: null}}",
         "tradition": "{{ (char.magicalTradition is not null)?  char.magicalTradition.name: null}}",
-        "totem": "{{ (char.magicalCapability is not null)?  char.magicalCapability.name: null}}",
+        "totem": "{{ (char.totem is not null)?  char.totem.name: null}}",
+        "attributes": [
+            {% for att in char.attributes %}
+            {
+                "name": "{{ att.attribute.name }}",
+                "level": "{{ att.level}}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}],
+        "skills": [
+            {% for skill in char.skills %}
+            {
+                "name": "{{ skill.skill.name }}",
+                "level": "{{ skill.level}}"
+                {% if skill.specializations is not empty %}
+            ,"specializations":[
+                {% for spec in skill.specializations %}
+                {
+                    "name": "{{ spec.name }}",
+                    "level": "{{ spec.level }}"
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]
+                {% endif %}
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}],
+        "connectionsID": [
+            {% for conn in char.connectionsInDB%}
+            {
+                "id": "{{ conn.character.id }}",
+                "name": "{{ conn.target.name }}",
+                "level": "{{ conn.level }}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}],
+        "connectionsNID": [
+            {% for conn in char.connectionsNotInDB%}
+            {
+                "name": "{{ conn.target }}",
+                "level": "{{ conn.level }}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}],
+        "equip": [
+            {% for item in char.items%}
+            {
+                "name": "{{ item.name }}",
+                "amount": "{{ item.amount }}"
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}]
+
     }
-    {% if not loop.last %}
-    ,
-    {% endif %}
+    {% if not loop.last %},{% endif %}
     {% endfor %}
 ]

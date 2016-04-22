@@ -25,6 +25,11 @@ class EquipItem extends AbstractEntity
     protected $amount;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
      * @param mixed $amount
      */
     public function setAmount($amount)
