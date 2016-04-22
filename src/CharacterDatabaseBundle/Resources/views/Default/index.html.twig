@@ -1,6 +1,16 @@
 {# app/Resources/views/blog/index.html.twig #}
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>Hello World!</h1>
+    <div ng-controller="StoreController as store">
+    <h1>Hello World!</h1>
     <h2>Work in Progress</h2>
-{%  endblock %}
+    {% verbatim %}
+    <ul class="phone-thumbs">
+        <li ng-repeat="gem in store.gems">
+            {{gem.name}}
+        </li>
+    </ul>
+    {% endverbatim %}
+    <h3>End JS </h3>
+    </div>
+{% endblock %}

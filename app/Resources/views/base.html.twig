@@ -1,13 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html >
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bundles/characterdatabase/vendor/css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/characterdatabase/vendor/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/characterdatabase/vendor/css/mobile-angular-ui-base.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/characterdatabase/vendor/css/mobile-angular-ui-hover.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/characterdatabase/vendor/css/mobile-angular-ui-desktop.min.css') }}" />
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body ng-app="srdb">
+        {% block navbar %}
+            {% include '::navbar.html.twig' %}
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+
+        <script src="{{ asset('bundles/characterdatabase/js/app.js') }}" ></script>
+        <script src="{{ asset('bundles/characterdatabase/vendor/js/bootstrap.min.js') }}" ></script>
+        <script src="{{ asset('bundles/characterdatabase/vendor/js/mobile-angular-ui.core.min.js') }}" ></script>
+        <script src="{{ asset('bundles/characterdatabase/vendor/js/mobile-angular-ui.gestures.min.js') }}" ></script>
+        <script src="{{ asset('bundles/characterdatabase/vendor/js/mobile-angular-ui.js') }}" ></script>
     </body>
 </html>

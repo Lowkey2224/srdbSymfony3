@@ -1,0 +1,120 @@
+{#<nav class="navbar navbar-default">#}
+    {#<div class="container-fluid">#}
+        {#<div class="navbar-header">#}
+            {#<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">#}
+                {#<span class="sr-only">Toggle Navigation</span>#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+            {#</button>#}
+            {#<a class="navbar-brand" href="/">SR Characterdatenbank</a>#}
+        {#</div>#}
+        {#<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+
+            {#<ul class="nav navbar-nav">#}
+                {##}
+                {#<li class=""><a href="">Neuer Character</a>#}
+                {#</li>#}
+                {#<li class="dropdown ">#}
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Meine Character<span class="caret"></span></a>#}
+                    {#<ul class="dropdown-menu" role="menu">#}
+                        {#<li><a href="">Geschäftspartner verwalten</a></li>#}
+                        {#<li><a href="">Benutzer verwalten</a></li>#}
+                        {#<li><a href="">Fahrer verwalten</a></li>#}
+
+                        {#<li><a href="">Touren-Frachtführer verwalten</a></li>#}
+                        {#<li><a href="">Frachtführer aus Fremdsystemen verwalten</a></li>#}
+
+
+                        {#<li><a href="">Verlage aus Fremdsystemen verwalten</a></li>#}
+
+
+                        {#<li><a href="">Feedback</a></li>#}
+
+                        {#<li><a href="">Statistiken: Frachtführer Zeitenmeldung</a></li>#}
+                        {#<li><a href="">Verspätungsgründe verwalten</a></li>#}
+                        {#<li><a href="">Manueller Passat Import</a></li>#}
+                    {#</ul>#}
+                {#</li>#}
+
+
+                {#<li class=""><a href="">Alle Character</a>#}
+                {#</li>#}
+
+                {#<li class="dropdown ">#}
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Content<span class="caret"></span></a>#}
+                    {#<ul class="dropdown-menu" role="menu">#}
+                        {#<li><a href="">Skills</a></li>#}
+                        {#<li><a href="">Spezialisierungen</a></li>#}
+                        {#<li><a href="">Attribute</a></li>#}
+
+                        {#<li><a href="">Traditionen</a></li>#}
+                        {#<li><a href="">Totems</a></li>#}
+                        {#<li><a href="">Cyberware</a></li>#}
+                        {#<li><a href="">Feedback</a></li>#}
+                    {#</ul>#}
+                {#</li>#}
+                {##}
+            {#</ul>#}
+
+            {##}
+            {#<ul class="nav navbar-nav navbar-right">#}
+                {#<li class="dropdown">#}
+
+                    {##}
+                    {##}
+
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"#}
+                       {#aria-expanded="false"><i class="fa fa-bell fa-fw" ></i>#}
+                        {#<span class="caret"></span></a>#}
+                    {#<ul class="dropdown-menu" role="menu">#}
+                        {#<li style="">#}
+                            {#<a href="">Touren#}
+                                {#ohne Zuordnung: </a></li>#}
+                    {#</ul>#}
+                {#</li>#}
+            {#</ul>#}
+            {##}
+
+
+            {#<ul class="nav navbar-nav navbar-right">#}
+
+                {#<li><a href="">Login</a></li>#}
+
+                {#<li class="dropdown">#}
+                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="caret"></span></a>#}
+                    {#<ul class="dropdown-menu" role="menu">#}
+                        {#<li class="disabled"><a href="#">Berechtigung: </a></li>#}
+                        {#<li><a href="">Logout</a></li>#}
+                    {#</ul>#}
+                {#</li>#}
+
+            {#</ul>#}
+        {#</div>#}
+    {#</div>#}
+{#</nav>#}
+<div class="navbar navbar-app navbar-absolute-top">
+    <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+        SR Characterdatenbank
+    </div>
+    <div class="btn-group pull-left">
+        <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <div class="btn-group pull-right" ui-yield-to="navbarAction">
+    </div>
+</div>
+
+<div ui-track-as-search-param='true' class="sidebar sidebar-left">
+    <div class="scrollable">
+        <h1 class="scrollable-header app-name">Ohl Zeitenerfassung</h1>
+        <div class="scrollable-content">
+            <div class="list-group" ui-turn-off='uiSidebarLeft'>
+                <!--<a class="list-group-item" href="#/">Home <i class="fa fa-chevron-right pull-right"></i></a>-->
+                <a class="list-group-item" href="#/tour">Touren <i class="fa fa-chevron-right pull-right"></i></a>
+                <a class="list-group-item" href="#/logout">Logout <i class="fa fa-chevron-right pull-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
