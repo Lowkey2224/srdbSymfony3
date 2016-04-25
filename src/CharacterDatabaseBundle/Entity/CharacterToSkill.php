@@ -33,7 +33,8 @@ class CharacterToSkill extends AbstractEntity
     protected $level;
 
     /**
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization", mappedBy="charSkill", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization",
+     *     mappedBy="charSkill", fetch="EAGER")
      */
     protected $specializations;
 

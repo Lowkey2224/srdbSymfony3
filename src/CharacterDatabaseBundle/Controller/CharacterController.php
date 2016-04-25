@@ -16,7 +16,10 @@ class CharacterController extends Controller
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
         $chars = $repo->findAll();
 
-        return $this->render('CharacterDatabaseBundle:Character:index.json.twig', ['characters' => $chars], new JsonResponse());
+        return $this->render(
+            'CharacterDatabaseBundle:Character:index.json.twig',
+            ['characters' => $chars],
+            new JsonResponse());
     }
 
     public function showAction($id)

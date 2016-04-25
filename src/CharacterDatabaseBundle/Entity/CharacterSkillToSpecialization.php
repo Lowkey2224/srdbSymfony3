@@ -22,7 +22,7 @@ class CharacterSkillToSpecialization extends AbstractEntity
     protected $charSkill;
 
     /**
-     * @var Specialization $specialization
+     * @var Specialization
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Specialization", inversedBy="specializations")
      * @ORM\JoinColumn(name="specialization_id", referencedColumnName="id")
      */

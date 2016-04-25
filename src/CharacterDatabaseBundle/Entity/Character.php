@@ -87,13 +87,15 @@ class Character extends AbstractEntity
 
     /**
      * @var
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToAttribute", mappedBy="character", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToAttribute",
+     *     mappedBy="character", fetch="EAGER")
      */
     protected $attributes;
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToSkill", mappedBy="character", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToSkill",
+     *     mappedBy="character", fetch="EAGER")
      **/
     protected $skills;
 
@@ -114,13 +116,15 @@ class Character extends AbstractEntity
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\ConnectionNotInDB", mappedBy="character", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\ConnectionNotInDB",
+     *      mappedBy="character", fetch="EAGER")
      */
     protected $connectionsNotInDB;
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\ConnectionInDB", mappedBy="character", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\ConnectionInDB",
+     *     mappedBy="character", fetch="EAGER")
      */
     protected $connectionsInDB;
 
