@@ -54,18 +54,18 @@ class CharacterControllerTest extends WebTestCase
 
         $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
         $this->assertGreaterThan(0, count($chars));
-        $crawler = $client->request('GET', '/character/'.$chars[0]->getId());
+        for($i = 0; $i < count($chars); $i++){
+            $client->request('GET', '/character/'.$chars[$i]->getId());
+                $this->assertTrue(
+                $client->getResponse()->headers->contains(
+                    'Content-Type',
+                    'application/json'
+                )
+            );
+            $this->assertTrue($client->getResponse()->isSuccessful());
+            $responseData = json_decode($client->getResponse()->getContent(), true);
+            $this->assertEquals(18, count($responseData));
+        }
 
-
-
-        $this->assertTrue(
-            $client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $responseData = json_decode($client->getResponse()->getContent(), true);
-        $this->assertEquals(18, count($responseData));
     }
 }
