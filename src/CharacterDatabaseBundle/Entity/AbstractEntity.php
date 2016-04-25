@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 abstract class AbstractEntity
@@ -90,6 +89,4 @@ abstract class AbstractEntity
     {
         return $this->updated;
     }
-
-
 }
