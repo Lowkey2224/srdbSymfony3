@@ -31,11 +31,7 @@ class CharacterControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = static::createClient();
-
-
         $client->request('GET', '/character');
-
-
         $this->assertTrue(
             $client->getResponse()->headers->contains(
                 'Content-Type',
@@ -51,12 +47,11 @@ class CharacterControllerTest extends WebTestCase
     public function testShow()
     {
         $client = static::createClient();
-
         $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
         $this->assertGreaterThan(0, count($chars));
-        for($i = 0; $i < count($chars); $i++){
+        for ($i = 0; $i < count($chars); $i++) {
             $client->request('GET', '/character/'.$chars[$i]->getId());
-                $this->assertTrue(
+            $this->assertTrue(
                 $client->getResponse()->headers->contains(
                     'Content-Type',
                     'application/json'
