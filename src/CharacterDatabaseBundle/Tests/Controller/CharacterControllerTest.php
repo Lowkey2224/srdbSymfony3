@@ -33,7 +33,7 @@ class CharacterControllerTest extends WebTestCase
         $client = static::createClient();
 
 
-        $crawler = $client->request('GET', '/character');
+        $client->request('GET', '/character');
 
 
         $this->assertTrue(
