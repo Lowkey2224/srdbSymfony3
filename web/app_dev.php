@@ -10,14 +10,11 @@ use Symfony\Component\Debug\Debug;
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.
+//std Allowed IPs
 $allowedIps = [
-    '127.0.0.1',
-    'fe80::1',
-    '::1',
-    '213.209.99.169', // Silpion Offics
-    '213.209.99.170', // Silpion Offics WiFi
-    '31.18.158.60', // Loki@Home
 ];
+include_once '../allowedIPs.php';
+
 
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])
