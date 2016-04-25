@@ -1,0 +1,12 @@
+<div ng-repeat="char in characterController.characters" class="list-group-item list-group-item-home">
+    <h1>{{char.name}}
+        <small>{{ char.user.name}}<i class="fa fa-chevron-right pull-right"></i></small>
+    </h1>
+</div>
+<div>
+    <div ng-hide="character" class="list-group-item list-group-item-home">
+        <h1>
+            Keine Character Vorhanden.
+        </h1>
+    </div>
+</div>

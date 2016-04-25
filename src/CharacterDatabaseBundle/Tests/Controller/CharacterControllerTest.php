@@ -57,6 +57,7 @@ class CharacterControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/character/'.$chars[0]->getId());
 
 
+
         $this->assertTrue(
             $client->getResponse()->headers->contains(
                 'Content-Type',

@@ -6,23 +6,26 @@
     var app = angular.module('srdb', [
         'mobile-angular-ui',
         'ngRoute',
-        'mobile-angular-ui.gestures'
+        'mobile-angular-ui.gestures',
+        'character'
     ]);
 
     app.baseUrl = function() {
+        //console.log("Loacation", $location, $location.absUrl(), $location.url());
         return "app_dev.php/";
     };
 
     app.controller('CharacterController', ['$http', '$log', function($http, $log){
         var character = this;
         character.characters = [];
-        url = app.baseUrl()+'character/list';
+        url = app.baseUrl()+'character';
         console.log(url);
         $http.get(url).success(function(data){
             character.characters = data;
             console.log(data, "yello ")
         });
     }]);
+
     app.config(function($routeProvider) {
         $routeProvider.when('/',              {templateUrl: 'bundles/characterdatabase/html/home.html', reloadOnSearch: false});
         $routeProvider.when('/new',        {templateUrl: 'bundles/characterdatabase/html/scroll.html', reloadOnSearch: false});
