@@ -16,6 +16,8 @@ class CharacterControllerTest extends WebTestCase
      */
     private $em;
 
+    private $jsonEntries = 18;
+
     /**
      * {@inheritDoc}
      */
@@ -41,7 +43,7 @@ class CharacterControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
         $responseData = json_decode($client->getResponse()->getContent(), true);
         $this->assertGreaterThan(1, count($responseData));
-        $this->assertEquals(17, count($responseData[0]));
+        $this->assertEquals($this->jsonEntries, count($responseData[0]));
     }
 
     public function testShow()
@@ -59,7 +61,7 @@ class CharacterControllerTest extends WebTestCase
             );
             $this->assertTrue($client->getResponse()->isSuccessful());
             $responseData = json_decode($client->getResponse()->getContent(), true);
-            $this->assertEquals(18, count($responseData));
+            $this->assertEquals($this->jsonEntries, count($responseData), "For Character: ".$chars[$i]->getName());
         }
 
     }
