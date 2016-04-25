@@ -14,3 +14,8 @@ CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization:
         specialization: "@street"
         level: <numberBetween(1,6)>
         charSkill: "@ett<current()>"
+
+    corp{Lodur, Nigel}:
+        specialization: "@corporate"
+        level: <numberBetween(1,6)>
+        charSkill: "@ett<current()>"
