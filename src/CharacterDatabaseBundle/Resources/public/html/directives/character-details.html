@@ -1,0 +1,12 @@
+<div ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home" ng-click="">
+    <h1>{{characterDetail.characterDetails.name}}
+        <small>{{ characterDetail.characterDetails.user.name}}</small>
+    </h1>
+</div>
+<div>
+    <div ng-hide="characterDetail.characterDetails" class="list-group-item list-group-item-home">
+        <h1>
+            Keine Character Vorhanden.
+        </h1>
+    </div>
+</div>

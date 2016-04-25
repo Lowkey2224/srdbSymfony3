@@ -7,7 +7,10 @@
     ]);
 
     app.baseUrl = function() {
-        return "app_dev.php/";
+        if(window.location.pathname.indexOf("app_dev.php") > 0){
+            return "app_dev.php/";
+        }
+        return "";
     };
 
     app.directive("characterList", function(){
@@ -19,13 +22,32 @@
                 var character = this;
                 character.characters = [];
                 url = app.baseUrl()+'character';
-                console.log(url);
+                console.log("Getting data from: ", url);
                 $http.get(url).success(function(data){
                     character.characters = data;
-                    console.log(data, "Character App ")
+                    console.log("received data for all", data)
                 });
             }],
             controllerAs: 'characterController'
+        };
+    });
+
+    app.directive("characterDetails", function(){
+        return{
+            restrict: 'E',
+            templateUrl: 'bundles/characterdatabase/html/directives/character-details.html',
+            controller: ['$http', '$routeParams', function ($http, $routeParams) {
+
+                var characterDetail = this;
+                characterDetail.characterDetails = null;
+                url = app.baseUrl()+'character/'+$routeParams.characterId;
+                console.log("Details Url", url);
+                $http.get(url).success(function(data){
+                    characterDetail.characterDetails = data;
+                    console.log("Details ", data)
+                });
+            }],
+            controllerAs: 'characterDetail'
         };
     });
 
