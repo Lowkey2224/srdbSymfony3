@@ -19,7 +19,8 @@ class CharacterController extends Controller
         return $this->render(
             'CharacterDatabaseBundle:Character:index.json.twig',
             ['characters' => $chars],
-            new JsonResponse());
+            new JsonResponse()
+        );
     }
 
     public function showAction($id)
