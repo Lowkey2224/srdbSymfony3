@@ -10,6 +10,24 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CharacterControllerTest extends WebTestCase
 {
+
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function setUp()
+    {
+        self::bootKernel();
+
+        $this->em = static::$kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+    }
+
     public function testIndex()
     {
         $client = static::createClient();
@@ -34,8 +52,9 @@ class CharacterControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-
-        $crawler = $client->request('GET', '/character/1');
+        $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
+        $this->assertGreaterThan(0, count($chars));
+        $crawler = $client->request('GET', '/character/'.$chars[0]->getId());
 
 
         $this->assertTrue(
