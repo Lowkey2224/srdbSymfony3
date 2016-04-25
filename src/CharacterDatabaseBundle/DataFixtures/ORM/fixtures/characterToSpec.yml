@@ -1,0 +1,16 @@
+CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization:
+
+    sprinting{Lodur, Nigel}:
+        specialization: "@sprinting"
+        level: <numberBetween(1,6)>
+        charSkill: "@ath<current()>"
+
+    hiding{Lodur, Nigel}:
+        specialization: "@hiding"
+        level: <numberBetween(1,6)>
+        charSkill: "@sth<current()>"
+
+    street{Lodur, Nigel}:
+        specialization: "@street"
+        level: <numberBetween(1,6)>
+        charSkill: "@ett<current()>"
