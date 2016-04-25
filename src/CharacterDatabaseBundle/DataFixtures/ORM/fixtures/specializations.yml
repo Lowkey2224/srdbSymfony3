@@ -1,10 +1,10 @@
 CharacterDatabaseBundle\Entity\Specialization:
     hiding:
-        name: verstecken
+        name: Verstecken
         skill: "@sth"
 
     sprinting:
-        name: sprinten
+        name: Sprinten
         skill: "@ath"
 
     street:
