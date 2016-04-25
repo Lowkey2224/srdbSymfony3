@@ -36,13 +36,14 @@
     <target name="quick-build" depends="prepare,lint,phpunit-no-coverage"
             description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
 
-    <target name="static-analysis" depends="lint,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci"
+    <target name="static-analysis" depends="prepare,lint,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit"
             description="Performs static analysis">
         <echo message="Performing static analysis"/>
     </target>
 
     <!-- Adjust the threadCount attribute's value to the number of CPUs -->
-    <target name="static-analysis-parallel" description="Performs static analysis (executing the tools in parallel)">
+    <target name="static-analysis-parallel" depends="prepare"
+            description="Performs static analysis (executing the tools in parallel)">
         <parallel threadCount="2">
             <sequential>
                 <antcall target="pdepend"/>
@@ -50,7 +51,8 @@
             </sequential>
             <antcall target="lint"/>
             <antcall target="phpcpd-ci"/>
-            <antcall target="phpcs-ci"/>>
+            <antcall target="phpcs-ci"/>
+            <antcall target="phpunit"/>
         </parallel>
     </target>
 
@@ -88,7 +90,7 @@
         <property name="lint.done" value="true"/>
     </target>
 
-    <target name="pdepend" unless="pdepend.done" depends="prepare"
+    <target name="pdepend" unless="pdepend.done"
             description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
         <exec executable="${pdepend}" taskname="pdepend">
             <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
@@ -111,7 +113,7 @@
         <property name="phpmd.done" value="true"/>
     </target>
 
-    <target name="phpmd-ci" unless="phpmd.done" depends="prepare"
+    <target name="phpmd-ci" unless="phpmd.done"
             description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
         <exec executable="${phpmd}" taskname="phpmd">
             <arg path="${basedir}/src"/>
@@ -137,7 +139,7 @@
         <property name="phpcs.done" value="true"/>
     </target>
 
-    <target name="phpcs-ci" unless="phpcs.done" depends="prepare"
+    <target name="phpcs-ci" unless="phpcs.done"
             description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
         <exec executable="${phpcs}" output="/dev/null" taskname="phpcs">
             <arg value="--report=checkstyle"/>
@@ -161,7 +163,7 @@
         <property name="phpcpd.done" value="true"/>
     </target>
 
-    <target name="phpcpd-ci" unless="phpcpd.done" depends="prepare"
+    <target name="phpcpd-ci" unless="phpcpd.done"
             description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
         <exec executable="${phpcpd}" taskname="phpcpd">
             <arg value="--log-pmd"/>
@@ -172,7 +174,8 @@
         <property name="phpcpd.done" value="true"/>
     </target>
 
-    <target name="phpunit" unless="phpunit.done" depends="prepare" description="Run unit tests with PHPUnit">
+    <target name="phpunit" unless="phpunit.done" description="Run unit tests with PHPUnit">
+        <echo message="PHP Unit gestartet"/>
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
 
