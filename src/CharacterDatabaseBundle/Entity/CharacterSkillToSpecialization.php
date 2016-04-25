@@ -5,9 +5,8 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
- * CharacterSkillToSpecialization
+ * CharacterSkillToSpecialization.
  *
  * @ORM\Table(name="character_skill_to_specialization")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\CharacterSkillToSpecializationRepository")
@@ -23,6 +22,7 @@ class CharacterSkillToSpecialization extends AbstractEntity
     protected $charSkill;
 
     /**
+     * @var Specialization $specialization
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Specialization", inversedBy="specializations")
      * @ORM\JoinColumn(name="specialization_id", referencedColumnName="id")
      */
@@ -71,7 +71,7 @@ class CharacterSkillToSpecialization extends AbstractEntity
     }
 
     /**
-     * @param mixed $spec
+     * @param Specialization $spec
      */
     public function setSpecialization($spec)
     {
@@ -79,13 +79,10 @@ class CharacterSkillToSpecialization extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return Specialization
      */
     public function getSpecialization()
     {
         return $this->specialization;
     }
-
-
-
 }

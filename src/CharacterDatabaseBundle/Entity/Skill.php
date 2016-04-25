@@ -3,11 +3,9 @@
 namespace CharacterDatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 
 /**
- * Skill
+ * Skill.
  *
  * @ORM\Table(name="skill")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\SkillRepository")
@@ -23,8 +21,8 @@ class Skill extends AbstractEntity
     protected $name;
 
     /**
-     * @var integer
-     * 1 = Aktionsskill, 2 = Wissenskill, 3 = Sprachen
+     * @var int
+     *          1 = Aktionsskill, 2 = Wissenskill, 3 = Sprachen
      * @ORM\Column(name="type", type="integer")
      */
     protected $type;
@@ -124,6 +122,4 @@ class Skill extends AbstractEntity
     {
         return $this->specializations;
     }
-
-
 }

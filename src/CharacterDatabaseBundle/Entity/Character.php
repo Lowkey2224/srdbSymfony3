@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Person
+ * Person.
  *
  * @ORM\Table(name="characters")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\PersonRepository")
@@ -15,8 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Character extends AbstractEntity
 {
-
-
     /**
      * @var string
      * @ORM\Column(type="string")
@@ -60,8 +58,8 @@ class Character extends AbstractEntity
     protected $karmapool;
 
     /**
-     * @var integer
-     * 1 = SC, 2 = NSC
+     * @var int
+     *          1 = SC, 2 = NSC
      * @ORM\Column(type="integer")
      */
     protected $type;
@@ -101,6 +99,7 @@ class Character extends AbstractEntity
 
     /**
      * Correlation to a user, who should be a partner.
+     *
      * @var User
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\User", inversedBy="characters")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
@@ -130,7 +129,6 @@ class Character extends AbstractEntity
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\ConnectionInDB", mappedBy="target", fetch="LAZY")
      */
     protected $connectionsInDBTarget;
-
 
     public function __construct()
     {
@@ -433,7 +431,4 @@ class Character extends AbstractEntity
     {
         $this->connectionsInDBTarget = $connectionsInDBTarget;
     }
-
-
 }
-

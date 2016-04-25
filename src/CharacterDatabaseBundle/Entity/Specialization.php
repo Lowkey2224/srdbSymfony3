@@ -5,9 +5,8 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
- * Specalization
+ * Specalization.
  *
  * @ORM\Table(name="specalization")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\SpecalizationRepository")
@@ -79,8 +78,4 @@ class Specialization extends AbstractEntity
     {
         return $this->specializations;
     }
-
-
-
 }
-

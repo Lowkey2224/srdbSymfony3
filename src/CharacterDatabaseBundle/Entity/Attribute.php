@@ -5,7 +5,7 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Attribute
+ * Attribute.
  *
  * @ORM\Table(name="attribute")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\AttributeRepository")
@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Attribute extends AbstractEntity
 {
-
     /**
      * @var string
      * @ORM\Column(name="name", type="string", length=45)
@@ -77,5 +76,4 @@ class Attribute extends AbstractEntity
     {
         return $this->skills;
     }
-
 }

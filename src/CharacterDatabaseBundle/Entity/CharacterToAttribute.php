@@ -5,9 +5,8 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
- * CharacterToAttribute
+ * CharacterToAttribute.
  *
  * @ORM\Table(name="character_to_attribute")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\CharacterToAttributeRepository")
@@ -80,6 +79,4 @@ class CharacterToAttribute extends AbstractEntity
     {
         return $this->level;
     }
-
-
 }

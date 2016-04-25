@@ -5,7 +5,7 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ConnectionNotInDB
+ * ConnectionNotInDB.
  *
  * @ORM\Table(name="connection_not_in_d_b")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\ConnectionNotInDBRepository")
@@ -14,26 +14,27 @@ use Doctrine\ORM\Mapping as ORM;
 class ConnectionNotInDB extends AbstractEntity
 {
     /**
-     * @var String der Connection
+     * @var string der Connection
      * @ORM\Column(type="string")
      */
     protected $target;
 
     /**
-     * Character @var
+     * Character @var.
+     *
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="connectionsNotInDB")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     protected $character;
     /**
-     * integer @var
+     * integer @var.
+     *
      * @ORM\Column(type="integer")
      */
     protected $level;
 
-
     /**
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -41,7 +42,7 @@ class ConnectionNotInDB extends AbstractEntity
     }
 
     /**
-     * @param integer $level
+     * @param int $level
      */
     public function setLevel($level)
     {
@@ -72,7 +73,6 @@ class ConnectionNotInDB extends AbstractEntity
         return $this->character;
     }
 
-
     /**
      * @param mixed $name
      */
@@ -88,6 +88,4 @@ class ConnectionNotInDB extends AbstractEntity
     {
         return $this->target;
     }
-
-
 }

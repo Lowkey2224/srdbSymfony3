@@ -9,9 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 abstract class AbstractEntity
 {
-
     /**
-     * @var integer
+     * @var int
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")

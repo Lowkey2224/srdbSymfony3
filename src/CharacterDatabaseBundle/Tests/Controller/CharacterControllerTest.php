@@ -5,12 +5,10 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class CharacterControllerTest extends WebTestCase
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */
@@ -19,7 +17,7 @@ class CharacterControllerTest extends WebTestCase
     private $jsonEntries = 18;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -51,7 +49,7 @@ class CharacterControllerTest extends WebTestCase
         $client = static::createClient();
         $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
         $this->assertGreaterThan(0, count($chars));
-        for ($i = 0; $i < count($chars); $i++) {
+        for ($i = 0; $i < count($chars); ++$i) {
             $client->request('GET', '/character/'.$chars[$i]->getId());
             $this->assertTrue(
                 $client->getResponse()->headers->contains(
@@ -61,8 +59,7 @@ class CharacterControllerTest extends WebTestCase
             );
             $this->assertTrue($client->getResponse()->isSuccessful());
             $responseData = json_decode($client->getResponse()->getContent(), true);
-            $this->assertEquals($this->jsonEntries, count($responseData), "For Character: ".$chars[$i]->getName());
+            $this->assertEquals($this->jsonEntries, count($responseData), 'For Character: '.$chars[$i]->getName());
         }
-
     }
 }

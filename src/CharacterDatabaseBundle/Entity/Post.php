@@ -5,7 +5,7 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Post
+ * Post.
  *
  * @ORM\Table(name="post")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\PostRepository")
@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post extends AbstractEntity
 {
-
     /**
      * @var string
      *
@@ -22,7 +21,7 @@ class Post extends AbstractEntity
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="age", type="integer")
      */
@@ -82,6 +81,4 @@ class Post extends AbstractEntity
     {
         return $this->title;
     }
-
-
 }

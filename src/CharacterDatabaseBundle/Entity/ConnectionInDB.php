@@ -5,7 +5,7 @@ namespace CharacterDatabaseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ConnectionInDB
+ * ConnectionInDB.
  *
  * @ORM\Table(name="connection_in_d_b")
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\ConnectionInDBRepository")
@@ -14,27 +14,31 @@ use Doctrine\ORM\Mapping as ORM;
 class ConnectionInDB extends AbstractEntity
 {
     /**
-     * Character @var
+     * Character @var.
+     *
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="connectionsInDBTarget")
      * @ORM\JoinColumn(name="target_id", referencedColumnName="id")
      */
     protected $target;
 
     /**
-     * Character @var
+     * Character @var.
+     *
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="connectionsInDB")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
     protected $character;
     /**
-     * integer @var
+     * integer @var.
+     *
      * @ORM\Column(type="integer")
      */
     protected $level;
 
     /**
      * Gibt den Namen der Connection zurück!
-     * @return String
+     *
+     * @return string
      */
     public function getName()
     {
@@ -73,7 +77,6 @@ class ConnectionInDB extends AbstractEntity
         return $this->character;
     }
 
-
     /**
      * @param mixed $target
      */
@@ -89,6 +92,4 @@ class ConnectionInDB extends AbstractEntity
     {
         return $this->target;
     }
-
-
 }
