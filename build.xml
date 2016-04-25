@@ -78,10 +78,10 @@
                 <modified/>
             </fileset>
 
-            <fileset dir="${basedir}/tests">
-                <include name="**/*.php"/>
-                <modified/>
-            </fileset>
+            <!--<fileset dir="${basedir}/tests">-->
+                <!--<include name="**/*.php"/>-->
+                <!--<modified/>-->
+            <!--</fileset>-->
         </apply>
 
         <property name="lint.done" value="true"/>
@@ -130,7 +130,7 @@
             <arg value="--extensions=php"/>
             <arg value="--ignore=autoload.php"/>
             <arg path="${basedir}/src"/>
-            <arg path="${basedir}/tests"/>
+            <!--<arg path="${basedir}/tests"/>-->
         </exec>
 
         <property name="phpcs.done" value="true"/>
@@ -145,7 +145,7 @@
             <arg value="--extensions=php"/>
             <arg value="--ignore=autoload.php"/>
             <arg path="${basedir}/src"/>
-            <arg path="${basedir}/tests"/>
+            <!--<arg path="${basedir}/tests"/>-->
         </exec>
 
         <property name="phpcs.done" value="true"/>
@@ -174,7 +174,7 @@
     <target name="phpunit" unless="phpunit.done" depends="prepare" description="Run unit tests with PHPUnit">
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/build/phpunit.xml"/>
+            <arg path="${basedir}/phpunit.xml"/>
         </exec>
 
         <property name="phpunit.done" value="true"/>
@@ -184,7 +184,7 @@
             description="Run unit tests with PHPUnit (without generating code coverage reports)">
         <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/build/phpunit.xml"/>
+            <arg path="${basedir}/phpunit.xml"/>
             <arg value="--no-coverage"/>
         </exec>
 
