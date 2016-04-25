@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"character","attribute"}, message="Dieser Character hat dieses Attribut bereits")
  */
-class CharacterToAttribute  extends AbstractEntity
+class CharacterToAttribute extends AbstractEntity
 {
     /**
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="attributes")

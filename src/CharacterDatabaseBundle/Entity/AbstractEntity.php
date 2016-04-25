@@ -7,9 +7,9 @@ namespace CharacterDatabaseBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Exclude;
 
-abstract class AbstractEntity {
+abstract class AbstractEntity
+{
 
     /**
      * @var integer
@@ -21,13 +21,11 @@ abstract class AbstractEntity {
 
     /**
      * @ORM\Column(type="datetime")
-     * @Exclude¶
      */
     protected $updated;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Exclude
      */
     protected $created;
 
@@ -92,7 +90,6 @@ abstract class AbstractEntity {
     {
         return $this->updated;
     }
-
 
 
 }

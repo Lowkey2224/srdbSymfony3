@@ -3,7 +3,6 @@
 namespace CharacterDatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * ConnectionNotInDB
@@ -74,7 +73,6 @@ class ConnectionNotInDB extends AbstractEntity
     }
 
 
-
     /**
      * @param mixed $name
      */
@@ -90,7 +88,6 @@ class ConnectionNotInDB extends AbstractEntity
     {
         return $this->target;
     }
-
 
 
 }
