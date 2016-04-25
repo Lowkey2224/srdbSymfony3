@@ -26,6 +26,7 @@
     <property name="phpmd" value="${basedir}/vendor/bin/phpmd"/>
     <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/>
     <property name="php-cs-fixer" value="${basedir}/vendor/bin/php-cs-fixer"/>
+    <property name="console" value="${basedir}/bin/console"/>
 
     <target name="full-build" depends="prepare,static-analysis,-check-failure"
             description="Performs static analysis, runs the tests, and generates project documentation"/>
@@ -176,8 +177,6 @@
             <arg value="fix"/>
             <arg path="${basedir}/src"/>
         </exec>
-
-        <property name="phpunit.done" value="true"/>
     </target>
 
     <target name="phpunit-no-coverage" unless="phpunit.done" depends="prepare"
@@ -205,5 +204,19 @@
                 </not>
             </condition>
         </fail>
+    </target>
+
+    <target name="warmup" unless="warmup.done" description="clears cache and installs assets">
+        <echo message=""/>
+        <exec executable="php" taskname="cache:clear prod">
+            <arg line="${console} cache:clear --env=prod"/>
+        </exec>
+        <exec executable="php" taskname="cache:clear dev">
+            <arg line="${console} cache:clear"/>
+        </exec>
+        <exec executable="php" taskname="assets:install">
+            <arg line="${console} assets:install --symlink"/>
+        </exec>
+        <property name="warmup.done" value="true"/>
     </target>
 </project>
