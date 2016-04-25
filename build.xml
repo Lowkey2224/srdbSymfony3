@@ -174,7 +174,10 @@
     <target name="phpunit" unless="phpunit.done" depends="prepare" description="Run unit tests with PHPUnit">
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
+
             <arg path="${basedir}/phpunit.xml.dist"/>
+            <arg value="--coverage-clover"/>
+            <arg path="${basedir}/build/logs/coverage.xml"/>
             <arg path="${basedir}/src/CharacterDatabaseBundle"/>
         </exec>
 
