@@ -29,6 +29,7 @@
         {% for skill in char.skills %}
         {
             "name": "{{ skill.skill.name }}",
+            "type": "{{ skill.skill.typeName }}",
             "level": "{{ skill.level}}"
             {% if skill.specializations is not empty %},
             "specializations": [

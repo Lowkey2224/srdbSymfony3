@@ -38,6 +38,7 @@
             controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
                 var characterDetail = this;
                 characterDetail.description = "...";
+                characterDetail.needsSubString = true;
                 characterDetail.short = false;
                 //Toggle the length of Description
                 characterDetail.toggleDescription = function(){
@@ -56,6 +57,8 @@
                 $http.get(url).success(function(data){
                     characterDetail.characterDetails = data;
                     characterDetail.short = data.description.length>100;
+                    characterDetail.needsSubString = characterDetail.short;
+
                     characterDetail.toggleDescription();
 
                 });

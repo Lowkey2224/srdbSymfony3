@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <em ng-click="characterDetail.toggleDescription()">{{characterDetail.description}}</em>
-        <i class="fa glyphicon-text-color" ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'" ng-click="characterDetail.toggleDescription()"></i>
+        <br/><i ng-show="characterDetail.needsSubString " class="fa color-blue" ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'" ng-click="characterDetail.toggleDescription()"></i>
     </div>
 </div>
 <div>
@@ -45,15 +45,15 @@
     </div>
 
     <!-- Akkordeon Skills-->
-    <div class="panel panel-default">
-        <div class="panel-heading" ui-set="{'myAccordion': 2}">
+    <div class="panel panel-default" ng-repeat="(key,type) in {2:'Aktionsfähigkeit', 3:'Wissensfähigkeit', 4:'Sprache'}">
+        <div class="panel-heading" ui-set="{'myAccordion': key } ">
             <h4 class="panel-title">
-                Skills
+                {{type}}
             </h4>
         </div>
-        <div ui-if="myAccordion == 2">
+        <div ui-if="myAccordion == {{key}}">
             <div class="panel-body list-group ">
-                <div class="row list-group-item" ng-repeat="skill in characterDetail.characterDetails.skills">
+                <div class="row list-group-item" ng-repeat="skill in characterDetail.characterDetails.skills | filter:type">
                     <div class="col-sm-2 col-sm-offset-0 col-xs-4">
                         <strong class="pull-left">{{skill.name}}</strong>
                     </div>

@@ -13,3 +13,13 @@ CharacterDatabaseBundle\Entity\Skill:
         name: Heimlichkeit
         type: 1
         attribute: "@qck"
+
+    gangid:
+        name: Gang Identifikation
+        type: 2
+        attribute: "@qck"
+
+    eng:
+        name: Englisch
+        type: 3
+        attribute: "@int"

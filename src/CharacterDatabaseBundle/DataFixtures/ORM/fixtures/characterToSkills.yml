@@ -14,3 +14,13 @@ CharacterDatabaseBundle\Entity\CharacterToSkill:
         character: "@<current()>"
         skill: "@ett"
         level: <numberBetween(1,6)>
+
+    eng{Lodur, Nigel}:
+        character: "@<current()>"
+        skill: "@eng"
+        level: <numberBetween(1,6)>
+
+    gangid{Lodur, Nigel}:
+        character: "@<current()>"
+        skill: "@gangid"
+        level: <numberBetween(1,6)>

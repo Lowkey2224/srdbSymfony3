@@ -43,6 +43,20 @@ class Skill extends AbstractEntity
      */
     protected $specializations;
 
+
+
+    public function getTypeName(){
+        switch ($this->type){
+            case 1:
+                return "Aktionsfähigkeit";
+            case 2:
+                return "Wissensfähigkeit";
+            case 3:
+                return "Sprache";
+        }
+        return "unbekannt";
+    }
+
     /**
      * @param mixed $attribute
      */
