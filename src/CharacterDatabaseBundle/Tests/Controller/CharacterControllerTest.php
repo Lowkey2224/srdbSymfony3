@@ -66,6 +66,6 @@ class CharacterControllerTest extends WebTestCase
         );
         $this->assertTrue($client->getResponse()->isSuccessful());
         $responseData = json_decode($client->getResponse()->getContent(), true);
-        $this->assertEquals(17, count($responseData));
+        $this->assertEquals(18, count($responseData));
     }
 }
