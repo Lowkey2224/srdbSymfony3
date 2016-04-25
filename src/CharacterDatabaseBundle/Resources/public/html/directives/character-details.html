@@ -1,7 +1,16 @@
 <div ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home">
-    <h1>{{characterDetail.characterDetails.name}}
-        <small>{{ characterDetail.characterDetails.user.name}}</small>
-    </h1>
+    <div class="row">
+        <h1>{{characterDetail.characterDetails.name}}
+            <small>by {{ characterDetail.characterDetails.user.name}}</small>
+        </h1>
+    </div>
+    <div class="row">
+        <h4>{{characterDetail.characterDetails.occupation}}</h4>
+    </div>
+    <div class="row">
+        <em ng-click="characterDetail.toggleDescription()">{{characterDetail.description}}</em>
+        <i class="fa glyphicon-text-color" ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'" ng-click="characterDetail.toggleDescription()"></i>
+    </div>
 </div>
 <div>
     <div ng-hide="characterDetail.characterDetails" class="list-group-item list-group-item-home">

@@ -25,7 +25,6 @@
                 console.log("Getting data from: ", url);
                 $http.get(url).success(function(data){
                     character.characters = data;
-                    console.log("received data for all", data)
                 });
             }],
             controllerAs: 'characterController'
@@ -36,15 +35,29 @@
         return{
             restrict: 'E',
             templateUrl: 'bundles/characterdatabase/html/directives/character-details.html',
-            controller: ['$http', '$routeParams', function ($http, $routeParams) {
-
+            controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
                 var characterDetail = this;
+                characterDetail.description = "...";
+                characterDetail.short = false;
+                //Toggle the length of Description
+                characterDetail.toggleDescription = function(){
+                    if(characterDetail.short){
+                        characterDetail.description = characterDetail.characterDetails.description.substring(0,100)+"...";
+                        characterDetail.short = false;
+                    }else{
+                        characterDetail.description = characterDetail.characterDetails.description;
+                        characterDetail.short = true;
+                    }
+                    console.log("length", characterDetail.description.length);
+                };
+                //Fill CharacterData
                 characterDetail.characterDetails = null;
                 url = app.baseUrl()+'character/'+$routeParams.characterId;
-                console.log("Details Url", url);
                 $http.get(url).success(function(data){
                     characterDetail.characterDetails = data;
-                    console.log("Details ", data)
+                    characterDetail.short = data.description.length>100;
+                    characterDetail.toggleDescription();
+
                 });
             }],
             controllerAs: 'characterDetail'

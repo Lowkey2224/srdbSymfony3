@@ -3,7 +3,7 @@ CharacterDatabaseBundle\Entity\Character:
         name: Lodur
         race: HSS
         occupation: Decker/Rigger
-        description: <text(100)>
+        description: <sentences(50,true)>
         type: 1
         user: "@superadmin-loki"
 
