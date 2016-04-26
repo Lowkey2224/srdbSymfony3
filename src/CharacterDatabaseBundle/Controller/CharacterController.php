@@ -6,10 +6,9 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Character;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class CharacterController extends Controller
+class CharacterController extends AbstractBaseController
 {
     public function indexAction()
     {

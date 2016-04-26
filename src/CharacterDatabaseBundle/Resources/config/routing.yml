@@ -9,6 +9,8 @@ character_list:
 character_show:
     path:     /character/{id}
     defaults: { _controller: CharacterDatabaseBundle:Character:show }
+    requirements:
+        id:  \d+
 
 user_list:
     path:     /user
@@ -17,3 +19,9 @@ user_list:
 user_show:
     path:     /user/{id}
     defaults: { _controller: CharacterDatabaseBundle:User:show }
+    requirements:
+        id:  \d+
+
+user_logged_in:
+    path:     /user/loggedIn
+    defaults: { _controller: CharacterDatabaseBundle:User:isLoggedIn }

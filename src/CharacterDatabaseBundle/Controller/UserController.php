@@ -7,11 +7,11 @@ namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\User;
 use CharacterDatabaseBundle\Model\UserModel;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class UserController extends Controller
+class UserController extends AbstractBaseController
 {
     /**
      * @ApiDoc(
@@ -25,6 +25,7 @@ class UserController extends Controller
      * @param $id
      *
      * @return JsonResponse
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function showAction($id)
     {
@@ -35,6 +36,9 @@ class UserController extends Controller
         return new JsonResponse($model->toArray());
     }
 
+    /**
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
     public function indexAction()
     {
         $user = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:User')->findAll();
@@ -47,7 +51,8 @@ class UserController extends Controller
         return new JsonResponse($data);
     }
 
-    public function isLoggedInAction(){
-
+    public function isLoggedInAction()
+    {
+        return new JsonResponse($this->isLoggedIn());
     }
 }
