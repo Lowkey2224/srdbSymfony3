@@ -24,14 +24,6 @@
         });
     }]);
 
-    app.directive('loginRegister', function () {
-        return {
-            restrict: 'E',
-            templateUrl: app.bundleDir + 'html/directives/login-register.html',
-        };
-    });
-
-
     app.config(function ($routeProvider) {
 
         $routeProvider.when('/', {templateUrl: app.bundleDir + 'html/home.html', reloadOnSearch: false});
