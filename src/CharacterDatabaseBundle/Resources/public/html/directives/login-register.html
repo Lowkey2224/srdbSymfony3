@@ -1,0 +1,16 @@
+<div class="visible-xs">
+    <div class="btn-group right">
+        <div ui-toggle="uiSidebarRight" class="btn sidebar-toggle">
+            Login <i class="fa fa-user"></i>
+        </div>
+    </div>
+
+</div>
+<div class="hidden-xs">
+    <div class="btn">
+        <a href="{{ path('fos_user_registration_register') }}">Registrieren <i class="fa fa-user-plus"></i></a>
+    </div>
+    <div class="btn">
+        <a href="{{ path('fos_user_security_login') }}">Login <i class="fa fa-sign-in"></i></a>
+    </div>
+</div>
