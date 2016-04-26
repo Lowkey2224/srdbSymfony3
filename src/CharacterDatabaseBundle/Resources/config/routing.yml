@@ -9,3 +9,7 @@ character_list:
 character_show:
     path:     /character/{id}
     defaults: { _controller: CharacterDatabaseBundle:Character:show }
+
+user_show:
+    path:     /user/{id}
+    defaults: { _controller: CharacterDatabaseBundle:User:show }
