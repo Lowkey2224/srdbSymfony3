@@ -33,7 +33,7 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isDeleted;
+    protected $isDeleted = false;
 
     /**
      * @return int
