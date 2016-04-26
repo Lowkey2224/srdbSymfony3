@@ -17,8 +17,6 @@ class Fixtures implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-
-//$set = new \h4cc\AliceFixturesBundle\Fixtures\FixtureSet();
         $ary[] = __DIR__.'/fixtures/users.yml';
         $ary[] = __DIR__.'/fixtures/attributes.yml';
         $ary[] = __DIR__.'/fixtures/skills.yml';
@@ -34,6 +32,7 @@ class Fixtures implements FixtureInterface
         $ary[] = __DIR__.'/fixtures/characterToSpec.yml';
 
         $objects = \Nelmio\Alice\Fixtures::load($ary, $manager);
+
         return $objects;
     }
 }
