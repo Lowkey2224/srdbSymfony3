@@ -5,7 +5,7 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-
+use CharacterDatabaseBundle\Model\UserModel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
@@ -14,9 +14,6 @@ class UserControllerTest extends WebTestCase
      * @var \Doctrine\ORM\EntityManager
      */
     private $em;
-
-    private $jsonEntries = 18;
-
     /**
      * {@inheritdoc}
      */
@@ -32,7 +29,7 @@ class UserControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = static::createClient();
-        $client->request('GET', '/character');
+        $client->request('GET', '/user');
         $this->assertTrue(
             $client->getResponse()->headers->contains(
                 'Content-Type',
@@ -42,25 +39,26 @@ class UserControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
         $responseData = json_decode($client->getResponse()->getContent(), true);
         $this->assertGreaterThan(1, count($responseData));
-        $this->assertEquals($this->jsonEntries, count($responseData[0]));
+        for ($i = 0; $i < count($responseData) && $i < 10; ++$i) {
+            $this->assertArrayHasKey('id', $responseData[$i]);
+            $this->assertArrayHasKey('username', $responseData[$i]);
+            $this->assertArrayHasKey('email', $responseData[$i]);
+            $this->assertArrayHasKey('character', $responseData[$i]);
+        }
     }
 
     public function testShow()
     {
         $client = static::createClient();
-        $chars = $this->em->getRepository('CharacterDatabaseBundle:User')->findAll();
-        $this->assertGreaterThan(0, count($chars));
-        for ($i = 0; $i < count($chars); ++$i) {
-            $client->request('GET', '/User/'.$chars[$i]->getId());
-            $this->assertTrue(
-                $client->getResponse()->headers->contains(
-                    'Content-Type',
-                    'application/json'
-                )
-            );
+        $users = $this->em->getRepository('CharacterDatabaseBundle:User')->findAll();
+        $this->assertGreaterThan(0, count($users));
+        for ($i = 0; $i < count($users) && $i < 10; ++$i) {
+            $client->request('GET', '/user/'.$users[$i]->getId());
+            $this->assertTrue($client->getResponse()->headers->contains('Content-Type', 'application/json'));
+            $userModel = new UserModel($users[$i]);
             $this->assertTrue($client->getResponse()->isSuccessful());
             $responseData = json_decode($client->getResponse()->getContent(), true);
-            $this->assertEquals($this->jsonEntries, count($responseData), 'For Character: '.$chars[$i]->getUsername());
+            $this->assertEquals($userModel->toArray(), $responseData, 'For Character: '.$users[$i]->getUsername());
         }
     }
 }

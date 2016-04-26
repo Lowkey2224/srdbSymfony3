@@ -42,7 +42,8 @@
         "squizlabs/php_codesniffer": "^2.6",
         "phpmd/phpmd": "^2.4",
         "sebastian/phpcpd": "^2.0",
-        "pdepend/pdepend": "^2.2"
+        "pdepend/pdepend": "^2.2",
+        "nelmio/api-doc-bundle": "^2.12"
     },
     "scripts": {
         "post-install-cmd": [

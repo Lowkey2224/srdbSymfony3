@@ -10,6 +10,10 @@ character_show:
     path:     /character/{id}
     defaults: { _controller: CharacterDatabaseBundle:Character:show }
 
+user_list:
+    path:     /user
+    defaults: { _controller: CharacterDatabaseBundle:User:index }
+
 user_show:
     path:     /user/{id}
     defaults: { _controller: CharacterDatabaseBundle:User:show }

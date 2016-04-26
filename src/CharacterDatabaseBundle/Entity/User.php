@@ -3,6 +3,7 @@
 namespace CharacterDatabaseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -25,7 +26,7 @@ class User extends BaseUser
     /**
      * Correlation to a user, who should be a partner.
      *
-     * @var User
+     * @var Character[]
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\Character", mappedBy="user", fetch="EAGER")
      */
     protected $characters;
@@ -52,7 +53,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return User
+     * @return PersistentCollection
      */
     public function getCharacters()
     {

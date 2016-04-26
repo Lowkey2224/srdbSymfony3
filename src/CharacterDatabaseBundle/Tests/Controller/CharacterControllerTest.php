@@ -49,7 +49,7 @@ class CharacterControllerTest extends WebTestCase
         $client = static::createClient();
         $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
         $this->assertGreaterThan(0, count($chars));
-        for ($i = 0; $i < count($chars); ++$i) {
+        for ($i = 0; $i < count($chars) && $i < 10; ++$i) {
             $client->request('GET', '/character/'.$chars[$i]->getId());
             $this->assertTrue(
                 $client->getResponse()->headers->contains(
