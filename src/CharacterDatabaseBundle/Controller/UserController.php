@@ -9,6 +9,7 @@ use CharacterDatabaseBundle\Entity\User;
 use CharacterDatabaseBundle\Model\UserModel;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class UserController extends Controller
 {
@@ -44,5 +45,9 @@ class UserController extends Controller
         }, $user);
 
         return new JsonResponse($data);
+    }
+
+    public function isLoggedInAction(){
+
     }
 }
