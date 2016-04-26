@@ -34,5 +34,6 @@ class Fixtures implements FixtureInterface
         $ary[] = __DIR__.'/fixtures/characterToSpec.yml';
 
         $objects = \Nelmio\Alice\Fixtures::load($ary, $manager);
+        return $objects;
     }
 }
