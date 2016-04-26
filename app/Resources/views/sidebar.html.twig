@@ -12,7 +12,12 @@
                 <a class="list-group-item" href="#/traditions">Traditionen<i class="fa fa-chevron-right pull-right"></i></a>
                 <a class="list-group-item" href="#/totems">Totems<i class="fa fa-chevron-right pull-right"></i></a>
                 <a class="list-group-item" href="#/cyberware">Cyberware<i class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/logout">Logout<i class="fa fa-chevron-right pull-right"></i></a>
+                {% if app.user %}
+                    <a class="list-group-item" href="#/logout">Logout<i class="fa fa-chevron-right pull-right"></i></a>
+                {% else %}
+                    <a class="list-group-item" href="#/login">Login<i class="fa fa-chevron-right pull-right"></i></a>
+                {% endif %}
+
             </div>
         </div>
     </div>
