@@ -10,7 +10,7 @@
         'character'
     ]);
 
-    console.log("Testausgabe", bundleDir);
+
     app.bundleDir = bundleDir;
     app.baseUrl = indexUrl;
 
@@ -19,10 +19,8 @@
         var character = this;
         character.characters = [];
         url = app.baseUrl + 'character';
-        console.log(url);
         $http.get(url).success(function (data) {
             character.characters = data;
-            console.log(data, "yello ")
         });
     }]);
 

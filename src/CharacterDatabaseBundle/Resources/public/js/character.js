@@ -17,7 +17,6 @@
                 var character = this;
                 character.characters = [];
                 url = app.baseUrl+'character';
-                console.log("Getting data from: ", url);
                 $http.get(url).success(function(data){
                     character.characters = data;
                 });
@@ -44,7 +43,7 @@
                         characterDetail.description = characterDetail.characterDetails.description;
                         characterDetail.short = true;
                     }
-                    console.log("length", characterDetail.description.length);
+
                 };
                 //Fill CharacterData
                 characterDetail.characterDetails = null;
