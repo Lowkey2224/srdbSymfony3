@@ -3,19 +3,20 @@
         <h1 class="scrollable-header app-name">SR Character DB</h1>
         <div class="scrollable-content">
             <div class="list-group" ui-turn-off='uiSidebarLeft'>
-                <a class="list-group-item" href="#/new">Neuer Character<i
+                
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/new">Neuer Character<i
                             class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/mine">Meine Character<i
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/mine">Meine Character<i
                             class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/all">Alle Character<i class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/skills">Skills<i class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/specs">Spezialisierungen<i
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/all">Alle Character<i class="fa fa-chevron-right pull-right"></i></a>
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/skills">Skills<i class="fa fa-chevron-right pull-right"></i></a>
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/specs">Spezialisierungen<i
                             class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/attributes">Attribute<i
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/attributes">Attribute<i
                             class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/traditions">Traditionen<i class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/totems">Totems<i class="fa fa-chevron-right pull-right"></i></a>
-                <a class="list-group-item" href="#/cyberware">Cyberware<i
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/traditions">Traditionen<i class="fa fa-chevron-right pull-right"></i></a>
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/totems">Totems<i class="fa fa-chevron-right pull-right"></i></a>
+                <a class="list-group-item" href="{{ path('character_database_homepage') }}#/cyberware">Cyberware<i
                             class="fa fa-chevron-right pull-right"></i></a>
                 {% if app.user %}
                     <a class="list-group-item" href="{{ path('fos_user_security_logout') }}">Logout<i
