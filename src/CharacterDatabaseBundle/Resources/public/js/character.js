@@ -6,22 +6,17 @@
 
     ]);
 
-    app.baseUrl = function() {
-        if(window.location.pathname.indexOf("app_dev.php") > 0){
-            return "app_dev.php/";
-        }
-        return "";
-    };
-
+    app.baseUrl = indexUrl;
+    app.bundleDir = bundleDir;
     app.directive("characterList", function(){
         return{
             restrict: 'E',
-            templateUrl: 'bundles/characterdatabase/html/directives/character-list.html',
+            templateUrl: app.bundleDir+'html/directives/character-list.html',
             controller: ['$http', function ($http) {
 
                 var character = this;
                 character.characters = [];
-                url = app.baseUrl()+'character';
+                url = app.baseUrl+'character';
                 console.log("Getting data from: ", url);
                 $http.get(url).success(function(data){
                     character.characters = data;
@@ -34,7 +29,7 @@
     app.directive("characterDetails", function(){
         return{
             restrict: 'E',
-            templateUrl: 'bundles/characterdatabase/html/directives/character-details.html',
+            templateUrl: app.bundleDir+'html/directives/character-details.html',
             controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
                 var characterDetail = this;
                 characterDetail.description = "...";
@@ -53,7 +48,7 @@
                 };
                 //Fill CharacterData
                 characterDetail.characterDetails = null;
-                url = app.baseUrl()+'character/'+$routeParams.characterId;
+                url = app.baseUrl+'character/'+$routeParams.characterId;
                 $http.get(url).success(function(data){
                     characterDetail.characterDetails = data;
                     characterDetail.short = data.description.length>100;

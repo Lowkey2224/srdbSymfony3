@@ -10,17 +10,15 @@
         'character'
     ]);
 
-    app.baseUrl = function() {
-        if(window.location.pathname.indexOf("app_dev.php") > 0){
-            return "app_dev.php/";
-        }
-        return "";
-    };
+    console.log("Testausgabe", bundleDir);
+    app.bundleDir = bundleDir;
+    app.baseUrl = indexUrl;
+
 
     app.controller('CharacterController', ['$http', '$log', function ($http, $log) {
         var character = this;
         character.characters = [];
-        url = app.baseUrl() + 'character';
+        url = app.baseUrl + 'character';
         console.log(url);
         $http.get(url).success(function (data) {
             character.characters = data;
@@ -29,49 +27,49 @@
     }]);
 
     app.config(function ($routeProvider) {
-        $routeProvider.when('/', {templateUrl: 'bundles/characterdatabase/html/home.html', reloadOnSearch: false});
-        $routeProvider.when('/new', {templateUrl: 'bundles/characterdatabase/html/scroll.html', reloadOnSearch: false});
+
+        $routeProvider.when('/', {templateUrl: app.bundleDir+'html/home.html', reloadOnSearch: false});
+        $routeProvider.when('/new', {templateUrl: app.bundleDir+'html/scroll.html', reloadOnSearch: false});
         $routeProvider.when('/mine', {
-            templateUrl: 'bundles/characterdatabase/html/toggle.html',
+            templateUrl: app.bundleDir+'html/toggle.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/character/:characterId', {
-            templateUrl: 'bundles/characterdatabase/html/character-show.html',
+            templateUrl: app.bundleDir+'html/character-show.html',
             //reloadOnSearch: false
         });
         $routeProvider.when('/all', {
-            templateUrl: 'bundles/characterdatabase/html/characters.html',
+            templateUrl: app.bundleDir+'html/characters.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/skills', {
-            templateUrl: 'bundles/characterdatabase/html/accordion.html',
+            templateUrl: app.bundleDir+'html/accordion.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/specs', {
-            templateUrl: 'bundles/characterdatabase/html/overlay.html',
+            templateUrl: app.bundleDir+'html/overlay.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/attributes', {
-            templateUrl: 'bundles/characterdatabase/html/forms.html',
+            templateUrl: app.bundleDir+'html/forms.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/traditions', {
-            templateUrl: 'bundles/characterdatabase/html/dropdown.html',
+            templateUrl: app.bundleDir+'html/dropdown.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/totems', {
-            templateUrl: 'bundles/characterdatabase/html/touch.html',
+            templateUrl: app.bundleDir+'html/touch.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/cyberware', {
-            templateUrl: 'bundles/characterdatabase/html/swipe.html',
+            templateUrl: app.bundleDir+'html/swipe.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/logout', {
-            templateUrl: 'bundles/characterdatabase/html/drag.html',
+            templateUrl: app.bundleDir+'html/drag.html',
             reloadOnSearch: false
-        }).
-        otherwise({
+        }).otherwise({
             redirectTo: '/all'
         });
     });
