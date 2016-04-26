@@ -1,3 +1,14 @@
+<!-- Show Spinner while loading, or Error MEssage if there is no Data-->
+<div ng-hide="characterDetail.characterDetails" class="list-group-item list-group-item-home">
+    <h1 ng-hide="characterDetail.loading">
+        Kein Character Vorhanden.
+    </h1>
+    <div ng-show="characterDetail.loading">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!--Show Character Details-->
 <div ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home">
     <div class="row">
         <h1>{{characterDetail.characterDetails.name}}
@@ -9,18 +20,13 @@
     </div>
     <div class="row">
         <em ng-click="characterDetail.toggleDescription()">{{characterDetail.description}}</em>
-        <br/><i ng-show="characterDetail.needsSubString " class="fa color-blue" ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'" ng-click="characterDetail.toggleDescription()"></i>
-    </div>
-</div>
-<div>
-    <div ng-hide="characterDetail.characterDetails" class="list-group-item list-group-item-home">
-        <h1>
-            Keine Character Vorhanden.
-        </h1>
+        <br/><i ng-show="characterDetail.needsSubString " class="fa color-blue"
+                ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'"
+                ng-click="characterDetail.toggleDescription()"></i>
     </div>
 </div>
 
-<div class="panel-group" ui-state="myAccordion" ui-default="1">
+<div ng-show="characterDetail.characterDetails" class="panel-group" ui-state="myAccordion" ui-default="1">
     <!-- Akkordeon Attribute -->
     <div class="panel panel-default">
         <div class="panel-heading" ui-set="{'myAccordion': 1}">
@@ -45,7 +51,8 @@
     </div>
 
     <!-- Akkordeon Skills-->
-    <div class="panel panel-default" ng-repeat="(key,type) in {2:'Aktionsfähigkeit', 3:'Wissensfähigkeit', 4:'Sprache'}">
+    <div class="panel panel-default"
+         ng-repeat="(key,type) in {2:'Aktionsfähigkeit', 3:'Wissensfähigkeit', 4:'Sprache'}">
         <div class="panel-heading" ui-set="{'myAccordion': key } ">
             <h4 class="panel-title">
                 {{type}}
@@ -53,7 +60,8 @@
         </div>
         <div ui-if="myAccordion == {{key}}">
             <div class="panel-body list-group ">
-                <div class="row list-group-item" ng-repeat="skill in characterDetail.characterDetails.skills | filter:type">
+                <div class="row list-group-item"
+                     ng-repeat="skill in characterDetail.characterDetails.skills | filter:type">
                     <div class="col-sm-2 col-sm-offset-0 col-xs-4">
                         <strong class="pull-left">{{skill.name}}</strong>
                     </div>

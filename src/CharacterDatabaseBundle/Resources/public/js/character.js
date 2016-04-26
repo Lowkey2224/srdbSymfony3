@@ -11,16 +11,17 @@
     app.directive("characterList", function(){
         return{
             restrict: 'E',
-            templateUrl: app.bundleDir+'html/directives/character-list.html',
             controller: ['$http', function ($http) {
-
                 var character = this;
+                character.loading = true;
                 character.characters = [];
                 url = app.baseUrl+'character';
                 $http.get(url).success(function(data){
                     character.characters = data;
+                    character.loading = false;
                 });
             }],
+            templateUrl: app.bundleDir+'html/directives/character-list.html',
             controllerAs: 'characterController'
         };
     });
@@ -33,6 +34,7 @@
                 var characterDetail = this;
                 characterDetail.description = "...";
                 characterDetail.needsSubString = true;
+                characterDetail.loading = true;
                 characterDetail.short = false;
                 //Toggle the length of Description
                 characterDetail.toggleDescription = function(){
@@ -52,6 +54,7 @@
                     characterDetail.characterDetails = data;
                     characterDetail.short = data.description.length>100;
                     characterDetail.needsSubString = characterDetail.short;
+                    characterDetail.loading = false;
 
                     characterDetail.toggleDescription();
 

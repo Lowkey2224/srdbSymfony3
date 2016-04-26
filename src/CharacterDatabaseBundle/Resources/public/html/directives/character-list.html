@@ -1,12 +1,19 @@
-<div ng-repeat="char in characterController.characters" class="list-group-item list-group-item-home">
-    <h1>{{char.name}}
-        <small>{{ char.user.name}}<a a href="#/character/{{char.id}}"><i class="fa fa-chevron-right pull-right"></i></a></small>
-    </h1>
+<div ng-repeat="char in characterController.characters" class="">
+    <a href="#/character/{{char.id}}" class="list-group-item ">
+        <h1>{{char.name}}
+            <small>{{ char.user.name}}<i class="fa fa-chevron-right pull-right"></i></small>
+        </h1>
+    </a>
 </div>
+
 <div>
-    <div ng-hide="character.length" class="list-group-item list-group-item-home">
-        <h1>
+    <div ng-hide="characterController.characters.length" class="list-group-item list-group-item-home">
+        <h1 ng-hide="characterController.loading">
             Keine Character Vorhanden.
         </h1>
+        <div ng-show="characterController.loading">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
 </div>
