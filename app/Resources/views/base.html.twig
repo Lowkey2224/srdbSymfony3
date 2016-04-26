@@ -20,23 +20,6 @@
 <body ng-app="srdb">
 
 {% include '::sidebar.html.twig' %}
-<div class="app">
-
-    {% include '::navbar.html.twig' %}
-
-    <div class='app-body'>
-        <div class='app-content'>
-            <ng-view>
-
-            </ng-view>
-        </div>
-    </div>
-</div><!-- ~ .app -->
-
-<!-- Modals and Overlays -->
-<div ui-yield-to="modals"></div>
-
-
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

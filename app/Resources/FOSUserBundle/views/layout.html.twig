@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}SRDB Login{% endblock %}
+{% block body %}
+
+    <div class="app">
+
+        {% include '::navbar.html.twig' %}
+
+        <div class='app-body'>
+            <div class='app-content'>
+
+                {#<ng-view>#}
+                <div class="list-group">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <div class="list-group-item">Eingeloggt als {{ app.user.username }} |
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                Logout
+                            </a>
+                        </div>
+                    {% endif %}
+
+
+                    {% for type, messages in app.session.flashBag.all %}
+                        <div class="list-group-item">
+                            {% for message in messages %}
+                                <div class="{{ type }}">
+                                    {{ message|trans({}, 'FOSUserBundle') }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <div class="list-group-item">
+                        {% block fos_user_content %}
+                        {% endblock fos_user_content %}
+                    </div>
+                </div>
+                {#</ng-view>#}
+            </div>
+        </div>
+    </div><!-- ~ .app -->
+
+    <!-- Modals and Overlays -->
+    <div ui-yield-to="modals"></div>
+
+{% endblock %}
