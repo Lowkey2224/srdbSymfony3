@@ -3,13 +3,13 @@
  * @author Marcus Jenz
  */
 
-namespace CharacterDatabaseBundle\Service;
+namespace CharacterDatabaseBundle\Service\CharacterService;
 
 use CharacterDatabaseBundle\Entity\Character;
 use CharacterDatabaseBundle\Entity\MagicalCapability;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class CharacterService
+class Service
 {
     /**
      * Checks if the associative array is a valid Character.

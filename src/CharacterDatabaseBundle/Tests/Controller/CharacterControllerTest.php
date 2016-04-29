@@ -99,10 +99,8 @@ class CharacterControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/character');
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $client->followRedirect();
-        $this->assertContains('login', $client->getRequest()->getUri(),
-            'Es wurde nicht auf die Login Seite weitergeleitet');
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
     public function testShow()
@@ -133,10 +131,8 @@ class CharacterControllerTest extends WebTestCase
         $this->assertGreaterThan(0, count($chars));
         for ($i = 0; $i < count($chars) && $i < 10; ++$i) {
             $client->request('GET', '/character/'.$chars[$i]->getId());
-            $this->assertTrue($client->getResponse()->isRedirect());
-            $client->followRedirect();
-            $this->assertContains('login', $client->getRequest()->getUri(),
-                'Es wurde nicht auf die Login Seite weitergeleitet');
+            $this->assertTrue($client->getResponse()->isClientError());
+            $this->assertEquals(401, $client->getResponse()->getStatusCode());
         }
     }
 
@@ -144,10 +140,8 @@ class CharacterControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('PUT', '/character');
-        $this->assertTrue($client->getResponse()->isRedirect(), 'Is not Redirect');
-        $client->followRedirect();
-        $this->assertContains('login', $client->getRequest()->getUri(),
-            'Es wurde nicht auf die Login Seite weitergeleitet');
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
     public function testCreateWithWrongJson()

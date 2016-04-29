@@ -34,10 +34,8 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/user');
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $client->followRedirect();
-        $this->assertContains('login', $client->getRequest()->getUri(),
-            'Es wurde nicht auf die Login Seite weitergeleitet');
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
     public function testIndex()
@@ -88,10 +86,8 @@ class UserControllerTest extends WebTestCase
         $this->assertGreaterThan(0, count($users));
         for ($i = 0; $i < count($users) && $i < 10; ++$i) {
             $client->request('GET', '/user/'.$users[$i]->getId());
-            $this->assertTrue($client->getResponse()->isRedirect());
-            $client->followRedirect();
-            $this->assertContains('login', $client->getRequest()->getUri(),
-                'Es wurde nicht auf die Login Seite weitergeleitet');
+            $this->assertTrue($client->getResponse()->isClientError());
+            $this->assertEquals(401, $client->getResponse()->getStatusCode());
         }
         TestUtils::logout($client);
     }
