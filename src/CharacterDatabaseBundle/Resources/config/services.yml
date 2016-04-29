@@ -1,4 +1,4 @@
 services:
-#    character_database.example:
-#        class: CharacterDatabaseBundle\Example
+    character_database.character_service:
+        class: CharacterDatabaseBundle\Service\CharacterService
 #        arguments: ["@service_id", "plain_value", %parameter%]

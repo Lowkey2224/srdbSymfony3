@@ -10,19 +10,23 @@
         'character'
     ]);
 
+    app.service('userService', ['$http',function($http){
+        this.isLoggedIn = function(){
+            url = app.baseUrl+'user/loggedIn';
+            var f = this;
+            f.logged = false;
+            $http.get(url).success(function(data){
+                f.logged = data;
+                console.log('Logged IN: ',f.logged);
+            });
+            console.log('Logged IN: ',f.logged);
+            return f.logged;
+        }
+    }]);
+
 
     app.bundleDir = bundleDir;
     app.baseUrl = indexUrl;
-
-
-    app.controller('CharacterController', ['$http', '$log', function ($http, $log) {
-        var character = this;
-        character.characters = [];
-        url = app.baseUrl + 'character';
-        $http.get(url).success(function (data) {
-            character.characters = data;
-        });
-    }]);
 
     app.config(function ($routeProvider) {
 

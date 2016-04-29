@@ -1,27 +1,40 @@
 character_database_homepage:
     path:     /
     defaults: { _controller: CharacterDatabaseBundle:Default:index }
+    methods: [GET]
 
 character_list:
     path:     /character
     defaults: { _controller: CharacterDatabaseBundle:Character:index }
+    methods: [GET]
 
 character_show:
     path:     /character/{id}
     defaults: { _controller: CharacterDatabaseBundle:Character:show }
+    methods: [GET]
+    requirements:
+        id:  \d+
+
+character_store:
+    path:     /character/{id}
+    defaults: { _controller: CharacterDatabaseBundle:Character:store, id: null }
+    methods: [PUT]
     requirements:
         id:  \d+
 
 user_list:
     path:     /user
     defaults: { _controller: CharacterDatabaseBundle:User:index }
+    methods: [GET]
 
 user_show:
     path:     /user/{id}
     defaults: { _controller: CharacterDatabaseBundle:User:show }
+    methods: [GET]
     requirements:
         id:  \d+
 
 user_logged_in:
     path:     /user/loggedIn
     defaults: { _controller: CharacterDatabaseBundle:User:isLoggedIn }
+    methods: [GET]

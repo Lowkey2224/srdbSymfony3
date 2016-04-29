@@ -2,34 +2,33 @@
  * Created by jenz on 25.04.16.
  */
 (function () {
-    var app = angular.module('character',[
-
-    ]);
+    var app = angular.module('character', []);
 
     app.baseUrl = indexUrl;
     app.bundleDir = bundleDir;
-    app.directive("characterList", function(){
-        return{
+    app.directive("characterList", function () {
+        return {
             restrict: 'E',
-            controller: ['$http', function ($http) {
+            controller: ['$http', 'userService', function ($http, userService) {
                 var character = this;
                 character.loading = true;
+                character.isLoggedIn = userService.isLoggedIn;
                 character.characters = [];
-                url = app.baseUrl+'character';
-                $http.get(url).success(function(data){
+                url = app.baseUrl + 'character';
+                $http.get(url).success(function (data) {
                     character.characters = data;
                     character.loading = false;
                 });
             }],
-            templateUrl: app.bundleDir+'html/directives/character-list.html',
+            templateUrl: app.bundleDir + 'html/directives/character-list.html',
             controllerAs: 'characterController'
         };
     });
 
-    app.directive("characterDetails", function(){
-        return{
+    app.directive("characterDetails", function () {
+        return {
             restrict: 'E',
-            templateUrl: app.bundleDir+'html/directives/character-details.html',
+            templateUrl: app.bundleDir + 'html/directives/character-details.html',
             controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
                 var characterDetail = this;
                 characterDetail.description = "...";
@@ -37,11 +36,11 @@
                 characterDetail.loading = true;
                 characterDetail.short = false;
                 //Toggle the length of Description
-                characterDetail.toggleDescription = function(){
-                    if(characterDetail.short){
-                        characterDetail.description = characterDetail.characterDetails.description.substring(0,100)+"...";
+                characterDetail.toggleDescription = function () {
+                    if (characterDetail.short) {
+                        characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
                         characterDetail.short = false;
-                    }else{
+                    } else {
                         characterDetail.description = characterDetail.characterDetails.description;
                         characterDetail.short = true;
                     }
@@ -49,10 +48,10 @@
                 };
                 //Fill CharacterData
                 characterDetail.characterDetails = null;
-                url = app.baseUrl+'character/'+$routeParams.characterId;
-                $http.get(url).success(function(data){
+                url = app.baseUrl + 'character/' + $routeParams.characterId;
+                $http.get(url).success(function (data) {
                     characterDetail.characterDetails = data;
-                    characterDetail.short = data.description.length>100;
+                    characterDetail.short = data.description.length > 100;
                     characterDetail.needsSubString = characterDetail.short;
                     characterDetail.loading = false;
 
