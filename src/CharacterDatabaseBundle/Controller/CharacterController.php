@@ -44,7 +44,10 @@ class CharacterController extends AbstractBaseController
             throw new NotFoundHttpException('Character not found');
         }
 
-        return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $char], new JsonResponse());
+        return $this->render(
+            'CharacterDatabaseBundle:Character:show.json.twig',
+            ['char' => $char],
+            new JsonResponse());
     }
 
     /**
@@ -77,7 +80,9 @@ class CharacterController extends AbstractBaseController
         $em->persist($character);
         $em->flush();
 
-        return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $character],
+        return $this->render(
+            'CharacterDatabaseBundle:Character:show.json.twig',
+            ['char' => $character],
             new JsonResponse());
     }
 }
