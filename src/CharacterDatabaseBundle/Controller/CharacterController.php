@@ -6,7 +6,6 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Character;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -41,6 +40,9 @@ class CharacterController extends AbstractBaseController
     {
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
         $char = $repo->find($id);
+        if (is_null($char)) {
+            throw new NotFoundHttpException('Character not found');
+        }
 
         return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $char], new JsonResponse());
     }
@@ -63,9 +65,6 @@ class CharacterController extends AbstractBaseController
                 throw new NotFoundHttpException('Character not Found');
             }
         }
-        /*
-         * @var ObjectManager
-         */
         $em = $this->getDoctrine()->getManager();
         $jsonBody = json_decode($request->getContent(), true);
         $characterService = $this->get('character_database.character_service');

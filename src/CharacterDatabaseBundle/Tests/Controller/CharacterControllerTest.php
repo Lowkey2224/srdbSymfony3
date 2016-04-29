@@ -136,6 +136,16 @@ class CharacterControllerTest extends WebTestCase
         }
     }
 
+    public function testShowWithWrongId()
+    {
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $client->request('GET', '/character/999999999');
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        TestUtils::logout($client);
+    }
+
     public function testCreateAnonymously()
     {
         $client = static::createClient();
@@ -200,5 +210,6 @@ class CharacterControllerTest extends WebTestCase
         $client->request('PUT', '/character/9999999999', [], [], [], json_encode($char));
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        TestUtils::logout($client);
     }
 }
