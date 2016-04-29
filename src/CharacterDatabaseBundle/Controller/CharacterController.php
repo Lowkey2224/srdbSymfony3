@@ -83,7 +83,7 @@ class CharacterController extends AbstractBaseController
 
         return $this->render(
             'CharacterDatabaseBundle:Character:show.json.twig',
-            ['char' => $character],
+            ['char' => $repo->find($character->getId())],
             new JsonResponse()
         );
     }

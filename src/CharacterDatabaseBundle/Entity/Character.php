@@ -88,14 +88,14 @@ class Character extends AbstractEntity
     /**
      * @var
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToAttribute",
-     *     mappedBy="character", fetch="EAGER")
+     *     mappedBy="character", fetch="EAGER", cascade={"persist"})
      */
     protected $attributes;
 
     /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToSkill",
-     *     mappedBy="character", fetch="EAGER")
+     *     mappedBy="character", fetch="EAGER", cascade={"persist"})
      **/
     protected $skills;
 
@@ -337,7 +337,10 @@ class Character extends AbstractEntity
      */
     public function setAttributes($attributes)
     {
-        $this->attributes = $attributes;
+        $this->attributes->clear();
+        foreach ($attributes as $att) {
+            $this->attributes->add($att);
+        }
     }
 
     /**

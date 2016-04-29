@@ -22,6 +22,31 @@ character_store:
     requirements:
         id:  \d+
 
+attribute_list:
+    path: /attribute
+    defaults: {_controller: CharacterDatabaseBundle:Attribute:index }
+    methods: [GET]
+
+skill_list:
+    path: /skill
+    defaults: {_controller: CharacterDatabaseBundle:Skill:index }
+    methods: [GET]
+
+magical_tradition_list:
+    path: /tradition
+    defaults: {_controller: CharacterDatabaseBundle:MagicalTradition:index }
+    methods: [GET]
+
+magical_capability_list:
+    path: /capability
+    defaults: {_controller: CharacterDatabaseBundle:MagicalCapability:index}
+    methods: [GET]
+
+totem_list:
+    path: /totem
+    defaults: {_controller: CharacterDatabaseBundle:Totem:index }
+    methods: [GET]
+
 user_list:
     path:     /user
     defaults: { _controller: CharacterDatabaseBundle:User:index }

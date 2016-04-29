@@ -24,8 +24,8 @@ class CharacterControllerTest extends WebTestCase
         'race' => 'HSS',
         'description' => 'Kid-Stealth Cyberlegs Guy',
         'occupation' => 'Street-Sam',
-        'goodKarma' => '0',
-        'reputaion' => '0',
+        'karma' => '0',
+        'reputation' => '0',
         'type' => 'SC',
     ];
 
@@ -34,10 +34,10 @@ class CharacterControllerTest extends WebTestCase
         'race' => 'HSR',
         'description' => 'Pinoy Troll Schamane',
         'occupation' => 'Schamane',
-        'goodKarma' => '0',
-        'reputaion' => '0',
+        'karma' => '0',
+        'reputation' => '0',
         'type' => 'SC',
-        'magical' => 'Vollmagier',
+        'capability' => 'Vollmagier',
         'tradition' => 'Schamane',
         'totem' => 'Wildschwein',
     ];
@@ -48,8 +48,8 @@ class CharacterControllerTest extends WebTestCase
         'race' => 'HSS',
         'description' => 'Lässiger Konzerner mit Chip und Datenbuchsen',
         'occupation' => 'Decker/Rigger',
-        'goodKarma' => '150',
-        'reputaion' => '150',
+        'karma' => '150',
+        'reputation' => '150',
         'type' => 'SC',
     ];
 
@@ -58,10 +58,10 @@ class CharacterControllerTest extends WebTestCase
         'race' => 'HSS',
         'description' => 'Unnauffälliger Norm mit weißer Strähne',
         'occupation' => 'Util-Mage',
-        'goodKarma' => '0',
-        'reputaion' => '0',
+        'karma' => '0',
+        'reputation' => '0',
         'type' => 'SC',
-        'magical' => 'Vollmagier',
+        'capability' => 'Vollmagier',
         'tradition' => 'Hermetiker',
     ];
 
@@ -201,8 +201,8 @@ class CharacterControllerTest extends WebTestCase
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);
-        $this->assertEquals($char['goodKarma'], $response['goodKarma']);
-        $this->assertEquals($char['reputaion'], $response['reputaion']);
+        $this->assertEquals($char['karma'], $response['goodKarma']);
+        $this->assertEquals($char['reputation'], $response['reputation']);
         $this->assertEquals($char['id'], $response['id']);
     }
 
