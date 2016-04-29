@@ -28,7 +28,7 @@ class Specialization extends AbstractEntity
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization", mappedBy="spec")
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization", mappedBy="specialization")
      */
     protected $specializations;
     /**
