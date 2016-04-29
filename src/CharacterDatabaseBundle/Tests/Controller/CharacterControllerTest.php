@@ -42,6 +42,17 @@ class CharacterControllerTest extends WebTestCase
         "totem" => "Wildschwein",
     ];
 
+    private $characterArrayLodur = [
+        "id" => 1,
+        "name" => "Lodur",
+        "race" => "HSS",
+        "description" => "Lässiger Konzerner mit Chip und Datenbuchsen",
+        "occupation" => "Decker/Rigger",
+        "goodKarma" => "150",
+        "reputaion" => "150",
+        "type" => "SC"
+    ];
+
     private $characterArrayCowboy = [
         "name" => "Cowboy",
         "race" => "HSS",
@@ -167,6 +178,23 @@ class CharacterControllerTest extends WebTestCase
             $this->assertEquals($char['race'], $response['race']);
             $this->assertTrue(isset($response['id']));
         }
+        TestUtils::logout($client);
+    }
 
+    public function testUpdate()
+    {
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $char = $this->characterArrayLodur;
+            $client->request('PUT', '/character/'.$char['id'], [], [], [], json_encode($char));
+            $response = $client->getResponse();
+            $this->assertTrue($response->isSuccessful(),
+                "Is not Successful for Character: ".$char['name']." with Errorcode: ".$response->getStatusCode()." and Body: ".$response->getContent());
+            $response = json_decode($response->getContent(), true);
+            $this->assertEquals($char['name'], $response['name']);
+            $this->assertEquals($char['description'], $response['description']);
+            $this->assertEquals($char['goodKarma'], $response['goodKarma']);
+            $this->assertEquals($char['reputaion'], $response['reputaion']);
+            $this->assertEquals($char['id'], $response['id']);
     }
 }
