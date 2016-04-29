@@ -174,8 +174,10 @@ class CharacterControllerTest extends WebTestCase
         foreach ($characters as $char) {
             $client->request('PUT', '/character', [], [], [], json_encode($char));
             $response = $client->getResponse();
-            $this->assertTrue($response->isSuccessful(),
-                'Is not Successful for Character: '.$char['name'].' with Errorcode: '.$response->getStatusCode().' and Body: '.$response->getContent());
+            $this->assertTrue(
+                $response->isSuccessful(),
+                'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
+                $response->getStatusCode().' and Body: '.$response->getContent());
             $response = json_decode($response->getContent(), true);
             $this->assertEquals($char['name'], $response['name']);
             $this->assertEquals($char['occupation'], $response['occupation']);
@@ -192,8 +194,10 @@ class CharacterControllerTest extends WebTestCase
         $char = $this->characterArrayLodur;
         $client->request('PUT', '/character/'.$char['id'], [], [], [], json_encode($char));
         $response = $client->getResponse();
-        $this->assertTrue($response->isSuccessful(),
-            'Is not Successful for Character: '.$char['name'].' with Errorcode: '.$response->getStatusCode().' and Body: '.$response->getContent());
+        $this->assertTrue(
+            $response->isSuccessful(),
+            'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
+            $response->getStatusCode().' and Body: '.$response->getContent());
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);
