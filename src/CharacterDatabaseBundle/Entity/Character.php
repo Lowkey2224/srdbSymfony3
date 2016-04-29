@@ -60,7 +60,7 @@ class Character extends AbstractEntity
     /**
      * @var int
      *          1 = SC, 2 = NSC
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
      */
     protected $type;
 

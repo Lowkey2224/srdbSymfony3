@@ -16,8 +16,43 @@ class CharacterControllerTest extends WebTestCase
 
     private $jsonEntries = 18;
 
-    public $username = 'Loki';
-    public $password = 'wuseldusel';
+    private $username = 'Loki';
+    private $password = 'wuseldusel';
+
+    private $characterArrayNeil = [
+        "name" => "Neil",
+        "race" => "HSS",
+        "description" => "Kid-Stealth Cyberlegs Guy",
+        "occupation" => "Street-Sam",
+        "goodKarma" => "0",
+        "reputaion" => "0",
+        "type" => "SC",
+    ];
+
+    private $characterArrayJose = [
+        "name" => "José",
+        "race" => "HSR",
+        "description" => "Pinoy Troll Schamane",
+        "occupation" => "Schamane",
+        "goodKarma" => "0",
+        "reputaion" => "0",
+        "type" => "SC",
+        "magical" => "Vollmagier",
+        "tradition" => "Schamane",
+        "totem" => "Wildschwein",
+    ];
+
+    private $characterArrayCowboy = [
+        "name" => "Cowboy",
+        "race" => "HSS",
+        "description" => "Unnauffälliger Norm mit weißer Strähne",
+        "occupation" => "Util-Mage",
+        "goodKarma" => "0",
+        "reputaion" => "0",
+        "type" => "SC",
+        "magical" => "Vollmagier",
+        "tradition" => "Hermetiker",
+    ];
 
     /**
      * {@inheritdoc}
@@ -92,5 +127,46 @@ class CharacterControllerTest extends WebTestCase
             $this->assertContains('login', $client->getRequest()->getUri(),
                 'Es wurde nicht auf die Login Seite weitergeleitet');
         }
+    }
+
+    public function testCreateAnonymously()
+    {
+        $client = static::createClient();
+        $client->request('PUT', '/character');
+        $this->assertTrue($client->getResponse()->isRedirect(), "Is not Redirect");
+        $client->followRedirect();
+        $this->assertContains('login', $client->getRequest()->getUri(),
+            'Es wurde nicht auf die Login Seite weitergeleitet');
+    }
+
+    public function testCreateWithWrongJson()
+    {
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $client->request('PUT', '/character', [], [], [], json_encode(['Name' => 'Hallo']));
+        $this->assertTrue($client->getResponse()->isClientError(), "Is not Clienterror");
+    }
+
+    public function testCreate()
+    {
+        $characters = [
+            $this->characterArrayCowboy,
+            $this->characterArrayJose,
+            $this->characterArrayNeil,
+        ];
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        foreach ($characters as $char) {
+            $client->request('PUT', '/character', [], [], [], json_encode($char));
+            $response = $client->getResponse();
+            $this->assertTrue($response->isSuccessful(),
+                "Is not Successful for Character: ".$char['name']." with Errorcode: ".$response->getStatusCode()." and Body: ".$response->getContent());
+            $response = json_decode($response->getContent(), true);
+            $this->assertEquals($char['name'], $response['name']);
+            $this->assertEquals($char['occupation'], $response['occupation']);
+            $this->assertEquals($char['race'], $response['race']);
+            $this->assertTrue(isset($response['id']));
+        }
+
     }
 }

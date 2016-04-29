@@ -9,6 +9,7 @@ use CharacterDatabaseBundle\Entity\Character;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CharacterController extends AbstractBaseController
 {
@@ -57,10 +58,17 @@ class CharacterController extends AbstractBaseController
         } else {
             $character = $repo->find($id);
         }
+        $em = $this->getDoctrine()->getManager();
         $jsonBody = json_decode($request->getContent(), true);
-
-        $jsonBody['result'] = $this->get('character_database.character_service')->validateJson($jsonBody);
-
-        return new JsonResponse($jsonBody);
+        $characterService = $this->get('character_database.character_service');
+        $jsonBody['result'] = $characterService->validateJson($jsonBody);
+        if(!$jsonBody['result']){
+            throw new BadRequestHttpException("Malformed JSON");
+        }
+        $character->setUser($this->getUser());
+        $character = $characterService->updateCharacter($character, $jsonBody, $em);
+        $em->persist($character);
+        $em->flush();
+        return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $character], new JsonResponse());
     }
 }
