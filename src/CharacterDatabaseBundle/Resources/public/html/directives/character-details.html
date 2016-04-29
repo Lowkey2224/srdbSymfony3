@@ -1,7 +1,14 @@
-<!-- Show Spinner while loading, or Error MEssage if there is no Data-->
-<div ng-hide="characterDetail.characterDetails" class="list-group-item list-group-item-home">
+
+<div ng-show="characterDetail.characterDetails.code==401" class="list-group-item list-group-item-home">
     <h1 ng-hide="characterDetail.loading">
-        Kein Character Vorhanden.
+        Bitte Log dich zuerst ein.
+    </h1>
+</div>
+
+
+<div ng-hide="characterDetail.characterDetails" ng-show="characterDetail.characterDetails.code==404" class="list-group-item list-group-item-home">
+    <h1 ng-hide="characterDetail.loading">
+        Kein Character Gefunden.
     </h1>
     <div ng-show="characterDetail.loading">
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
@@ -9,7 +16,7 @@
     </div>
 </div>
 <!--Show Character Details-->
-<div ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home">
+<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home">
     <div class="row">
         <h1>{{characterDetail.characterDetails.name}}
             <small>by {{ characterDetail.characterDetails.user.name}}</small>
@@ -26,7 +33,7 @@
     </div>
 </div>
 
-<div ng-show="characterDetail.characterDetails" class="panel-group" ui-state="myAccordion" ui-default="1">
+<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails" class="panel-group" ui-state="myAccordion" ui-default="1">
     <!-- Akkordeon Attribute -->
     <div class="panel panel-default">
         <div class="panel-heading" ui-set="{'myAccordion': 1}">

@@ -15,8 +15,11 @@
                 character.isLoggedIn = userService.isLoggedIn;
                 character.characters = [];
                 url = app.baseUrl + 'character';
-                $http.get(url).success(function (data) {
-                    character.characters = data;
+                $http.get(url).then(function (request) {
+                    character.characters = request.data;
+                    character.loading = false;
+                }, function (request) {
+                    character.characters = {'code': request.status};
                     character.loading = false;
                 });
             }],
@@ -38,8 +41,10 @@
                 //Toggle the length of Description
                 characterDetail.toggleDescription = function () {
                     if (characterDetail.short) {
-                        characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
-                        characterDetail.short = false;
+                        if(characterDetail.characterDetails.description > 100){
+                            characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
+                            characterDetail.short = false;
+                        }
                     } else {
                         characterDetail.description = characterDetail.characterDetails.description;
                         characterDetail.short = true;
@@ -49,14 +54,17 @@
                 //Fill CharacterData
                 characterDetail.characterDetails = null;
                 url = app.baseUrl + 'character/' + $routeParams.characterId;
-                $http.get(url).success(function (data) {
-                    characterDetail.characterDetails = data;
-                    characterDetail.short = data.description.length > 100;
+                $http.get(url).then(function (request) {
+                    characterDetail.characterDetails = request.data;
+                    characterDetail.short = request.data.description.length > 100;
                     characterDetail.needsSubString = characterDetail.short;
                     characterDetail.loading = false;
 
                     characterDetail.toggleDescription();
 
+                }, function (request) {
+                    characterDetail.characterDetails = {'code': request.status};
+                    characterDetail.loading = false;
                 });
             }],
             controllerAs: 'characterDetail'
