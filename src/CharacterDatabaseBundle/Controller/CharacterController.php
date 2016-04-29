@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CharacterController extends AbstractBaseController
 {
@@ -58,9 +59,12 @@ class CharacterController extends AbstractBaseController
             $character = new Character();
         } else {
             $character = $repo->find($id);
+            if (is_null($character)) {
+                throw new NotFoundHttpException('Character not Found');
+            }
         }
-        /**
-         * @var $em ObjectManager
+        /*
+         * @var ObjectManager
          */
         $em = $this->getDoctrine()->getManager();
         $jsonBody = json_decode($request->getContent(), true);
@@ -74,6 +78,7 @@ class CharacterController extends AbstractBaseController
         $em->persist($character);
         $em->flush();
 
-        return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $character], new JsonResponse());
+        return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $character],
+            new JsonResponse());
     }
 }

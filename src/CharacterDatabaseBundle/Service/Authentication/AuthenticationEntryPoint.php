@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Service\Authentication;
 
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -13,7 +12,6 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
 
 class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
 {
-
     /**
      * Returns a response that directs the user to authenticate.
      *
@@ -27,7 +25,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
      *  B) For an API token authentication system, you return a 401 response
      *      return new Response('Auth header required', 401);
      *
-     * @param Request $request The request that resulted in an AuthenticationException
+     * @param Request                 $request       The request that resulted in an AuthenticationException
      * @param AuthenticationException $authException The exception that started the authentication process
      *
      * @return Response

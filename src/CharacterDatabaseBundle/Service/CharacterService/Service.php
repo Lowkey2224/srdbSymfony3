@@ -53,7 +53,7 @@ class Service
     public function updateCharacter(Character $character, $jsonBody, ObjectManager $manager)
     {
         if (!$this->validateJson($jsonBody)) {
-            return null;
+            return;
         }
 
         $character->setName($jsonBody['name']);

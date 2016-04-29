@@ -183,12 +183,22 @@ class CharacterControllerTest extends WebTestCase
         $client->request('PUT', '/character/'.$char['id'], [], [], [], json_encode($char));
         $response = $client->getResponse();
         $this->assertTrue($response->isSuccessful(),
-                'Is not Successful for Character: '.$char['name'].' with Errorcode: '.$response->getStatusCode().' and Body: '.$response->getContent());
+            'Is not Successful for Character: '.$char['name'].' with Errorcode: '.$response->getStatusCode().' and Body: '.$response->getContent());
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);
         $this->assertEquals($char['goodKarma'], $response['goodKarma']);
         $this->assertEquals($char['reputaion'], $response['reputaion']);
         $this->assertEquals($char['id'], $response['id']);
+    }
+
+    public function testUpdateWithWrongId()
+    {
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $char = $this->characterArrayLodur;
+        $client->request('PUT', '/character/9999999999', [], [], [], json_encode($char));
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
 }
