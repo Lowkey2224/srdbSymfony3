@@ -1,7 +1,7 @@
 services:
     character_database.character_service:
         class: CharacterDatabaseBundle\Service\CharacterService\Service
-#        arguments: ["@service_id", "plain_value", %parameter%]
+        arguments: ["@logger"]
     character_database.authentication_entry_point:
         class: CharacterDatabaseBundle\Service\Authentication\AuthenticationEntryPoint
-#        arguments: ["@service_id", "plain_value", %parameter%]
+        arguments: ["@logger"]

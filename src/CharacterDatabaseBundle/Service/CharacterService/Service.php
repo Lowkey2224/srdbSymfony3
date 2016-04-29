@@ -20,34 +20,21 @@ class Service
      */
     public function validateJson($json)
     {
-        if (!isset($json['name'])) {
-            return false;
-        }
-        if (!isset($json['race'])) {
-            return false;
-        }
-        if (!isset($json['occupation'])) {
-            return false;
-        }
-        if (!isset($json['description'])) {
-            return false;
-        }
-        if (!isset($json['goodKarma'])) {
-            return false;
-        }
-        if (!isset($json['reputaion'])) {
-            return false;
-        }
-        if (!isset($json['type'])) {
-            return false;
-        }
+        $return = isset($json['name']);
+        $return = ($return) ? isset($json['race']) : false;
+        $return = ($return) ? isset($json['occupation']) : false;
+        $return = ($return) ? isset($json['description']) : false;
+        $return = ($return) ? isset($json['goodKarma']) : false;
+        $return = ($return) ? isset($json['reputaion']) : false;
+        $return = ($return) ? isset($json['type']) : false;
+        $return = ($return) ? isset($json['type']) : false;
         if (isset($json['magical']) && isset($json['tradition']) && $json['tradition'] == '') {
             if (!isset($json['totem'])) {
                 return false;
             }
         }
 
-        return true;
+        return $return;
     }
 
     public function updateCharacter(Character $character, $jsonBody, ObjectManager $manager)

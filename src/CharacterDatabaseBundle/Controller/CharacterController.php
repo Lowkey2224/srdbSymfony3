@@ -47,7 +47,8 @@ class CharacterController extends AbstractBaseController
         return $this->render(
             'CharacterDatabaseBundle:Character:show.json.twig',
             ['char' => $char],
-            new JsonResponse());
+            new JsonResponse()
+        );
     }
 
     /**
@@ -83,6 +84,7 @@ class CharacterController extends AbstractBaseController
         return $this->render(
             'CharacterDatabaseBundle:Character:show.json.twig',
             ['char' => $character],
-            new JsonResponse());
+            new JsonResponse()
+        );
     }
 }
