@@ -8,9 +8,14 @@ namespace CharacterDatabaseBundle\Controller;
 use CharacterDatabaseBundle\Entity\Character;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CharacterController extends AbstractBaseController
 {
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
     public function indexAction()
     {
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
@@ -23,6 +28,12 @@ class CharacterController extends AbstractBaseController
         );
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
     public function showAction($id)
     {
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
@@ -31,6 +42,13 @@ class CharacterController extends AbstractBaseController
         return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $char], new JsonResponse());
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     *
+     * @return JsonResponse
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
     public function storeAction(Request $request, $id)
     {
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
