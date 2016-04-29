@@ -91,4 +91,14 @@ class UserControllerTest extends WebTestCase
         }
         TestUtils::logout($client);
     }
+
+    public function testShowWithWrongId()
+    {
+        $client = static::createClient();
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $client->request('GET', '/user/0');
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        TestUtils::logout($client);
+    }
 }

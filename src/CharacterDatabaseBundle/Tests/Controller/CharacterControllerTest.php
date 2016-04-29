@@ -140,7 +140,7 @@ class CharacterControllerTest extends WebTestCase
     {
         $client = static::createClient();
         TestUtils::loginAs($client, $this->username, $this->password);
-        $client->request('GET', '/character/999999999');
+        $client->request('GET', '/character/0');
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         TestUtils::logout($client);
@@ -207,7 +207,7 @@ class CharacterControllerTest extends WebTestCase
         $client = static::createClient();
         TestUtils::loginAs($client, $this->username, $this->password);
         $char = $this->characterArrayLodur;
-        $client->request('PUT', '/character/9999999999', [], [], [], json_encode($char));
+        $client->request('PUT', '/character/0', [], [], [], json_encode($char));
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         TestUtils::logout($client);

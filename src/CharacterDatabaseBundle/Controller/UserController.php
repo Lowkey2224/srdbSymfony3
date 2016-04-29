@@ -10,6 +10,7 @@ use CharacterDatabaseBundle\Model\UserModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends AbstractBaseController
 {
@@ -31,6 +32,9 @@ class UserController extends AbstractBaseController
     {
         $repo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:User');
         $user = $repo->find($id);
+        if (is_null($user)) {
+            throw new NotFoundHttpException('User not found');
+        }
         $model = new UserModel($user);
 
         return new JsonResponse($model->toArray());
