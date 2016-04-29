@@ -68,17 +68,17 @@ class CharacterService
                 ->findOneBy(['name' => $jsonBody['magical']]);
             $character->setMagicalCapability($magicalCapability);
         }
-        if(isset($jsonBody['tradition'])){
+        if (isset($jsonBody['tradition'])) {
             $tradition = $manager->getRepository('CharacterDatabaseBundle:MagicalTradition')
                 ->findOneBy(['name' => $jsonBody['tradition']]);
             $character->setMagicalTradition($tradition);
         }
-        if(isset($jsonBody['totem'])){
+        if (isset($jsonBody['totem'])) {
             $totem = $manager->getRepository('CharacterDatabaseBundle:Totem')
                 ->findOneBy(['name' => $jsonBody['totem']]);
             $character->setTotem($totem);
         }
-        return $character;
 
+        return $character;
     }
 }

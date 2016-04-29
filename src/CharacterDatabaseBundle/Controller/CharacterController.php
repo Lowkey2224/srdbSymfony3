@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Character;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -58,17 +59,21 @@ class CharacterController extends AbstractBaseController
         } else {
             $character = $repo->find($id);
         }
+        /**
+         * @var $em ObjectManager
+         */
         $em = $this->getDoctrine()->getManager();
         $jsonBody = json_decode($request->getContent(), true);
         $characterService = $this->get('character_database.character_service');
         $jsonBody['result'] = $characterService->validateJson($jsonBody);
-        if(!$jsonBody['result']){
-            throw new BadRequestHttpException("Malformed JSON");
+        if (!$jsonBody['result']) {
+            throw new BadRequestHttpException('Malformed JSON');
         }
         $character->setUser($this->getUser());
         $character = $characterService->updateCharacter($character, $jsonBody, $em);
         $em->persist($character);
         $em->flush();
+
         return $this->render('CharacterDatabaseBundle:Character:show.json.twig', ['char' => $character], new JsonResponse());
     }
 }
