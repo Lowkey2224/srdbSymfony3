@@ -1,0 +1,43 @@
+<div>
+    <div class="row">
+        <button class="col-xs-offset-5 col-xs-2 btn btn-success" ui-turn-on="modalSkillsAdd">Skills <i
+                class="fa fa-plus"></i></button>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div ng-repeat="skill in form.formSkills">
+                <label for="skill{{skill.id}}" class="col-xs-3 text-left">{{skill.name}}</label>
+                <input ng-model="form.character.skill[skill.name]" id="skill{{skill.id}}" name=skill{{skill.id}}" type="number" class="col-xs-2"
+                       value="0">
+                <div class="col-xs-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div ui-content-for="modals">
+        <div class="modal" ui-if="modalSkillsAdd" ui-state='modalSkillsAdd'>
+            <div class="modal-backdrop in"></div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close"
+                                ui-turn-off="modal1">&times;</button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" ng-repeat="skill in form.skills" style="padding-bottom: 10px">
+                            <button ng-class="form.isAdded(skill)?'btn-danger':'btn-success'"
+                                    class="btn col-xs-offset-5 col-xs-2"
+                                    ng-click="form.toggleSkill(skill)" type="button">{{skill.name}}
+                                <i class="fa" ng-class="form.isAdded(skill)?'fa-minus':'fa-plus'"></i></button>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button ui-turn-off="modalSkillsAdd" class="btn btn-default">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

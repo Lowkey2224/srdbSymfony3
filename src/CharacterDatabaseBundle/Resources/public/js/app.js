@@ -7,7 +7,8 @@
         'mobile-angular-ui',
         'ngRoute',
         'mobile-angular-ui.gestures',
-        'character'
+        'character',
+        'form'
     ]);
 
     app.service('userService', ['$http',function($http){
@@ -31,13 +32,13 @@
     app.config(function ($routeProvider) {
 
         $routeProvider.when('/', {templateUrl: app.bundleDir + 'html/home.html', reloadOnSearch: false});
-        $routeProvider.when('/new', {templateUrl: app.bundleDir + 'html/scroll.html', reloadOnSearch: false});
+        $routeProvider.when('/new', {templateUrl: app.bundleDir + 'html/new-character.html', reloadOnSearch: false});
         $routeProvider.when('/mine', {
             templateUrl: app.bundleDir + 'html/toggle.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/character/:characterId', {
-            templateUrl: app.bundleDir + 'html/character-show.html',
+            templateUrl: app.bundleDir + 'html/character-show.html'
             //reloadOnSearch: false
         });
         $routeProvider.when('/all', {
