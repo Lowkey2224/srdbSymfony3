@@ -10,6 +10,7 @@
             templateUrl: bundleDir + 'html/directives/character-form.html',
             controller: ['$http', '$routeParams', "$scope", "$location", function ($http, $routeParams, $scope, $location) {
                 var form = this;
+                form.loadStatus = 5;
                 form.count = 0;
                 form.needsRow = function (countPerRow) {
                     val = form.count % countPerRow == 0;
@@ -17,12 +18,10 @@
                     return val;
                 };
                 form.character = {};
-                form.skills = [];
                 form.attributes = [];
                 form.totems = [];
                 form.capabilities = [];
                 form.traditions = [];
-                form.formSkills = [];
                 form.submitData = function () {
                     console.log("Formdata:", form.character);
                     var url = indexUrl + 'character' + "?XDEBUG_SESSION_START=PHPSTORM";
@@ -33,48 +32,45 @@
                         console.log(request);
                     });
                 };
-                form.toggleSkill = function (skill) {
-                    var index = form.formSkills.indexOf(skill);
-                    console.log("Toggle skill;", skill, index);
-                    if (index == -1) {
-                        form.formSkills.push(skill);
-                    } else {
-                        form.formSkills.splice(index, 1);
-                    }
-                    console.log("Formskills", form.formSkills);
-                };
-                form.isAdded = function (skill) {
-                    return form.formSkills.indexOf(skill) != -1;
-                };
                 var url = indexUrl + 'skill';
                 $http.get(url).then(function (request) {
                     form.skills = request.data;
+                    form.loadStatus--;
                 }, function (request) {
                     form.skills = {'code': request.status};
+                    form.loadStatus--;
                 });
                 url = indexUrl + 'attribute';
                 $http.get(url).then(function (request) {
                     form.attributes = request.data;
+                    form.loadStatus--;
                 }, function (request) {
                     form.attributes = {'code': request.status};
+                    form.loadStatus--;
                 });
                 url = indexUrl + 'totem';
                 $http.get(url).then(function (request) {
                     form.totems = request.data;
+                    form.loadStatus--;
                 }, function (request) {
                     form.totems = {'code': request.status};
+                    form.loadStatus--;
                 });
                 url = indexUrl + 'capability';
                 $http.get(url).then(function (request) {
                     form.capabilities = request.data;
+                    form.loadStatus--;
                 }, function (request) {
                     form.capabilities = {'code': request.status};
+                    form.loadStatus--;
                 });
                 url = indexUrl + 'tradition';
                 $http.get(url).then(function (request) {
                     form.traditions = request.data;
+                    form.loadStatus--;
                 }, function (request) {
                     form.traditions = {'code': request.status};
+                    form.loadStatus--;
                 });
             }],
             controllerAs: 'form'
