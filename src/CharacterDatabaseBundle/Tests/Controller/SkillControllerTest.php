@@ -5,12 +5,10 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-
 class SkillControllerTest extends AbstractEntityControllerTest
 {
-
     protected function getRouteName()
     {
-        return "/skill";
+        return '/skill';
     }
 }

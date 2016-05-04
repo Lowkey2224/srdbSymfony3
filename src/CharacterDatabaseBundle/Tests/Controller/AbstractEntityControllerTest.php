@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class AbstractEntityControllerTest extends WebTestCase
 {
-
     protected $username = 'Loki';
     protected $password = 'wuseldusel';
 

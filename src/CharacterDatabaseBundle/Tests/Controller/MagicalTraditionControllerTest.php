@@ -5,12 +5,10 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-
 class MagicalTraditionControllerTest extends AbstractEntityControllerTest
 {
-
     protected function getRouteName()
     {
-        return "/tradition";
+        return '/tradition';
     }
 }
