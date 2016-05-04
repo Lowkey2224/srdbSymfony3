@@ -103,4 +103,25 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         TestUtils::logout($client);
     }
+
+    public function testisLoggedInAction()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/user/loggedIn');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Request is not Successful');
+        $this->assertTrue(
+            $client->getResponse()->headers->contains('Content-Type', 'application/json'),
+            'Request is hast not correct MimeType');
+
+        $this->assertFalse(json_decode($client->getResponse()->getContent()));
+        TestUtils::loginAs($client, $this->username, $this->password);
+        $client->request('GET', '/user/loggedIn');
+        $this->assertTrue($client->getResponse()->isSuccessful(), 'Request is not Successful');
+        $this->assertTrue(
+            $client->getResponse()->headers->contains('Content-Type', 'application/json'),
+            'Request is hast not correct MimeType');
+
+        $this->assertTrue(json_decode($client->getResponse()->getContent()));
+        TestUtils::logout($client);
+    }
 }
