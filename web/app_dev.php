@@ -13,8 +13,7 @@ use Symfony\Component\Debug\Debug;
 //std Allowed IPs
 $allowedIps = [
 ];
-include_once '../allowedIPs.php';
-
+include_once __DIR__.'../allowedIPs.php';
 
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])
@@ -22,7 +21,12 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], $allowedIps) || php_sapi_name() === 'cli-server')
 ) {
     header('HTTP/1.0 403 Forbidden');
-    exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
+    exit(
+        'You are not allowed to access this file. Check '
+        .basename(__FILE__)
+        .' for more information. Request IP: '
+        .$_SERVER['HTTP_CLIENT_IP']
+    );
 }
 
 /**
