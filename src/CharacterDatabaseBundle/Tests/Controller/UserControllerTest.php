@@ -6,9 +6,8 @@
 namespace CharacterDatabaseBundle\Tests\Controller;
 
 use CharacterDatabaseBundle\Model\UserModel;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserControllerTest extends WebTestCase
+class UserControllerTest extends AbstractEntityControllerTest
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -17,6 +16,16 @@ class UserControllerTest extends WebTestCase
 
     public $username = 'Loki';
     public $password = 'wuseldusel';
+
+    public function testedIndexFields()
+    {
+        return ['id', 'username', 'email', 'character'];
+    }
+
+    protected function getRouteName()
+    {
+        return '/user';
+    }
 
     /**
      * {@inheritdoc}
@@ -30,42 +39,13 @@ class UserControllerTest extends WebTestCase
             ->getManager();
     }
 
-    public function testIndexAnonymously()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/user');
-        $this->assertTrue($client->getResponse()->isClientError());
-        $this->assertEquals(401, $client->getResponse()->getStatusCode());
-    }
-
-    public function testIndex()
-    {
-        $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
-        $client->request('GET', '/user');
-        $this->assertTrue($client->getResponse()->isSuccessful(), 'Request is not Successful');
-        $this->assertTrue(
-            $client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            ),
-            'Request is hast not correct MimeType'
-        );
-        $responseData = json_decode($client->getResponse()->getContent(), true);
-        $this->assertGreaterThan(1, count($responseData));
-        for ($i = 0; $i < count($responseData) && $i < 10; ++$i) {
-            $this->assertArrayHasKey('id', $responseData[$i]);
-            $this->assertArrayHasKey('username', $responseData[$i]);
-            $this->assertArrayHasKey('email', $responseData[$i]);
-            $this->assertArrayHasKey('character', $responseData[$i]);
-        }
-        TestUtils::logout($client);
-    }
-
+    /**
+     * @covers UserController::showAction()
+     */
     public function testShow()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $users = $this->em->getRepository('CharacterDatabaseBundle:User')->findAll();
         $this->assertGreaterThan(0, count($users));
         for ($i = 0; $i < count($users) && $i < 10; ++$i) {
@@ -78,9 +58,12 @@ class UserControllerTest extends WebTestCase
             $responseData = json_decode($client->getResponse()->getContent(), true);
             $this->assertEquals($userModel->toArray(), $responseData, 'For Character: '.$users[$i]->getUsername());
         }
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
+    /**
+     * @covers UserController::showAction()
+     */
     public function testShowAnonymously()
     {
         $client = static::createClient();
@@ -91,19 +74,25 @@ class UserControllerTest extends WebTestCase
             $this->assertTrue($client->getResponse()->isClientError());
             $this->assertEquals(401, $client->getResponse()->getStatusCode());
         }
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
+    /**
+     * @covers UserController::showAction()
+     */
     public function testShowWithWrongId()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $client->request('GET', '/user/0');
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
+    /**
+     * @covers UserController::showAction()
+     */
     public function testisLoggedInAction()
     {
         $client = static::createClient();
@@ -114,7 +103,7 @@ class UserControllerTest extends WebTestCase
             'Request is hast not correct MimeType');
 
         $this->assertFalse(json_decode($client->getResponse()->getContent()));
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $client->request('GET', '/user/loggedIn');
         $this->assertTrue($client->getResponse()->isSuccessful(), 'Request is not Successful');
         $this->assertTrue(
@@ -122,6 +111,6 @@ class UserControllerTest extends WebTestCase
             'Request is hast not correct MimeType');
 
         $this->assertTrue(json_decode($client->getResponse()->getContent()));
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 }

@@ -137,10 +137,6 @@ class Service
     private function setAttributes($json, Character $character, ObjectManager $manager)
     {
         $attributes = $this->createAttributes($json, $character, $manager);
-//        $col = new ArrayCollection();
-//        foreach($attributes as $att){
-//            $col->add($col);
-//        }
         $character->setAttributes($attributes);
 
         return $character;

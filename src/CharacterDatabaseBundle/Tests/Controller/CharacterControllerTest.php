@@ -5,9 +5,7 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class CharacterControllerTest extends WebTestCase
+class CharacterControllerTest extends AbstractEntityControllerTest
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -16,8 +14,15 @@ class CharacterControllerTest extends WebTestCase
 
     private $jsonEntries = 18;
 
-    private $username = 'Loki';
-    private $password = 'wuseldusel';
+    public function testedIndexFields()
+    {
+        return ['id', 'name', 'user'];
+    }
+
+    protected function getRouteName()
+    {
+        return '/character';
+    }
 
     private $characterArrayNeil = [
         'name' => 'Neil',
@@ -77,36 +82,10 @@ class CharacterControllerTest extends WebTestCase
             ->getManager();
     }
 
-    public function testIndex()
-    {
-        $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
-        $client->request('GET', '/character');
-        $this->assertTrue(
-            $client->getResponse()->headers->contains(
-                'Content-Type',
-                'application/json'
-            )
-        );
-        $this->assertTrue($client->getResponse()->isSuccessful());
-        $responseData = json_decode($client->getResponse()->getContent(), true);
-        $this->assertGreaterThan(1, count($responseData));
-        $this->assertEquals($this->jsonEntries, count($responseData[0]));
-        TestUtils::logout($client);
-    }
-
-    public function testIndexAnonymously()
-    {
-        $client = static::createClient();
-        $client->request('GET', '/character');
-        $this->assertTrue($client->getResponse()->isClientError());
-        $this->assertEquals(401, $client->getResponse()->getStatusCode());
-    }
-
     public function testShow()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $chars = $this->em->getRepository('CharacterDatabaseBundle:Character')->findAll();
         $this->assertGreaterThan(0, count($chars));
         for ($i = 0; $i < count($chars) && $i < 10; ++$i) {
@@ -121,7 +100,7 @@ class CharacterControllerTest extends WebTestCase
             $responseData = json_decode($client->getResponse()->getContent(), true);
             $this->assertEquals($this->jsonEntries, count($responseData), 'For Character: '.$chars[$i]->getName());
         }
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
     public function testShowAnonymously()
@@ -139,11 +118,11 @@ class CharacterControllerTest extends WebTestCase
     public function testShowWithWrongId()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $client->request('GET', '/character/0');
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
     public function testCreateAnonymously()
@@ -157,7 +136,7 @@ class CharacterControllerTest extends WebTestCase
     public function testCreateWithWrongJson()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $client->request('PUT', '/character', [], [], [], json_encode(['Name' => 'Hallo']));
         $this->assertTrue($client->getResponse()->isClientError(), 'Is not Clienterror');
     }
@@ -170,7 +149,7 @@ class CharacterControllerTest extends WebTestCase
             $this->characterArrayNeil,
         ];
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         foreach ($characters as $char) {
             $client->request('PUT', '/character', [], [], [], json_encode($char));
             $response = $client->getResponse();
@@ -184,13 +163,13 @@ class CharacterControllerTest extends WebTestCase
             $this->assertEquals($char['race'], $response['race']);
             $this->assertTrue(isset($response['id']));
         }
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 
     public function testUpdate()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $char = $this->characterArrayLodur;
         $client->request('PUT', '/character/'.$char['id'], [], [], [], json_encode($char));
         $response = $client->getResponse();
@@ -209,11 +188,11 @@ class CharacterControllerTest extends WebTestCase
     public function testUpdateWithWrongId()
     {
         $client = static::createClient();
-        TestUtils::loginAs($client, $this->username, $this->password);
+        $this->loginAs($client, $this->username, $this->password);
         $char = $this->characterArrayLodur;
         $client->request('PUT', '/character/0', [], [], [], json_encode($char));
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        TestUtils::logout($client);
+        $this->logout($client);
     }
 }
