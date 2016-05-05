@@ -13,7 +13,7 @@ use Symfony\Component\Debug\Debug;
 //std Allowed IPs
 $allowedIps = [
 ];
-include_once __DIR__.'../allowedIPs.php';
+include_once '../allowedIPs.php';
 
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])
