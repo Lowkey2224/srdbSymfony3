@@ -8,7 +8,8 @@
         'ngRoute',
         'mobile-angular-ui.gestures',
         'character',
-        'form'
+        'form',
+        'skills',
     ]);
 
     app.service('userService', ['$http',function($http){
@@ -46,7 +47,7 @@
             reloadOnSearch: false
         });
         $routeProvider.when('/skills', {
-            templateUrl: app.bundleDir + 'html/accordion.html',
+            templateUrl: app.bundleDir + 'html/skills.html',
             reloadOnSearch: false
         });
         $routeProvider.when('/specs', {

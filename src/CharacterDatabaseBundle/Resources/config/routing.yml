@@ -32,6 +32,13 @@ skill_list:
     defaults: {_controller: CharacterDatabaseBundle:Skill:index }
     methods: [GET]
 
+skill_store:
+    path:     /skill/{id}
+    defaults: { _controller: CharacterDatabaseBundle:Skill:store, id: null }
+    methods: [PUT]
+    requirements:
+        id:  \d+
+
 magical_tradition_list:
     path: /tradition
     defaults: {_controller: CharacterDatabaseBundle:MagicalTradition:index }
