@@ -50,13 +50,12 @@ class UserControllerTest extends AbstractEntityControllerTest
         $this->assertGreaterThan(0, count($users));
         for ($i = 0; $i < count($users) && $i < 10; ++$i) {
             $client->request('GET', '/user/'.$users[$i]->getId());
-            $this->assertTrue($client->getResponse()->isSuccessful(), 'Request is not Successful');
+            $this->assertTrue($client->getResponse()->isSuccessful(), "Request for userId: $users[$i]->getId() is not Successful");
             $this->assertTrue(
                 $client->getResponse()->headers->contains('Content-Type', 'application/json'),
                 'Request is hast not correct MimeType');
-            $userModel = new UserModel($users[$i]);
             $responseData = json_decode($client->getResponse()->getContent(), true);
-            $this->assertEquals($userModel->toArray(), $responseData, 'For Character: '.$users[$i]->getUsername());
+            $this->assertEquals(UserModel::toArray($users[$i]), $responseData, 'For Character: '.$users[$i]->getUsername());
         }
         $this->logout($client);
     }

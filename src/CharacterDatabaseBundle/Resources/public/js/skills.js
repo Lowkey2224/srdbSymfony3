@@ -13,29 +13,28 @@
                 skills.loading = true;
                 skills.isLoggedIn = userService.isLoggedIn;
                 skills.skills = [];
-                skills.edit = null;
+                skills.currentlyEditedSkill = null;
                 skills.attributes =[];
                 skills.editSkill = function (skill) {
-                    skills.edit = skill;
-                    console.log("Edit Skill", skills.edit);
+                    skills.currentlyEditedSkill = skill;
+                    console.log("Edit Skill", skills.currentlyEditedSkill);
                 };
                 skills.submitForm = function () {
                     var data = {
-                        "name": skills.edit.name,
+                        "name": skills.currentlyEditedSkill.name,
                         "type": 1,
                         "attribute": {
-                            "id":skills.edit.attribute.id,
-                            "name":skills.edit.attribute.name
+                            "id":skills.currentlyEditedSkill.attribute.id,
+                            "name":skills.currentlyEditedSkill.attribute.name
                         }
                     };
                     console.log('Sending data', data);
                     var url = indexUrl + 'skill';
-                    url += (skills.edit.id)?'/'+(skills.edit.id):'';
+                    url += (skills.currentlyEditedSkill.id)?'/'+(skills.currentlyEditedSkill.id):'';
                     $http.put(url, data).then(function (request) {
                         console.log(request);
-                        skills.skills.indexOf()
-                        skills.skills.push(skills.edit);
-                        skills.edit = null;
+                        skills.skills.push(skills.currentlyEditedSkill);
+                        skills.currentlyEditedSkill = null;
                     }, function (request) {
                         console.log(request);
                     });

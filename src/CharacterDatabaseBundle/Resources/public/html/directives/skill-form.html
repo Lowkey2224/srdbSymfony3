@@ -20,13 +20,13 @@
     </h1>
 </div>
 
-<div ng-show="skills.edit" class="list-group-item list-group-item-home">
+<div ng-show="skills.currentlyEditedSkill" class="list-group-item list-group-item-home">
     <form class="form-inline" name="skillForm"
           ng-submit="skillForm.$valid && skills.submitForm()" novalidate>
-        <label for="skill.name">Skill</label><input type="text" id="skill.name" ng-model="skills.edit.name">
+        <label for="skill.name">Skill</label><input type="text" id="skill.name" ng-model="skills.currentlyEditedSkill.name">
 
         <label for="skill.attribute">Attribut</label>
-        <select id="skill.attribute" ng-model="skills.edit.attribute" ng-options="attribute.name for attribute in skills.attributes">
+        <select id="skill.attribute" ng-model="skills.currentlyEditedSkill.attribute" ng-options="attribute.name for attribute in skills.attributes">
 
         </select>
         <input type="submit" class="btn btn-info" value="Speichern">

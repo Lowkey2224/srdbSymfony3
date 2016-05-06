@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\MagicalCapability;
+use CharacterDatabaseBundle\Model\MagicalCapabilityModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -18,13 +19,7 @@ class MagicalCapabilityController extends AbstractBaseController
     public function indexAction()
     {
         $magicalCapabilities = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:MagicalCapability')->findAll();
-        $magicalCapabilities = array_map(function (MagicalCapability $magicalCapability) {
-            return [
-                'id' => $magicalCapability->getId(),
-                'name' => $magicalCapability->getName(),
-            ];
-        }, $magicalCapabilities);
 
-        return new JsonResponse($magicalCapabilities);
+        return new JsonResponse(MagicalCapabilityModel::entityArrayToArray($magicalCapabilities));
     }
 }

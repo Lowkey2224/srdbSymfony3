@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Attribute;
+use CharacterDatabaseBundle\Model\AttributeModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -18,13 +19,7 @@ class AttributeController extends AbstractBaseController
     public function indexAction()
     {
         $atts = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Attribute')->findAll();
-        $atts = array_map(function (Attribute $att) {
-            return [
-                'id' => $att->getId(),
-                'name' => $att->getName(),
-            ];
-        }, $atts);
 
-        return new JsonResponse($atts);
+        return new JsonResponse(AttributeModel::entityArrayToArray($atts));
     }
 }

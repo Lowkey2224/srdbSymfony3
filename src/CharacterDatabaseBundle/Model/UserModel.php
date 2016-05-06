@@ -8,65 +8,37 @@ namespace CharacterDatabaseBundle\Model;
 use CharacterDatabaseBundle\Entity\Character;
 use CharacterDatabaseBundle\Entity\User;
 
-class UserModel
+class UserModel extends AbstractModel
 {
-    private $username;
-    private $email;
-    private $id;
-
-    private $character;
-
-    public function __construct(User $user)
+    /**
+     * Returns the Fieldnames in the array as an array.
+     *
+     * @return array
+     */
+    public static function getArrayFields()
     {
-        $this->username = $user->getUsername();
-        $this->email = $user->getEmail();
-        $this->id = $user->getId();
-        $this->character = $user->getCharacters()->map(function (Character $char) {
-            return ['id' => $char->getId()];
-        })->toArray();
-    }
-
-    public function toArray()
-    {
-        $array = [
-            'id' => $this->id,
-            'username' => $this->username,
-            'email' => $this->email,
-            'character' => $this->character,
-        ];
-
-        return $array;
+        return ['id', 'username', 'email', 'character'];
     }
 
     /**
-     * @return string
+     * Returns the current Model, as an Array representation, so it can be rendered as JSON.
+     *
+     * @return array
      */
-    public function getUsername()
+    public static function toArray($entity)
     {
-        return $this->username;
-    }
+        if ($entity instanceof User) {
+            return [
+                'id' => $entity->getId(),
+                'username' => $entity->getUsername(),
+                'email' => $entity->getEmail(),
+                'character' => $entity->getCharacters()->map(function (Character $char) {
+                    return ['id' => $char->getId()];
+                })->toArray(),
 
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+            ];
+        }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCharacter()
-    {
-        return $this->character;
+        return [];
     }
 }

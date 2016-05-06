@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\MagicalTradition;
+use CharacterDatabaseBundle\Model\MagicalTraditionModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -18,13 +19,7 @@ class MagicalTraditionController extends AbstractBaseController
     public function indexAction()
     {
         $magicalTraditions = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:MagicalTradition')->findAll();
-        $magicalTraditions = array_map(function (MagicalTradition $magicalTradition) {
-            return [
-                'id' => $magicalTradition->getId(),
-                'name' => $magicalTradition->getName(),
-            ];
-        }, $magicalTraditions);
 
-        return new JsonResponse($magicalTraditions);
+        return new JsonResponse(MagicalTraditionModel::entityArrayToArray($magicalTraditions));
     }
 }

@@ -66,7 +66,7 @@ class Skill extends AbstractEntity
     }
 
     /**
-     * @return mixed
+     * @return Attribute
      */
     public function getAttribute()
     {

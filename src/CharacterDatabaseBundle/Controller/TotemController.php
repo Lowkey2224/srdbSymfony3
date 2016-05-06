@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Totem;
+use CharacterDatabaseBundle\Model\TotemModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -18,13 +19,7 @@ class TotemController extends AbstractBaseController
     public function indexAction()
     {
         $totems = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Totem')->findAll();
-        $totems = array_map(function (Totem $totem) {
-            return [
-                'id' => $totem->getId(),
-                'name' => $totem->getName(),
-            ];
-        }, $totems);
 
-        return new JsonResponse($totems);
+        return new JsonResponse(TotemModel::entityArrayToArray($totems));
     }
 }

@@ -35,9 +35,8 @@ class UserController extends AbstractBaseController
         if (is_null($user)) {
             throw new NotFoundHttpException('User not found');
         }
-        $model = new UserModel($user);
 
-        return new JsonResponse($model->toArray());
+        return new JsonResponse(UserModel::toArray($user));
     }
 
     /**
@@ -46,13 +45,8 @@ class UserController extends AbstractBaseController
     public function indexAction()
     {
         $user = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:User')->findAll();
-        $data = array_map(function (User $user) {
-            $model = new UserModel($user);
 
-            return $model->toArray();
-        }, $user);
-
-        return new JsonResponse($data);
+        return new JsonResponse(UserModel::entityArrayToArray($user));
     }
 
     public function isLoggedInAction()
