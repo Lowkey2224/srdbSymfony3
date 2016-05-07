@@ -45,7 +45,8 @@ class SkillController extends AbstractBaseController
         $skill->setAttribute($attribute);
         $skill->setName($jsonBody['name']);
         $skill->setType($jsonBody['type']);
-
-        return new JsonResponse($jsonBody);
+        $em->persist($skill);
+        $em->flush();
+        return new JsonResponse(SkillModel::toArray($skill));
     }
 }

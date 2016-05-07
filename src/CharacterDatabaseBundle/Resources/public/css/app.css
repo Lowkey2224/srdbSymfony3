@@ -1,3 +1,53 @@
-.color-blue{
+.color-blue {
     color: #4481ff;
+}
+
+.animate-show {
+    -webkit-transition: 1s linear all; /* CHrome */
+    transition: 1s linear all;
+    opacity: 0;
+}
+
+.animate-show-active {
+    opacity: 1;
+}
+
+.animate-hide {
+    -webkit-transition: 1s linear all; /* CHrome */
+    transition: 1s linear all;
+    opacity: 1;
+}
+
+.animate-hide-active {
+    opacity: 0;
+}
+
+.animate-enter,
+.animate-leave
+{
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+}
+
+.animate-enter,
+.animate-leave.animate-leave-active
+{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave
+{
+    opacity: 1;
+    width: 150px;
+    height: 30px;
 }

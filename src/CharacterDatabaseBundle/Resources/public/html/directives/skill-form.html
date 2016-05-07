@@ -8,7 +8,8 @@
     </h1>
 </div>
 
-<div ng-hide="skills.skills.code" ng-repeat="skill in skills.skills" class="list-group-item list-group-item-home" ng-click="skills.editSkill(skill)">
+<div ng-hide="skills.skills.code" ng-repeat="skill in skills.skills | orderBy: ['type.id', 'name']" ng-animate="'animate'"
+     class="list-group-item list-group-item-home" ng-click="skills.editSkill(skill)">
     <h1>{{skill.name}}
         <small>{{ skill.attribute.name}}<i class="fa fa-pencil pull-right"></i></small>
     </h1>
@@ -28,6 +29,12 @@
         <label for="skill.attribute">Attribut</label>
         <select id="skill.attribute" ng-model="skills.currentlyEditedSkill.attribute" ng-options="attribute.name for attribute in skills.attributes">
 
+        </select>
+        <label for="skill.type">Typ</label>
+        <select id="skill.type" ng-model="skills.currentlyEditedSkill.type">
+            <option value="1">Aktionsfähigkeit</option>
+            <option value="2">Wissensfähigkeit</option>
+            <option value="3">Sprache</option>
         </select>
         <input type="submit" class="btn btn-info" value="Speichern">
     </form>

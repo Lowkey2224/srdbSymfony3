@@ -16,25 +16,38 @@
                 skills.currentlyEditedSkill = null;
                 skills.attributes =[];
                 skills.editSkill = function (skill) {
+                    skills.bindAttribute(skill);
                     skills.currentlyEditedSkill = skill;
-                    console.log("Edit Skill", skills.currentlyEditedSkill);
+                };
+
+                skills.bindAttribute = function(skill){
+                    if(skill.attribute){
+                        skill.attribute =  skills.attributes.find(function(elem){
+                            return elem.id == skill.attribute.id;
+                        });
+                    }
                 };
                 skills.submitForm = function () {
                     var data = {
                         "name": skills.currentlyEditedSkill.name,
-                        "type": 1,
-                        "attribute": {
-                            "id":skills.currentlyEditedSkill.attribute.id,
-                            "name":skills.currentlyEditedSkill.attribute.name
-                        }
+                        "type": skills.currentlyEditedSkill.type,
+                        "attribute": skills.currentlyEditedSkill.attribute
                     };
-                    console.log('Sending data', data);
                     var url = indexUrl + 'skill';
                     url += (skills.currentlyEditedSkill.id)?'/'+(skills.currentlyEditedSkill.id):'';
                     $http.put(url, data).then(function (request) {
-                        console.log(request);
-                        skills.skills.push(skills.currentlyEditedSkill);
+                        console.log(request.data);
                         skills.currentlyEditedSkill = null;
+                        var pushed = false;
+                        for(var i = 0; i< skills.skills.length; i++){
+                            if(request.data.id == skills.skills[i].id){
+                                skills.skills[i] = request.data;
+                                pushed = true;
+                            }
+                        }
+                        if(!pushed){
+                            skills.skills.push(request.data);
+                        }
                     }, function (request) {
                         console.log(request);
                     });
@@ -44,7 +57,6 @@
                 $http.get(url).then(function (request) {
                     skills.skills = request.data;
                     skills.loading = false;
-                    console.log("Skills:", skills.skills);
                 }, function (request) {
                     skills.skills = {'code': request.status};
                     skills.loading = false;
@@ -53,7 +65,6 @@
                 $http.get(url).then(function (request) {
                     skills.attributes = request.data;
                     skills.loading = false;
-                    console.log("Skills:", skills.skills);
                 }, function (request) {
                     skills.attributes = {'code': request.status};
                     skills.loading = false;
