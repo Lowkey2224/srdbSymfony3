@@ -36,7 +36,7 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
      *  B) For an API token authentication system, you return a 401 response
      *      return new Response('Auth header required', 401);
      *
-     * @param Request                 $request       The request that resulted in an AuthenticationException
+     * @param Request $request The request that resulted in an AuthenticationException
      * @param AuthenticationException $authException The exception that started the authentication process
      *
      * @return Response
@@ -45,7 +45,8 @@ class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
     {
         $this->logger->info(
             $request->getClientIp().' tried to reach '.$request->getUri().
-            ' but got '.$authException->getMessage());
+            ' but got '.$authException->getMessage()
+        );
         $array = array('result' => false);
         $response = new Response(json_encode($array), 401);
         $response->headers->set('Content-Type', 'application/json');
