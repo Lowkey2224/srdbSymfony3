@@ -27,6 +27,7 @@ class SkillController extends AbstractBaseController
 
     /**
      * @param Request $request
+     *
      * @return JsonResponse
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
@@ -52,6 +53,7 @@ class SkillController extends AbstractBaseController
         $skill->setType($jsonBody['type']);
         $em->persist($skill);
         $em->flush();
+
         return new JsonResponse(SkillModel::toArray($skill));
     }
 }

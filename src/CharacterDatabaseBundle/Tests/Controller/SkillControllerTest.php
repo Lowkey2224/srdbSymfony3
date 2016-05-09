@@ -9,20 +9,17 @@ use CharacterDatabaseBundle\Entity\Skill;
 
 class SkillControllerTest extends AbstractEntityControllerTest
 {
-
-
     private $skillThrowing = [
-        'name' => "Wurfwaffen",
+        'name' => 'Wurfwaffen',
         'type' => Skill::TYPE_ACTION_SKILL,
-        "attribute" => [
+        'attribute' => [
             'id' => 2,
-            'name' => "Schnelligkeit",
+            'name' => 'Schnelligkeit',
         ],
     ];
 
     protected function getRouteName()
     {
-
         return '/skill';
     }
 
@@ -96,6 +93,4 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->logout($client);
     }
-
-
 }

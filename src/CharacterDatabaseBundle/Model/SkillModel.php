@@ -24,8 +24,8 @@ class SkillModel extends AbstractModel
                 'id' => $entity->getId(),
                 'name' => $entity->getName(),
                 'type' => [
-                    "id" => $entity->getType(),
-                    "name" => $entity->getTypeName(),
+                    'id' => $entity->getType(),
+                    'name' => $entity->getTypeName(),
                     ],
                 'attribute' => AttributeModel::toArray($entity->getAttribute()),
             ];

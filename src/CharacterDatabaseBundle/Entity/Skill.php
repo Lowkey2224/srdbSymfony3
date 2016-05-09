@@ -13,7 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Skill extends AbstractEntity
 {
-
     const TYPE_ACTION_SKILL = 1;
     const TYPE_KNOWLEDGE_SKILL = 2;
     const TYPE_LANGUAGE_SKILL = 2;

@@ -107,7 +107,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character $character
+     * @param Character     $character
      * @param ObjectManager $manager
      *
      * @return CharacterToSkill[]
@@ -144,7 +144,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character $character
+     * @param Character     $character
      * @param ObjectManager $manager
      *
      * @return CharacterToAttribute[]
