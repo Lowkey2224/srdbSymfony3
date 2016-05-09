@@ -160,12 +160,15 @@
         </exec>
     </target>
 
-    <target name="phpunit-no-coverage" unless="phpunit.done" depends="prepare"
+    <target name="phpunit-no-coverage" unless="phpunit.done"
             description="Run unit tests with PHPUnit (without generating code coverage reports)">
         <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/phpunit.xml"/>
+            <arg path="${basedir}/phpunit.xml.dist"/>
             <arg value="--no-coverage"/>
+            <arg value="--log-junit"/>
+            <arg path="${basedir}/build/logs/phpunit.xml"/>
+            <arg path="${basedir}/src/CharacterDatabaseBundle"/>
         </exec>
 
         <property name="phpunit.done" value="true"/>
