@@ -156,7 +156,8 @@ class CharacterControllerTest extends AbstractEntityControllerTest
             $this->assertTrue(
                 $response->isSuccessful(),
                 'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
-                $response->getStatusCode().' and Body: '.$response->getContent());
+                $response->getStatusCode().' and Body: '.$response->getContent()
+            );
             $response = json_decode($response->getContent(), true);
             $this->assertEquals($char['name'], $response['name']);
             $this->assertEquals($char['occupation'], $response['occupation']);
@@ -176,7 +177,8 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $this->assertTrue(
             $response->isSuccessful(),
             'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
-            $response->getStatusCode().' and Body: '.$response->getContent());
+            $response->getStatusCode().' and Body: '.$response->getContent()
+        );
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);

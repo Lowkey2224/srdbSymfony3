@@ -25,6 +25,11 @@ class SkillController extends AbstractBaseController
         return new JsonResponse(SkillModel::entityArrayToArray($skills));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
     public function storeAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
