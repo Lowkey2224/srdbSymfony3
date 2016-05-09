@@ -107,7 +107,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character     $character
+     * @param Character $character
      * @param ObjectManager $manager
      *
      * @return CharacterToSkill[]
@@ -144,7 +144,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character     $character
+     * @param Character $character
      * @param ObjectManager $manager
      *
      * @return CharacterToAttribute[]
@@ -164,7 +164,8 @@ class Service
                 'attribute' => $attribute,
                 'character' => $character,
             ]);
-            $characterToAttribute = (is_null($characterToAttribute)) ? new CharacterToAttribute() : $characterToAttribute;
+            $characterToAttribute = (is_null($characterToAttribute)) ?
+                new CharacterToAttribute() : $characterToAttribute;
             $characterToAttribute->setLevel($level);
             $characterToAttribute->setCharacter($character);
             $characterToAttribute->setAttribute($attribute);

@@ -18,7 +18,9 @@ class MagicalCapabilityController extends AbstractBaseController
      */
     public function indexAction()
     {
-        $magicalCapabilities = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:MagicalCapability')->findAll();
+        $magicalCapabilities = $this->getDoctrine()
+            ->getRepository('CharacterDatabaseBundle:MagicalCapability')
+            ->findAll();
 
         return new JsonResponse(MagicalCapabilityModel::entityArrayToArray($magicalCapabilities));
     }

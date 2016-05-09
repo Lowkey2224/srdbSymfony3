@@ -45,7 +45,11 @@ abstract class AbstractEntityControllerTest extends WebTestCase
         $this->assertGreaterThan(1, count($responseData));
         for ($i = 0; $i < count($responseData) && $i < 10; ++$i) {
             foreach ($this->testedIndexFields() as $field) {
-                $this->assertArrayHasKey($field, $responseData[$i], 'Only has Keys: '.implode(', ', array_keys($responseData[$i])));
+                $this->assertArrayHasKey(
+                    $field,
+                    $responseData[$i],
+                    'Only has Keys: '.implode(', ', array_keys($responseData[$i]))
+                );
             }
         }
         $this->logout($client);
