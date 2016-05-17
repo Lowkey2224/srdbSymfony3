@@ -18,6 +18,15 @@ class SkillControllerTest extends AbstractEntityControllerTest
         ],
     ];
 
+    private $skillTHeimlichkeit = [
+        'name' => 'Heimlichkeit ist gut',
+        'type' => Skill::TYPE_ACTION_SKILL,
+        'attribute' => [
+            'id' => 2,
+            'name' => 'Schnelligkeit',
+        ],
+    ];
+
     protected function getRouteName()
     {
         return '/skill';
@@ -37,7 +46,8 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
         $client->request('PUT', $this->getRouteName(), [], [], [], json_encode(['Name' => 'Hallo']));
-        $this->assertTrue($client->getResponse()->isClientError(), 'Is not Clienterror, got Statuscode'. $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isClientError(),
+            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode());
     }
 
     public function testCreate()
@@ -67,23 +77,30 @@ class SkillControllerTest extends AbstractEntityControllerTest
 
     public function testUpdate()
     {
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $em = static::$kernel->getContainer()->get('doctrine')->getManager();
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
 
-        $char = $this->skillThrowing;
-        $this->markTestIncomplete("Skill muss gesucht werden");
-        $client->request('PUT', $this->getRouteName().$char['id'], [], [], [], json_encode($char));
+
+        $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->findOneBy(['name' => 'Heimlichkeit']);
+//        $this->markTestIncomplete("Skill muss gesucht werden");
+//        $url = $this->getRouteName()."/".$skill->getId();
+//        var_dump($url);
+//        die();
+        $client->request('PUT', $this->getRouteName()."/".$skill->getId(), [], [], [], json_encode($this->skillTHeimlichkeit));
         $response = $client->getResponse();
         $this->assertTrue(
             $response->isSuccessful(),
-            'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
+            'Is not Successful for Skill: '.$this->skillTHeimlichkeit['name'].' with Errorcode: '.
             $response->getStatusCode().' and Body: '.$response->getContent()
         );
         $response = json_decode($response->getContent(), true);
-        $this->assertEquals($char['name'], $response['name']);
-        $this->assertEquals($char['type'], $response['type']);
-        $this->assertEquals($char['attribute']['id'], $response['attribute']['id']);
-        $this->assertEquals($char['id'], $response['id']);
+        $this->assertEquals($this->skillTHeimlichkeit['name'], $response['name']);
+        $this->assertEquals($this->skillTHeimlichkeit['type'], $response['type']['id']);
+        $this->assertEquals($this->skillTHeimlichkeit['attribute']['id'], $response['attribute']['id']);
+        $this->assertEquals($skill->getId(), $response['id']);
     }
 
     public function testUpdateWithWrongId()
