@@ -6,6 +6,7 @@
 namespace CharacterDatabaseBundle\Tests\Controller;
 
 use CharacterDatabaseBundle\Entity\Skill;
+use CharacterDatabaseBundle\Model\SkillModel;
 
 class SkillControllerTest extends AbstractEntityControllerTest
 {
@@ -36,28 +37,28 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
         $client->request('PUT', $this->getRouteName(), [], [], [], json_encode(['Name' => 'Hallo']));
-        $this->assertTrue($client->getResponse()->isClientError(), 'Is not Clienterror');
+        $this->assertTrue($client->getResponse()->isClientError(), 'Is not Clienterror, got Statuscode'. $client->getResponse()->getStatusCode());
     }
 
     public function testCreate()
     {
-        $characters = [
+        $skills = [
             $this->skillThrowing,
         ];
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
-        foreach ($characters as $char) {
-            $client->request('PUT', $this->getRouteName(), [], [], [], json_encode($char));
+        foreach ($skills as $skill) {
+            $client->request('PUT', $this->getRouteName(), [], [], [], json_encode($skill));
             $response = $client->getResponse();
             $this->assertTrue(
                 $response->isSuccessful(),
-                'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
+                'Is not Successful for Character: '.$skill['name'].' with Errorcode: '.
                 $response->getStatusCode().' and Body: '.$response->getContent()
             );
             $response = json_decode($response->getContent(), true);
-            $this->assertEquals($char['name'], $response['name']);
-            $this->assertEquals($char['type'], $response['type']);
-            $this->assertEquals($char['attribute']['id'], $response['attribute']['id']);
+            $this->assertEquals($skill['name'], $response['name']);
+            $this->assertEquals($skill['type'], $response['type']['id']);
+            $this->assertEquals($skill['attribute']['id'], $response['attribute']['id']);
             $this->assertTrue(isset($response['id']));
             $this->skillThrowing['id'] = $response['id'];
         }
@@ -68,7 +69,9 @@ class SkillControllerTest extends AbstractEntityControllerTest
     {
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
+
         $char = $this->skillThrowing;
+        $this->markTestIncomplete("Skill muss gesucht werden");
         $client->request('PUT', $this->getRouteName().$char['id'], [], [], [], json_encode($char));
         $response = $client->getResponse();
         $this->assertTrue(
@@ -89,7 +92,7 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->loginAs($client, $this->username, $this->password);
         $char = $this->skillThrowing;
         $client->request('PUT', $this->getRouteName().'/0', [], [], [], json_encode($char));
-        $this->assertTrue($client->getResponse()->isClientError());
+//        $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->logout($client);
     }

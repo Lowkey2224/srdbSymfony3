@@ -40,7 +40,7 @@ class UserControllerTest extends AbstractEntityControllerTest
     }
 
     /**
-     * @covers UserController::showAction()
+     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
      */
     public function testShow()
     {
@@ -64,7 +64,7 @@ class UserControllerTest extends AbstractEntityControllerTest
     }
 
     /**
-     * @covers UserController::showAction()
+     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
      */
     public function testShowAnonymously()
     {
@@ -80,7 +80,7 @@ class UserControllerTest extends AbstractEntityControllerTest
     }
 
     /**
-     * @covers UserController::showAction()
+     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
      */
     public function testShowWithWrongId()
     {
@@ -93,7 +93,7 @@ class UserControllerTest extends AbstractEntityControllerTest
     }
 
     /**
-     * @covers UserController::showAction()
+     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
      */
     public function testisLoggedInAction()
     {
