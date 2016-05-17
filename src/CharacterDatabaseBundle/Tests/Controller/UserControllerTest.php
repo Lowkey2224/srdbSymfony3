@@ -39,9 +39,6 @@ class UserControllerTest extends AbstractEntityControllerTest
             ->getManager();
     }
 
-    /**
-     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
-     */
     public function testShow()
     {
         $client = static::createClient();
@@ -63,9 +60,6 @@ class UserControllerTest extends AbstractEntityControllerTest
         $this->logout($client);
     }
 
-    /**
-     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
-     */
     public function testShowAnonymously()
     {
         $client = static::createClient();
@@ -79,9 +73,6 @@ class UserControllerTest extends AbstractEntityControllerTest
         $this->logout($client);
     }
 
-    /**
-     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
-     */
     public function testShowWithWrongId()
     {
         $client = static::createClient();
@@ -92,9 +83,6 @@ class UserControllerTest extends AbstractEntityControllerTest
         $this->logout($client);
     }
 
-    /**
-     * @covers CharacterDatabaseBundle\Controller\UserController::showAction()
-     */
     public function testisLoggedInAction()
     {
         $client = static::createClient();

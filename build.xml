@@ -15,7 +15,7 @@
     <target name="quick-build" depends="prepare,lint,phpunit-no-coverage"
             description="Performs a lint check and runs the tests (without generating code coverage reports)"/>
 
-    <target name="static-analysis" depends="prepare,lint,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci,phpunit"
+    <target name="static-analysis" depends="prepare,lint,pdepend,phpmd-ci,phpcs-ci,phpcpd-ci"
             description="Performs static analysis">
         <echo message="Performing static analysis"/>
     </target>

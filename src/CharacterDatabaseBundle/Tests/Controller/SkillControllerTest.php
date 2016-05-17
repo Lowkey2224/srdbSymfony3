@@ -31,9 +31,7 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
-    /**
-     * @covers CharacterDatabaseBundle\Controller\SkillController::store()
-     */
+
     public function testCreateWithWrongJson()
     {
         $client = static::createClient();
