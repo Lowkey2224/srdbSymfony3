@@ -22,14 +22,30 @@
                 form.totems = [];
                 form.capabilities = [];
                 form.traditions = [];
+                form.error = {};
+                form.showLogin = function () {
+                    if (form.loadStatus) {
+                        return false;
+                    }
+                    if (form.error.code) {
+                        if (form.error.code == 401) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+                form.showForm = function () {
+                    if (form.error.length) {
+                        if (form.error.code == 401)
+                            return false;
+                    }
+                    return !form.loadStatus && form.attributes.length;
+                };
                 form.submitData = function () {
-                    console.log("Formdata:", form.character);
-                    var url = indexUrl + 'character' + "?XDEBUG_SESSION_START=PHPSTORM";
+                    var url = indexUrl + 'character';// + "?XDEBUG_SESSION_START=PHPSTORM";
                     $http.put(url, form.character).then(function (request) {
-                        console.log(request);
                         $location.path("/character/" + request.data.id);
                     }, function (request) {
-                        console.log(request);
                     });
                 };
                 var url = indexUrl + 'skill';
@@ -37,7 +53,7 @@
                     form.skills = request.data;
                     form.loadStatus--;
                 }, function (request) {
-                    form.skills = {'code': request.status};
+                    form.error = {'code': request.status};
                     form.loadStatus--;
                 });
                 url = indexUrl + 'attribute';
@@ -45,7 +61,7 @@
                     form.attributes = request.data;
                     form.loadStatus--;
                 }, function (request) {
-                    form.attributes = {'code': request.status};
+                    form.error = {'code': request.status};
                     form.loadStatus--;
                 });
                 url = indexUrl + 'totem';
@@ -53,7 +69,7 @@
                     form.totems = request.data;
                     form.loadStatus--;
                 }, function (request) {
-                    form.totems = {'code': request.status};
+                    form.error = {'code': request.status};
                     form.loadStatus--;
                 });
                 url = indexUrl + 'capability';
@@ -61,7 +77,7 @@
                     form.capabilities = request.data;
                     form.loadStatus--;
                 }, function (request) {
-                    form.capabilities = {'code': request.status};
+                    form.error = {'code': request.status};
                     form.loadStatus--;
                 });
                 url = indexUrl + 'tradition';
@@ -69,7 +85,7 @@
                     form.traditions = request.data;
                     form.loadStatus--;
                 }, function (request) {
-                    form.traditions = {'code': request.status};
+                    form.error = {'code': request.status};
                     form.loadStatus--;
                 });
             }],
@@ -87,13 +103,11 @@
                 skills.formSkills = [];
                 skills.toggleSkill = function (skill) {
                     var index = skills.formSkills.indexOf(skill);
-                    console.log("Toggle skill;", skill, index);
                     if (index == -1) {
                         skills.formSkills.push(skill);
                     } else {
                         skills.formSkills.splice(index, 1);
                     }
-                    console.log("Formskills", form.formSkills);
                 };
                 skills.isAdded = function (skill) {
                     return skills.formSkills.indexOf(skill) != -1;

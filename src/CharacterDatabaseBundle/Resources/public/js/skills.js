@@ -58,7 +58,8 @@
                     skills.skills = request.data;
                     skills.loading = false;
                 }, function (request) {
-                    skills.skills = {'code': request.status};
+                    skills.skills = [];
+                    skills.error = {'code': request.status};
                     skills.loading = false;
                 });
                 url = indexUrl + 'attribute';
@@ -66,7 +67,8 @@
                     skills.attributes = request.data;
                     skills.loading = false;
                 }, function (request) {
-                    skills.attributes = {'code': request.status};
+                    skills.attributes = [];
+                    skills.error = {'code': request.status};
                     skills.loading = false;
                 });
             }],

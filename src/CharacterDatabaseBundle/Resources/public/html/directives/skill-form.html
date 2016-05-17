@@ -2,20 +2,20 @@
     <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
     <span class="sr-only">Loading...</span>
 </div>
-<div ng-show="skills.skills.code==401" class="list-group-item list-group-item-home">
+<div ng-show="skills.error.code==401" class="list-group-item list-group-item-home">
     <h1 ng-hide="skills.loading">
         Bitte Log dich zuerst ein.
     </h1>
 </div>
 
-<div ng-hide="skills.skills.code" ng-repeat="skill in skills.skills | orderBy: ['type.id', 'name']" ng-animate="'animate'"
+<div ng-hide="skills.error.code" ng-show="skills.skills.length" ng-repeat="skill in skills.skills | orderBy: ['type.id', 'name']" ng-animate="'animate'"
      class="list-group-item list-group-item-home" ng-click="skills.editSkill(skill)">
     <h1>{{skill.name}}
         <small>{{ skill.attribute.name}}<i class="fa fa-pencil pull-right"></i></small>
     </h1>
 </div>
 
-<div ng-hide="skills.loading" class="list-group-item list-group-item-home" ng-click="skills.editSkill([])">
+<div ng-hide="skills.loading || skills.error.code" class="list-group-item list-group-item-home" ng-click="skills.editSkill([])">
     <h1>
         Neue Fähigkeit hinzufügen. <small><i class="fa fa-plus pull-right"></i></small>
     </h1>
