@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SkillController extends AbstractBaseController
 {
@@ -34,13 +35,17 @@ class SkillController extends AbstractBaseController
     public function storeAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($id) {
-            $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->find($id);
-        } else {
+        if (is_null($id)) {
             $skill = new Skill();
+        } else {
+            $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->find($id);
+            if(is_null($skill)){
+                throw new NotFoundHttpException('Skill not Found');
+            }
         }
         $jsonBody = json_decode($request->getContent(), true);
-        if (!$jsonBody) {
+        $valid = SkillModel::isValidArray($jsonBody, false);
+        if (!$jsonBody || !$valid) {
             throw new BadRequestHttpException('Json Malformed');
         }
         $attribute = $em->getRepository('CharacterDatabaseBundle:Attribute')->find($jsonBody['attribute']['id']);

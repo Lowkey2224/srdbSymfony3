@@ -17,9 +17,12 @@ abstract class AbstractModel implements ModelInterface
         return $array;
     }
 
-    public static function isValidArray(array $array)
+    public static function isValidArray(array $array, $withId = true)
     {
         foreach (static::getArrayFields() as $field) {
+            if (!$withId && $field == 'id') {
+                continue;
+            }
             if (!isset($array[$field])) {
                 return false;
             }

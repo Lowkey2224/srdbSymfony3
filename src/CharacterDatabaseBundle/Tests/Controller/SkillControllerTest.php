@@ -6,7 +6,6 @@
 namespace CharacterDatabaseBundle\Tests\Controller;
 
 use CharacterDatabaseBundle\Entity\Skill;
-use CharacterDatabaseBundle\Model\SkillModel;
 
 class SkillControllerTest extends AbstractEntityControllerTest
 {
@@ -32,6 +31,9 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
+    /**
+     * @covers CharacterDatabaseBundle\Controller\SkillController::store()
+     */
     public function testCreateWithWrongJson()
     {
         $client = static::createClient();
