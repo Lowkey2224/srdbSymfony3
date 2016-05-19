@@ -72,15 +72,13 @@ class CharacterController extends AbstractBaseController
         $em = $this->getDoctrine()->getManager();
         $jsonBody = json_decode($request->getContent(), true);
         $characterService = $this->get('character_database.character_service');
-        $jsonBody['result'] = $characterService->validateJson($jsonBody);
-        if (!$jsonBody['result']) {
+        if (!$characterService->validateJson($jsonBody)) {
             throw new BadRequestHttpException('Malformed JSON');
         }
         $character->setUser($this->getUser());
         $character = $characterService->updateCharacter($character, $jsonBody, $em);
         $em->persist($character);
         $em->flush();
-
         return $this->render(
             'CharacterDatabaseBundle:Character:show.json.twig',
             ['char' => $repo->find($character->getId())],
