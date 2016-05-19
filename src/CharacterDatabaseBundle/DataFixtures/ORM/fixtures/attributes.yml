@@ -17,9 +17,6 @@ CharacterDatabaseBundle\Entity\Attribute:
     will:
         name: Willenskraft
 
-    ess:
-        name: Essenz
-
     mag:
         name: Magie
 

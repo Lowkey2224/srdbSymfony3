@@ -29,42 +29,37 @@ CharacterDatabaseBundle\Entity\CharacterToAttribute:
         attribute: "@will"
         level: <numberBetween(1,6)>
 
-    ess{Lodur, Nigel}:
-        character: "@<current()>"
-        attribute: "@ess"
-        level: <numberBetween(1,6)>
-
     mag{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@mag"
         level: 0
 
-    mag{Lodur, Nigel}:
+    kp{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@kp"
         level: 0
-    mag{Lodur, Nigel}:
 
+    akp{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@akp"
         level: 0
 
-    mag{Lodur, Nigel}:
+    tp{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@tp"
         level: 0
 
-    mag{Lodur, Nigel}:
+    hp{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@hp"
         level: 0
 
-    mag{Lodur, Nigel}:
+    hacking{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@hackingpool"
         level: 0
 
-    mag{Lodur, Nigel}:
+    sp{Lodur, Nigel}:
         character: "@<current()>"
         attribute: "@sp"
         level: 0
