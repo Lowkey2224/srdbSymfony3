@@ -1,0 +1,12 @@
+CharacterDatabaseBundle\Entity\CharacterToCyberware:
+    chipjackLodur:
+        level: 3
+        quality: 2
+        character: "@Lodur"
+        cyberware: "@chipjack"
+
+    essenceholeNigel:
+        level: 150
+        quality: 1
+        character: "@Nigel"
+        cyberware: "@essencehole"

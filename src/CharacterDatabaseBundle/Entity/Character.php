@@ -100,6 +100,13 @@ class Character extends AbstractEntity
     protected $skills;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToCyberware",
+     *     mappedBy="character", fetch="EAGER", cascade={"persist"})
+     **/
+    protected $cyberware;
+
+    /**
      * Correlation to a user, who should be a partner.
      *
      * @var User

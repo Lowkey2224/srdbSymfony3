@@ -30,6 +30,9 @@ class Fixtures implements FixtureInterface
         $ary[] = __DIR__.'/fixtures/connectionsInDB.yml';
         $ary[] = __DIR__.'/fixtures/specializations.yml';
         $ary[] = __DIR__.'/fixtures/characterToSpec.yml';
+        $ary[] = __DIR__.'/fixtures/cyberware.yml';
+        $ary[] = __DIR__.'/fixtures/cyberwareLevels.yml';
+        $ary[] = __DIR__.'/fixtures/characterToCyberware.yml';
 
         $objects = \Nelmio\Alice\Fixtures::load($ary, $manager);
 

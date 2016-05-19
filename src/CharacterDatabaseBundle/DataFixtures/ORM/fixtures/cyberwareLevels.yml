@@ -1,0 +1,36 @@
+CharacterDatabaseBundle\Entity\CyberwareLevel:
+    datajack1:
+        level: 1
+        effect: DNI Zugang
+        cost: 20
+        cyberware: "@datajack"
+
+    essencehole{1..600}:
+        level: <current()>
+        effect: Reduziert die Essenz
+        cost: <current()>
+        cyberware: "@essencehole"
+
+    chipjack1:
+        level: 1
+        effect: 1 Chipbuchse
+        cost: 20
+        cyberware: "@chipjack"
+
+    chipjack2:
+        level: 2
+        effect: 2 Chipbuchse
+        cost: 25
+        cyberware: "@chipjack"
+
+    chipjack3:
+        level: 3
+        effect: 3 Chipbuchse
+        cost: 30
+        cyberware: "@chipjack"
+
+    chipjack4:
+        level: 4
+        effect: 4 Chipbuchse
+        cost: 35
+        cyberware: "@chipjack"

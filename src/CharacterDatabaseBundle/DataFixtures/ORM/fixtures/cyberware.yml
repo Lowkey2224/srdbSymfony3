@@ -1,0 +1,12 @@
+CharacterDatabaseBundle\Entity\Cyberware:
+    datajack:
+        name: Datenbuchse
+        description: Weiblicher Stecker für Viele Sachen
+
+    essencehole:
+        name: Essenzloch
+        description: Fehlende Essenz aus entfernter Cyberware, oder Essenzentzug
+
+    chipjack:
+        name: Chipbuchse
+        description: Chipbuchse um Chips per DNI lesen zu können
