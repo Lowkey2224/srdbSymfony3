@@ -39,7 +39,7 @@ class SkillController extends AbstractBaseController
             $skill = new Skill();
         } else {
             $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->find($id);
-            if(is_null($skill)){
+            if (is_null($skill)) {
                 throw new NotFoundHttpException('Skill not Found');
             }
         }

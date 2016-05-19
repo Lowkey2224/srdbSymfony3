@@ -6,7 +6,7 @@
     <property name="phpcs" value="${basedir}/vendor/bin/phpcs"/>
     <property name="phpmd" value="${basedir}/vendor/bin/phpmd"/>
     <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/>
-    <property name="php-cs-fixer" value="${basedir}/vendor/bin/php-cs-fixer"/>
+    <property name="phpcbf" value="${basedir}/vendor/bin/phpcbf"/>
     <property name="console" value="${basedir}/bin/console"/>
 
     <target name="full-build" depends="prepare,static-analysis,-check-failure"
@@ -152,10 +152,11 @@
 
         <property name="phpunit.done" value="true"/>
     </target>
-
-    <target name="checkstyle" description="Codestyle fixing ">
-        <exec executable="${php-cs-fixer}" taskname="checkstyle">
-            <arg value="fix"/>
+    <target name="checkstyle-fix" description="Codestyle fixing ">
+        <exec executable="${phpcbf}" taskname="checkstyle-fix">
+            <arg value="--standard=PSR2"/>
+            <arg value="--extensions=php"/>
+            <arg value="--ignore=autoload.php"/>
             <arg path="${basedir}/src"/>
         </exec>
     </target>

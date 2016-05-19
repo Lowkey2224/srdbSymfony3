@@ -40,14 +40,15 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->assertEquals(401, $client->getResponse()->getStatusCode());
     }
 
-
     public function testCreateWithWrongJson()
     {
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
         $client->request('PUT', $this->getRouteName(), [], [], [], json_encode(['Name' => 'Hallo']));
-        $this->assertTrue($client->getResponse()->isClientError(),
-            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode());
+        $this->assertTrue(
+            $client->getResponse()->isClientError(),
+            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode()
+        );
     }
 
     public function testCreate()
@@ -83,13 +84,15 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
 
-
         $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->findOneBy(['name' => 'Heimlichkeit']);
-//        $this->markTestIncomplete("Skill muss gesucht werden");
-//        $url = $this->getRouteName()."/".$skill->getId();
-//        var_dump($url);
-//        die();
-        $client->request('PUT', $this->getRouteName()."/".$skill->getId(), [], [], [], json_encode($this->skillTHeimlichkeit));
+        $client->request(
+            'PUT',
+            $this->getRouteName().'/'.$skill->getId(),
+            [],
+            [],
+            [],
+            json_encode($this->skillTHeimlichkeit)
+        );
         $response = $client->getResponse();
         $this->assertTrue(
             $response->isSuccessful(),
