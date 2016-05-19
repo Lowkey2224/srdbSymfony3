@@ -5,3 +5,11 @@ services:
     character_database.authentication_entry_point:
         class: CharacterDatabaseBundle\Service\Authentication\AuthenticationEntryPoint
         arguments: ["@logger"]
+
+
+    character_database.cyberwarelevel_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+            - CharacterDatabaseBundle\Entity\CyberwareLevel
+

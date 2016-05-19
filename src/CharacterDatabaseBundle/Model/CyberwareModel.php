@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Model;
 
-
 use CharacterDatabaseBundle\Entity\Cyberware;
 use CharacterDatabaseBundle\Entity\CyberwareLevel;
 

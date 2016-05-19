@@ -134,7 +134,4 @@ class CyberwareLevel extends AbstractEntity
     {
         $this->cyberware = $cyberware;
     }
-
-
 }
-

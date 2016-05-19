@@ -83,25 +83,4 @@ class Cyberware extends AbstractEntity
     {
         $this->levels = $levels;
     }
-
-    /**
-     * @return CharacterToCyberware
-     */
-    public function getCharacterLink()
-    {
-        return $this->characterLink;
-    }
-
-    /**
-     * @param CharacterToCyberware $characterLink
-     */
-    public function setCharacterLink($characterLink)
-    {
-        $this->characterLink = $characterLink;
-    }
-
-
-
-
-
 }

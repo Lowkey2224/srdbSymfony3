@@ -150,7 +150,7 @@ class Character extends AbstractEntity
     {
         $essence = 600;
         /** @var CharacterToCyberware $item */
-        foreach ($this->cyberware as $item){
+        foreach ($this->cyberware as $item) {
             $essence -= $item->getQualityFactor() * $item->getCyberware()->getCost();
         }
         return $essence/100;
@@ -476,6 +476,4 @@ class Character extends AbstractEntity
     {
         $this->cyberware = $cyberware;
     }
-
-
 }

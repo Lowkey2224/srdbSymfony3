@@ -2,7 +2,6 @@
 
 namespace CharacterDatabaseBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -110,7 +109,4 @@ class CharacterToCyberware extends AbstractEntity
     {
         $this->cyberware = $cyberware;
     }
-
-
 }
-
