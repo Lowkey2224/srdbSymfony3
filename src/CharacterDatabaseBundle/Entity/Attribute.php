@@ -21,11 +21,13 @@ class Attribute extends AbstractEntity
 
     /**
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToAttribute", mappedBy="attribute")
+     * @var CharacterToAttribute[]
      */
     protected $characterLink;
 
     /**
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\Skill", mappedBy="attribute")
+     * @var Skill[] $skills
      */
     protected $skills;
 
