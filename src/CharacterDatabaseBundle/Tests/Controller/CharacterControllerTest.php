@@ -12,7 +12,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
      */
     private $em;
 
-    private $jsonEntries = 18;
+    private $jsonEntries = 19;
 
     public function testedIndexFields()
     {

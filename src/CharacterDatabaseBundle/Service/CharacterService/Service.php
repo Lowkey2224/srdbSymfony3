@@ -5,6 +5,7 @@
 
 namespace CharacterDatabaseBundle\Service\CharacterService;
 
+use CharacterDatabaseBundle\Entity\Attribute;
 use CharacterDatabaseBundle\Entity\Character;
 use CharacterDatabaseBundle\Entity\CharacterToAttribute;
 use CharacterDatabaseBundle\Entity\CharacterToSkill;
@@ -33,7 +34,7 @@ class Service
      */
     public function validateJson($json)
     {
-        $return =$this->validateJsonBasicInfo($json);
+        $return = $this->validateJsonBasicInfo($json);
         if (!isset($json['karma'])) {
             return false;
         }
@@ -43,7 +44,7 @@ class Service
         if (!isset($json['type'])) {
             return false;
         }
-        $return = ($return)?$this->validateJsonMagical($json):false;
+        $return = ($return) ? $this->validateJsonMagical($json) : false;
 
         return $return;
     }
@@ -62,6 +63,7 @@ class Service
         if (!isset($json['description'])) {
             return false;
         }
+
         return true;
     }
 
@@ -132,7 +134,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character     $character
+     * @param Character $character
      * @param ObjectManager $manager
      *
      * @return CharacterToSkill[]
@@ -161,7 +163,10 @@ class Service
 
     private function setAttributes($json, Character $character, ObjectManager $manager)
     {
-        $attributes = $this->createAttributes($json, $character, $manager);
+
+        $attributes = (isset($json['attribute'])) ?
+            $this->createAttributes($json, $character, $manager) :
+            $this->createEmptyAttributes($character, $manager);
         $character->setAttributes($attributes);
 
         return $character;
@@ -169,7 +174,7 @@ class Service
 
     /**
      * @param $json
-     * @param Character     $character
+     * @param Character $character
      * @param ObjectManager $manager
      *
      * @return CharacterToAttribute[]
@@ -180,9 +185,6 @@ class Service
         $charAttributeRepository = $manager->getRepository('CharacterDatabaseBundle:CharacterToAttribute');
 
         $atts = [];
-        if (!isset($json['skill'])) {
-            return [];
-        }
         foreach ($json['attribute'] as $name => $level) {
             $attribute = $attributeRepository->findOneBy(['name' => $name]);
             $characterToAttribute = $charAttributeRepository->findOneBy([
@@ -191,12 +193,41 @@ class Service
             ]);
             $characterToAttribute = (is_null($characterToAttribute)) ?
                 new CharacterToAttribute() : $characterToAttribute;
-            $characterToAttribute->setLevel($level);
-            $characterToAttribute->setCharacter($character);
-            $characterToAttribute->setAttribute($attribute);
-            $atts[] = $characterToAttribute;
+            $atts[] = $this->setAttribute($character, $attribute, $characterToAttribute, $level);
         }
 
         return $atts;
+    }
+
+    private function createEmptyAttributes(Character $character, ObjectManager $manager)
+    {
+        $initialLevel = 1;
+        $attributeRepository = $manager->getRepository('CharacterDatabaseBundle:Attribute');
+        $charAttributeRepository = $manager->getRepository('CharacterDatabaseBundle:CharacterToAttribute');
+        $attributes = $attributeRepository->findAll();
+        $arr = [];
+        foreach ($attributes as $attribute) {
+            $criteria = ['attribute' => $attribute, 'character' => $character];
+            //We dont want to overwrite any Attributes
+            if (!$charAttributeRepository->findOneBy($criteria)) {
+                $arr[] = $this->setAttribute($character, $attribute, new CharacterToAttribute(), $initialLevel);
+            }
+        }
+
+        return $arr;
+    }
+
+    private function setAttribute(
+        Character $character,
+        Attribute $attribute,
+        CharacterToAttribute $characterToAttribute,
+        $level
+    ) {
+
+        $characterToAttribute->setLevel($level);
+        $characterToAttribute->setCharacter($character);
+        $characterToAttribute->setAttribute($attribute);
+
+        return $characterToAttribute;
     }
 }
