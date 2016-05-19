@@ -1,0 +1,14 @@
+[
+    {% for item in cyberware %}
+    {
+        "name": "{{ item.cyberware.cyberware.name }}",
+        "description": "{{ item.cyberware.cyberware.description }}",
+        "level": "{{ item.cyberware.level}}",
+        "effect": "{{ item.cyberware.effect}}",
+        "quality": "{{ item.quality}}",
+        "cost": "{{ item.getQualityFactor*item.cyberware.cost}}"
+    }
+    {% if not loop.last %},
+    {% endif %}
+    {% endfor %}
+]

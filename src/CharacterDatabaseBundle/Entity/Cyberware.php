@@ -5,6 +5,7 @@
 
 namespace CharacterDatabaseBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,10 +37,70 @@ class Cyberware extends AbstractEntity
     protected $levels;
 
     /**
-     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToCyberware", mappedBy="cyberware")
-     * @var CharacterToCyberware
+     * @return string
      */
-    protected $characterLink;
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getLevels()
+    {
+        return $this->levels;
+    }
+
+    /**
+     * @param CyberwareLevel[] $levels
+     */
+    public function setLevels($levels)
+    {
+        $this->levels = $levels;
+    }
+
+    /**
+     * @return CharacterToCyberware
+     */
+    public function getCharacterLink()
+    {
+        return $this->characterLink;
+    }
+
+    /**
+     * @param CharacterToCyberware $characterLink
+     */
+    public function setCharacterLink($characterLink)
+    {
+        $this->characterLink = $characterLink;
+    }
+
+
 
 
 

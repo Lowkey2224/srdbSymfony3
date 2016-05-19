@@ -141,6 +141,21 @@ class Character extends AbstractEntity
      */
     protected $connectionsInDBTarget;
 
+
+    /**
+     * Calculates the Essence with the current Cyberware
+     * @return int
+     */
+    public function getEssence()
+    {
+        $essence = 600;
+        /** @var CharacterToCyberware $item */
+        foreach ($this->cyberware as $item){
+            $essence -= $item->getQualityFactor() * $item->getCyberware()->getCost();
+        }
+        return $essence/100;
+    }
+
     public function __construct()
     {
         parent::__construct();
@@ -445,4 +460,22 @@ class Character extends AbstractEntity
     {
         $this->connectionsInDBTarget = $connectionsInDBTarget;
     }
+
+    /**
+     * @return Collection
+     */
+    public function getCyberware()
+    {
+        return $this->cyberware;
+    }
+
+    /**
+     * @param Collection $cyberware
+     */
+    public function setCyberware($cyberware)
+    {
+        $this->cyberware = $cyberware;
+    }
+
+
 }

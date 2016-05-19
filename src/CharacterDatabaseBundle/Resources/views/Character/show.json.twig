@@ -48,6 +48,8 @@
         {% endif %}
         {% endfor %}
     ],
+    "cyberware" : {%  include '@CharacterDatabase/Character/characterCyberware.json.twig' with {'cyberware' : char.cyberware} %},
+
     "connectionsID": [
         {% for conn in char.connectionsInDB%}
         {

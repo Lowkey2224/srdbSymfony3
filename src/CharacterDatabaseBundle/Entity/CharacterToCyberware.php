@@ -2,6 +2,7 @@
 
 namespace CharacterDatabaseBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,13 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CharacterToCyberware extends AbstractEntity
 {
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="level", type="integer")
-     */
-    private $level;
 
     /**
      * @var int
@@ -35,38 +29,11 @@ class CharacterToCyberware extends AbstractEntity
     protected $character;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Cyberware", inversedBy="chharacters")
+     * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\CyberwareLevel", inversedBy="characterLink")
      * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
-     * @var Cyberware
+     * @var CyberwareLevel
      */
     protected $cyberware;
-
-
-
-
-    /**
-     * Set level
-     *
-     * @param integer $level
-     *
-     * @return CharacterToCyberware
-     */
-    public function setLevel($level)
-    {
-        $this->level = $level;
-
-        return $this;
-    }
-
-    /**
-     * Get level
-     *
-     * @return int
-     */
-    public function getLevel()
-    {
-        return $this->level;
-    }
 
     /**
      * Set quality
@@ -91,5 +58,59 @@ class CharacterToCyberware extends AbstractEntity
     {
         return $this->quality;
     }
+
+    public function getQualityFactor()
+    {
+        return 1 - (0.2 * ($this->quality - 1));
+    }
+
+    public function getQualityName()
+    {
+        switch ($this->quality) {
+            case 4:
+                return "Deltaware";
+            case 3:
+                return "Betwaware";
+            case 2:
+                return "Alphaware";
+            case 1:
+            default:
+                return "Standardware";
+        }
+    }
+
+    /**
+     * @return Character
+     */
+    public function getCharacter()
+    {
+        return $this->character;
+    }
+
+    /**
+     * @param Character $character
+     */
+    public function setCharacter($character)
+    {
+        $this->character = $character;
+    }
+
+    /**
+     * @return CyberwareLevel
+     */
+    public function getCyberware()
+    {
+        return $this->cyberware;
+    }
+
+    /**
+     * @param CyberwareLevel $cyberware
+     */
+    public function setCyberware($cyberware)
+    {
+        $this->cyberware = $cyberware;
+    }
+
+
 }
 

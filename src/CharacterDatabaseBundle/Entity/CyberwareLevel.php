@@ -40,6 +40,12 @@ class CyberwareLevel extends AbstractEntity
      */
     private $cyberware;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToCyberware", mappedBy="cyberware")
+     * @var CharacterToCyberware
+     */
+    protected $characterLink;
+
 
     /**
      * Set level
