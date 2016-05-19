@@ -15,7 +15,7 @@ class CharacterDatabaseExtension extends Extension
     /**
      * Loads a specific configuration.
      *
-     * @param array            $configs   An array of configuration values
+     * @param array $configs An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
@@ -27,6 +27,8 @@ class CharacterDatabaseExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yml');
-        $configs;
+        if (count($configs)) {
+            var_dump($configs);
+        }
     }
 }
