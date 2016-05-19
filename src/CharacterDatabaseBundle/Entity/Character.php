@@ -165,6 +165,7 @@ class Character extends AbstractEntity
         $this->connectionsInDBTarget = new ArrayCollection();
         $this->skills = new ArrayCollection();
         $this->attributes = new ArrayCollection();
+        $this->cyberware = new ArrayCollection();
         $this->reputation = 0;
         $this->goodKarma = 0;
         $this->karmapool = 0;
