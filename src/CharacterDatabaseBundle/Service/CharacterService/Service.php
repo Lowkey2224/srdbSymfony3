@@ -22,6 +22,23 @@ class Service
      */
     public function validateJson($json)
     {
+        $return =$this->validateJsonBasicInfo($json);
+        if (!isset($json['karma'])) {
+            return false;
+        }
+        if (!isset($json['reputation'])) {
+            return false;
+        }
+        if (!isset($json['type'])) {
+            return false;
+        }
+        $return = ($return)?$this->validateJsonMagical($json):false;
+
+        return $return;
+    }
+
+    private function validateJsonBasicInfo($json)
+    {
         if (!isset($json['name'])) {
             return false;
         }
@@ -34,15 +51,12 @@ class Service
         if (!isset($json['description'])) {
             return false;
         }
-        if (!isset($json['karma'])) {
-            return false;
-        }
-        if (!isset($json['reputation'])) {
-            return false;
-        }
-        if (!isset($json['type'])) {
-            return false;
-        }
+        return true;
+    }
+
+    private function validateJsonMagical($json)
+    {
+
         if (isset($json['magical']) && isset($json['tradition']) && $json['tradition'] == '') {
             if (!isset($json['totem'])) {
                 return false;

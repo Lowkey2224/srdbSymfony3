@@ -27,5 +27,6 @@ class CharacterDatabaseExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.yml');
+        $configs;
     }
 }
