@@ -20,10 +20,12 @@
         {
             "name": "{{ att.attribute.name }}",
             "level": "{{ att.level}}"
-        }
-        {% if not loop.last %},
-        {% endif %}
+        },
         {% endfor %}
+        {
+            "name": "Essenz",
+            "level": "{{ char.essence}}"
+        }
     ],
     "skills": [
         {% for skill in char.skills %}

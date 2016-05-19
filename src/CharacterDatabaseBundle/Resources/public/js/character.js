@@ -32,16 +32,28 @@
         return {
             restrict: 'E',
             templateUrl: app.bundleDir + 'html/directives/character-details.html',
-            controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
+            controller: ['$http', '$routeParams', function ($http, $routeParams) {
                 var characterDetail = this;
                 characterDetail.description = "...";
                 characterDetail.needsSubString = true;
                 characterDetail.loading = true;
                 characterDetail.short = false;
+                characterDetail.qualityName = function (quality) {
+                    console.log("Checking Code:", quality);
+                    var val = quality;
+                    if (quality == "alpha")
+                        val = "&alpha;";
+                    if (quality == "beta")
+                        val = "&beta;";
+                    if (quality == "delta")
+                        val = "&delta;";
+                    console.log("Quality Code:", val);
+                    return val;
+                };
                 //Toggle the length of Description
                 characterDetail.toggleDescription = function () {
                     if (characterDetail.short) {
-                        if(characterDetail.characterDetails.description > 100){
+                        if (characterDetail.characterDetails.description > 100) {
                             characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
                             characterDetail.short = false;
                         }

@@ -5,7 +5,11 @@
         "description": "{{ item.cyberware.cyberware.description }}",
         "level": "{{ item.cyberware.level}}",
         "effect": "{{ item.cyberware.effect}}",
-        "quality": "{{ item.quality}}",
+        "quality": {
+            "id": "{{ item.quality}}",
+            "name": "{{ item.qualityName }}",
+            "code": "{{  item.qualityCode }}"
+        },
         "cost": "{{ item.getQualityFactor*item.cyberware.cost}}"
     }
     {% if not loop.last %},

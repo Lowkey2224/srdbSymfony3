@@ -1,4 +1,3 @@
-
 <div ng-show="characterDetail.characterDetails.code==401" class="list-group-item list-group-item-home">
     <h1 ng-hide="characterDetail.loading">
         Bitte Log dich zuerst ein.
@@ -6,7 +5,8 @@
 </div>
 
 
-<div ng-hide="characterDetail.characterDetails" ng-show="characterDetail.characterDetails.code==404" class="list-group-item list-group-item-home">
+<div ng-hide="characterDetail.characterDetails" ng-show="characterDetail.characterDetails.code==404"
+     class="list-group-item list-group-item-home">
     <h1 ng-hide="characterDetail.loading">
         Kein Character Gefunden.
     </h1>
@@ -16,7 +16,8 @@
     </div>
 </div>
 <!--Show Character Details-->
-<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails" class="list-group-item list-group-item-home">
+<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails"
+     class="list-group-item list-group-item-home">
     <div class="row">
         <h1>{{characterDetail.characterDetails.name}}
             <small>by {{ characterDetail.characterDetails.user.name}}</small>
@@ -31,62 +32,95 @@
                 ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'"
                 ng-click="characterDetail.toggleDescription()"></i>
     </div>
-</div>
 
-<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails" class="panel-group" ui-state="myAccordion" ui-default="1">
-    <!-- Akkordeon Attribute -->
-    <div class="panel panel-default">
-        <div class="panel-heading" ui-set="{'myAccordion': 1}">
-            <h4 class="panel-title">
-                Attribute
-            </h4>
-        </div>
-        <div ui-if="myAccordion == 1">
-            <div class="panel-body">
-                <div class="row list-group ">
-                    <div ng-repeat="att in characterDetail.characterDetails.attributes">
-                        <div class="col-sm-2 col-sm-offset-0 col-xs-4">
-                            <strong class="pull-left">{{att.name}}</strong>
-                        </div>
-                        <div class="col-xs-1">
-                            {{att.level}}
-                        </div>
-                    </div>
-                </div>
+
+    <div class="panel-group" ui-state="myAccordion" ui-default="1">
+        <!-- Akkordeon Attribute -->
+        <div class="panel panel-default">
+            <div class="panel-heading" ui-set="{'myAccordion': 1}">
+                <h4 class="panel-title">
+                    Attribute
+                </h4>
             </div>
-        </div>
-    </div>
-
-    <!-- Akkordeon Skills-->
-    <div class="panel panel-default"
-         ng-repeat="(key,type) in {2:'Aktionsfähigkeit', 3:'Wissensfähigkeit', 4:'Sprache'}">
-        <div class="panel-heading" ui-set="{'myAccordion': key } ">
-            <h4 class="panel-title">
-                {{type}}
-            </h4>
-        </div>
-        <div ui-if="myAccordion == {{key}}">
-            <div class="panel-body list-group ">
-                <div class="row list-group-item"
-                     ng-repeat="skill in characterDetail.characterDetails.skills | filter:type">
-                    <div class="col-sm-2 col-sm-offset-0 col-xs-4">
-                        <strong class="pull-left">{{skill.name}}</strong>
-                    </div>
-                    <div class="col-xs-1">
-                        {{skill.level}}
-                    </div>
-                    <div class="col-xs-5 col-sm-3" ng-if="skill.specializations">
-                        <div class="row" ng-repeat="spec in skill.specializations">
-                            <div class="col-sm-6 col-sm-offset-0 col-xs-8">
-                                <strong class="pull-left">{{spec.name}}</strong>
+            <div ui-if="myAccordion == 1">
+                <div class="panel-body">
+                    <div class="row list-group ">
+                        <div ng-repeat="att in characterDetail.characterDetails.attributes">
+                            <div class="col-sm-2 col-sm-offset-0 col-xs-4">
+                                <strong class="pull-left">{{att.name}}</strong>
                             </div>
                             <div class="col-xs-1">
-                                {{spec.level}}
+                                {{att.level}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Akkordeon Skills-->
+        <div class="panel panel-default"
+             ng-repeat="(key,type) in {2:'Aktionsfähigkeit', 3:'Wissensfähigkeit', 4:'Sprache'}">
+            <div class="panel-heading" ui-set="{'myAccordion': key } ">
+                <h4 class="panel-title">
+                    {{type}}
+                </h4>
+            </div>
+            <div ui-if="myAccordion == {{key}}">
+                <div class="panel-body list-group ">
+                    <div class="row list-group-item"
+                         ng-repeat="skill in characterDetail.characterDetails.skills | filter:type">
+                        <div class="col-sm-2 col-sm-offset-0 col-xs-4">
+                            <strong class="pull-left">{{skill.name}}</strong>
+                        </div>
+                        <div class="col-xs-1">
+                            {{skill.level}}
+                        </div>
+                        <div class="col-xs-5 col-sm-3" ng-if="skill.specializations">
+                            <div class="row" ng-repeat="spec in skill.specializations">
+                                <div class="col-sm-6 col-sm-offset-0 col-xs-8">
+                                    <strong class="pull-left">{{spec.name}}</strong>
+                                </div>
+                                <div class="col-xs-1">
+                                    {{spec.level}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Akkordeon Cyberware-->
+        <div class="panel panel-default">
+            <div class="panel-heading" ui-set="{'myAccordion': 5}">
+                <h4 class="panel-title">
+                    Cyberware
+                </h4>
+            </div>
+            <div ui-if="myAccordion == 5">
+                <div class="panel-body">
+                    <div class="row list-group ">
+                        <div ng-repeat="cyberware in characterDetail.characterDetails.cyberware">
+                            <div class="col-xs-4">
+                                <strong class="pull-left">{{cyberware.name}}</strong>
+                            </div>
+                            <div class="col-xs-2">
+                                {{cyberware.level}}
+                                <span ng-if="cyberware.quality.id==2" title="Alphaware">&alpha;</span>
+                                <span ng-if="cyberware.quality.id==3" title="Betaware">&beta;</span>
+                                <span ng-if="cyberware.quality.id==4" title="Deltaware">&delta;</span>
+                            </div>
+                            <div class="pull-left col-xs-5">
+                                {{cyberware.description}}
+                            </div>
+                            <div class="pull-right col-xs-1">
+                                {{cyberware.cost/100}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

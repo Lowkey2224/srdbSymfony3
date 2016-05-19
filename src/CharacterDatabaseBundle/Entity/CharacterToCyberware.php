@@ -78,6 +78,21 @@ class CharacterToCyberware extends AbstractEntity
         }
     }
 
+    public function getQualityCode()
+    {
+        switch ($this->quality) {
+            case 4:
+                return "delta";
+            case 3:
+                return "beta";
+            case 2:
+                return "alpha";
+            case 1:
+            default:
+                return "";
+        }
+    }
+
     /**
      * @return Character
      */
