@@ -18,12 +18,14 @@ class CharacterToAttribute extends AbstractEntity
     /**
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="attributes")
      * @ORM\JoinColumn(name="character_id", referencedColumnName="id")
+     * @var Character
      */
     protected $character;
 
     /**
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Attribute", inversedBy="characterLink")
      * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
+     * @var Attribute
      */
     protected $attribute;
 
