@@ -59,6 +59,11 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testToArrayInvalid(){
+        $array = $this->toArrayMethod((object)[]);
+        $this->assertCount(0,$array);
+    }
+
     public function testToArray()
     {
         /**

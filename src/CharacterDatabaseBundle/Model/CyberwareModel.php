@@ -21,19 +21,22 @@ class CyberwareModel extends AbstractModel
      */
     public static function toArray($entity)
     {
-        return [
-            'id' => $entity->getId(),
-            'name' => $entity->getName(),
-            'description' => $entity->getDescription(),
-            'levels' => $entity->getLevels()->map(function (CyberwareLevel $level) {
-                return [
-                    'id' => $level->getId(),
-                    'level' => $level->getLevel(),
-                    'cost' => $level->getCost(),
-                    'effect' => $level->getEffect(),
-                ];
-            }),
-        ];
+        if($entity instanceof Cyberware) {
+            return [
+                'id' => $entity->getId(),
+                'name' => $entity->getName(),
+                'description' => $entity->getDescription(),
+                'levels' => $entity->getLevels()->map(function (CyberwareLevel $level) {
+                    return [
+                        'id' => $level->getId(),
+                        'level' => $level->getLevel(),
+                        'cost' => $level->getCost(),
+                        'effect' => $level->getEffect(),
+                    ];
+                }),
+            ];
+        }
+        return [];
     }
 
     /**
