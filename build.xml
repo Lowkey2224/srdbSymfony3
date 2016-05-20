@@ -143,8 +143,8 @@
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
             <arg path="${basedir}/phpunit.xml.dist"/>
-            <arg value="--coverage-clover"/>
-            <arg path="${basedir}/build/logs/coverage.xml"/>
+            <arg value="--coverage-html"/>
+            <arg path="${basedir}/build/logs/coverage"/>
             <arg value="--log-junit"/>
             <arg path="${basedir}/build/logs/phpunit.xml"/>
             <arg path="${basedir}/src/CharacterDatabaseBundle"/>
