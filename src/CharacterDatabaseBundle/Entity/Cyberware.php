@@ -15,14 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @package CharacterDatabaseBundle\Entity
  */
-class Cyberware extends AbstractEntity
+class Cyberware extends NamedEntity
 {
-
-    /**
-     * @ORM\Column(type="string", nullable=false)
-     * @var string $name Name of the Cyberware
-     */
-    protected $name;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -35,22 +29,6 @@ class Cyberware extends AbstractEntity
      * @var CyberwareLevel[] $levels
      */
     protected $levels;
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @return string

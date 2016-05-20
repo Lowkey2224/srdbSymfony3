@@ -11,17 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\SkillRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Skill extends AbstractEntity
+class Skill extends NamedEntity
 {
     const TYPE_ACTION_SKILL = 1;
     const TYPE_KNOWLEDGE_SKILL = 2;
-    const TYPE_LANGUAGE_SKILL = 2;
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=45, unique=true)
-     */
-    protected $name;
+    const TYPE_LANGUAGE_SKILL = 3;
 
     /**
      * @var int
@@ -90,22 +84,6 @@ class Skill extends AbstractEntity
     public function getCharacterLink()
     {
         return $this->characterLink;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

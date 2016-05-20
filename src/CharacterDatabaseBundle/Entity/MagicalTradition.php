@@ -11,14 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\MagicalTraditionRepository")
  * * @ORM\HasLifecycleCallbacks()
  */
-class MagicalTradition extends AbstractEntity
+class MagicalTradition extends NamedEntity
 {
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
     /**
      * @var string
      * @ORM\Column(type="text")
@@ -30,22 +24,6 @@ class MagicalTradition extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Totem", mappedBy="tradition")
      */
     protected $totems;
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @return string

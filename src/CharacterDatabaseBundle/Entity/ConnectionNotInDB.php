@@ -11,13 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\ConnectionNotInDBRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class ConnectionNotInDB extends AbstractEntity
+class ConnectionNotInDB extends NamedEntity
 {
-    /**
-     * @var string der Connection
-     * @ORM\Column(type="string")
-     */
-    protected $target;
 
     /**
      * Character @var.
@@ -33,13 +28,7 @@ class ConnectionNotInDB extends AbstractEntity
      */
     protected $level;
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->target;
-    }
+
 
     /**
      * @param int $level
@@ -71,21 +60,5 @@ class ConnectionNotInDB extends AbstractEntity
     public function getCharacter()
     {
         return $this->character;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setTarget($name)
-    {
-        $this->target = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTarget()
-    {
-        return $this->target;
     }
 }

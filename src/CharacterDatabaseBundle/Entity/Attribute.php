@@ -11,13 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\AttributeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Attribute extends AbstractEntity
+class Attribute extends NamedEntity
 {
-    /**
-     * @var string
-     * @ORM\Column(name="name", type="string", length=45)
-     */
-    protected $name;
 
     /**
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterToAttribute", mappedBy="attribute")
@@ -45,22 +40,6 @@ class Attribute extends AbstractEntity
     public function getCharacterLink()
     {
         return $this->characterLink;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

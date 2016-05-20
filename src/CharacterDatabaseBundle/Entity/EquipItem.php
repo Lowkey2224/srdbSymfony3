@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\EquipItemRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class EquipItem extends AbstractEntity
+class EquipItem extends NamedEntity
 {
     /**
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Character", inversedBy="items")
@@ -23,11 +23,6 @@ class EquipItem extends AbstractEntity
      * @ORM\Column(type="integer")
      */
     protected $amount;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $name;
 
     /**
      * @param mixed $amount

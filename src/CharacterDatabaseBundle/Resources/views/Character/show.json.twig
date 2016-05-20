@@ -66,7 +66,7 @@
     "connectionsNID": [
         {% for conn in char.connectionsNotInDB%}
         {
-            "name": "{{ conn.target }}",
+            "name": "{{ conn.name }}",
             "level": "{{ conn.level }}"
         }
         {% if not loop.last %},

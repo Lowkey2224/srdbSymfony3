@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields={"skill","name"}, message="Diese Spezialisierung existiert bereits.")
  * @ORM\HasLifecycleCallbacks()
  */
-class Specialization extends AbstractEntity
+class Specialization extends NamedEntity
 {
     /**
      * @ORM\ManyToOne(targetEntity="CharacterDatabaseBundle\Entity\Skill", inversedBy="specializations")
@@ -21,32 +21,14 @@ class Specialization extends AbstractEntity
      */
     protected $skill;
 
-    /**
-     * @var
-     * @ORM\Column(type="string")
-     */
-    protected $name;
 
     /**
      * @ORM\OneToMany(targetEntity="CharacterDatabaseBundle\Entity\CharacterSkillToSpecialization",
      * mappedBy="specialization")
      */
     protected $specializations;
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+
 
     /**
      * @param mixed $skill

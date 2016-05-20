@@ -13,14 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="CharacterDatabaseBundle\Repository\PersonRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Character extends AbstractEntity
+class Character extends NamedEntity
 {
-    /**
-     * @var string
-     * @ORM\Column(type="string")
-     */
-    protected $name;
-
     /**
      * @var string
      * @ORM\Column(type="string")
@@ -169,22 +163,6 @@ class Character extends AbstractEntity
         $this->reputation = 0;
         $this->goodKarma = 0;
         $this->karmapool = 0;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**
