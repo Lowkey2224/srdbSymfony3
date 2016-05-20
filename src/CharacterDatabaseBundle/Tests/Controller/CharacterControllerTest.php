@@ -70,6 +70,21 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'tradition' => 'Hermetiker',
     ];
 
+    private $characterArrayCowboyWithSkills = [
+        'name' => 'Cowboy',
+        'race' => 'HSS',
+        'description' => 'Unnauffälliger Norm mit weißer Strähne',
+        'occupation' => 'Util-Mage',
+        'karma' => '0',
+        'reputation' => '0',
+        'type' => 'SC',
+        'capability' => 'Vollmagier',
+        'tradition' => 'Hermetiker',
+        'skill' => [
+            'Heimlichkeit' => 3,
+        ],
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -187,6 +202,42 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $this->assertEquals($char['id'], $response['id']);
     }
 
+    public function testUpdateWithSkill()
+    {
+        $client = static::createClient();
+        $this->loginAs($client, $this->username, $this->password);
+        $char = $this->characterArrayCowboyWithSkills;
+        $id = $this->em->getRepository('CharacterDatabaseBundle:Character')->findOneBy(
+            ['name' => $char['name']]
+        )->getId();
+        $client->request('PUT', '/character/'.$id, [], [], [], json_encode($char));
+        $response = $client->getResponse();
+        $this->assertTrue(
+            $response->isSuccessful(),
+            'Is not Successful for Character: '.$char['name'].' with Errorcode: '.
+            $response->getStatusCode().' and Body: '.$response->getContent()
+        );
+        $response = json_decode($response->getContent(), true);
+        $this->assertEquals($char['name'], $response['name']);
+        $this->assertEquals($char['description'], $response['description']);
+        $this->assertEquals($char['karma'], $response['goodKarma']);
+        $this->assertEquals($char['reputation'], $response['reputation']);
+        $this->assertArrayHasKey('skills', $response);
+        foreach ($char['skill'] as $name => $level) {
+            $this->assertEquals(
+                1,
+                $this->containsSkill(
+                    ['name' => $name, 'level' => $level, "type" => "Aktionsfähigkeit"],
+                    $response['skills']
+                ),
+                "Skill Heimlichkeit was Found with a different Count"
+            );
+        }
+
+
+        $this->assertEquals($id, $response['id']);
+    }
+
     public function testUpdateWithWrongId()
     {
         $client = static::createClient();
@@ -206,5 +257,20 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $this->assertTrue($client->getResponse()->isClientError());
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->logout($client);
+    }
+
+    private function containsSkill($needle, $haystack)
+    {
+        $count = 0;
+        foreach ($haystack as $skill) {
+            if ($skill['name'] == $needle['name'] &&
+                $skill['level'] == $needle['level'] &&
+                $skill['type'] == $needle['type']
+            ) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }
