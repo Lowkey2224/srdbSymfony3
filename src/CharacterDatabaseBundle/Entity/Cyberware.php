@@ -55,7 +55,7 @@ class Cyberware extends NamedEntity
     }
 
     /**
-     * @param CyberwareLevel[] $levels
+     * @param Collection $levels
      */
     public function setLevels($levels)
     {
