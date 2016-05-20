@@ -98,7 +98,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
             );
             $this->assertTrue($client->getResponse()->isSuccessful());
             $responseData = json_decode($client->getResponse()->getContent(), true);
-            $this->assertEquals($this->jsonEntries, count($responseData), 'For Character: '.$chars[$i]->getName());
+            $this->assertCount($this->jsonEntries, $responseData, 'For Character: '.$chars[$i]->getName());
         }
         $this->logout($client);
     }
