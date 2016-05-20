@@ -27,6 +27,15 @@ class SkillControllerTest extends AbstractEntityControllerTest
         ],
     ];
 
+    private $skillTHeimlichkeitOriginal = [
+        'name' => 'Heimlichkeit',
+        'type' => Skill::TYPE_ACTION_SKILL,
+        'attribute' => [
+            'id' => 2,
+            'name' => 'Schnelligkeit',
+        ],
+    ];
+
     protected function getRouteName()
     {
         return '/skill';
@@ -122,6 +131,25 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $this->assertEquals($this->skillTHeimlichkeit['name'], $response['name']);
         $this->assertEquals($this->skillTHeimlichkeit['type'], $response['type']['id']);
         $this->assertEquals($this->skillTHeimlichkeit['attribute']['id'], $response['attribute']['id']);
+        $this->assertEquals($skill->getId(), $response['id']);
+        $client->request(
+            'PUT',
+            $this->getRouteName().'/'.$skill->getId(),
+            [],
+            [],
+            [],
+            json_encode($this->skillTHeimlichkeitOriginal)
+        );
+        $response = $client->getResponse();
+        $this->assertTrue(
+            $response->isSuccessful(),
+            'Is not Successful for Skill: '.$this->skillTHeimlichkeit['name'].' with Errorcode: '.
+            $response->getStatusCode().' and Body: '.$response->getContent()
+        );
+        $response = json_decode($response->getContent(), true);
+        $this->assertEquals($this->skillTHeimlichkeitOriginal['name'], $response['name']);
+        $this->assertEquals($this->skillTHeimlichkeitOriginal['type'], $response['type']['id']);
+        $this->assertEquals($this->skillTHeimlichkeitOriginal['attribute']['id'], $response['attribute']['id']);
         $this->assertEquals($skill->getId(), $response['id']);
     }
 

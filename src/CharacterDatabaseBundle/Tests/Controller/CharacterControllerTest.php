@@ -197,4 +197,14 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
         $this->logout($client);
     }
+
+    public function testUpdateWithWrongBody()
+    {
+        $client = static::createClient();
+        $this->loginAs($client, $this->username, $this->password);
+        $client->request('PUT', '/character/0', [], [], [], json_encode(['Hallo' => 'Welt']));
+        $this->assertTrue($client->getResponse()->isClientError());
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->logout($client);
+    }
 }

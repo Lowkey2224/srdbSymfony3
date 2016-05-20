@@ -21,7 +21,7 @@ class CyberwareModel extends AbstractModel
      */
     public static function toArray($entity)
     {
-        if($entity instanceof Cyberware) {
+        if ($entity instanceof Cyberware) {
             return [
                 'id' => $entity->getId(),
                 'name' => $entity->getName(),
