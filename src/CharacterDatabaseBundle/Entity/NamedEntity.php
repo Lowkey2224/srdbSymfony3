@@ -31,7 +31,4 @@ class NamedEntity extends AbstractEntity
     {
         $this->name = $name;
     }
-
-
-
 }

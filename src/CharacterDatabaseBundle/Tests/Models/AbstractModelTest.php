@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Tests\Models;
 
-
 use CharacterDatabaseBundle\Entity\NamedEntity;
 
 abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
@@ -15,7 +14,7 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
      * Returns an array with the name of all valid Fields
      * @return array
      */
-    protected abstract function getValidFields();
+    abstract protected function getValidFields();
 
     /**
      * The Method used to check if the array is valid
@@ -23,20 +22,20 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
      * @param bool $withId
      * @return bool
      */
-    protected abstract function validationMethod($array, $withId = true);
+    abstract protected function validationMethod($array, $withId = true);
 
     /**
      * Returns an Array of Entities, that will be rendered into an Array
      * @return array
      */
-    protected abstract function getEntities();
+    abstract protected function getEntities();
 
     /**
      * Renders the given Entity into an Array
      * @param $entity
      * @return array
      */
-    protected abstract function toArrayMethod($entity);
+    abstract protected function toArrayMethod($entity);
 
     public function testValidArray()
     {
@@ -50,7 +49,6 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
                 $this->validationMethod($arr1),
                 "Asserted that: ".implode(",", $arr1)."was ".($result) ? "valid" : "invalid"
             );
-
         }
         foreach ($this->getValidFields() as $field) {
             unset($arr1[$field]);
@@ -82,9 +80,13 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
      * @param $arrayField
      * @param NamedEntity $entity
      */
-    protected function assertEqualAttribute($fieldName, $arrayField, $entity){
-        $methodName= "get".strtoupper(substr($fieldName,0,1)).substr($fieldName,1);
-        $this->assertEquals($entity->$methodName(), $arrayField, "Expected for Entity". $entity->getName(). ' with method '.$methodName);
+    protected function assertEqualAttribute($fieldName, $arrayField, $entity)
+    {
+        $methodName = "get".strtoupper(substr($fieldName, 0, 1)).substr($fieldName, 1);
+        $this->assertEquals(
+            $entity->$methodName(),
+            $arrayField,
+            "Expected for Entity".$entity->getName().' with method '.$methodName
+        );
     }
-
 }

@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Tests\Models;
 
-
 use CharacterDatabaseBundle\Entity\Cyberware;
 use CharacterDatabaseBundle\Entity\CyberwareLevel;
 use CharacterDatabaseBundle\Model\CyberwareModel;
@@ -79,14 +78,14 @@ class CyberwareModelTest extends AbstractModelTest
      */
     protected function assertEqualAttribute($fieldName, $arrayField, $entity)
     {
-        if($fieldName == "levels"){
-            for($i = 0; $i < count($arrayField); $i++) {
+        if ($fieldName == "levels") {
+            for ($i = 0; $i < count($arrayField); $i++) {
                 $this->assertEquals($entity->getLevels()->get($i)->getId(), $arrayField[$i]['id']);
                 $this->assertEquals($entity->getLevels()->get($i)->getCost(), $arrayField[$i]['cost']);
                 $this->assertEquals($entity->getLevels()->get($i)->getLevel(), $arrayField[$i]['level']);
                 $this->assertEquals($entity->getLevels()->get($i)->getEffect(), $arrayField[$i]['effect']);
             }
-        }else{
+        } else {
             parent::assertEqualAttribute($fieldName, $arrayField, $entity);
         }
 

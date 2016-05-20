@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Tests\Models;
 
-
 use CharacterDatabaseBundle\Entity\MagicalCapability;
 use CharacterDatabaseBundle\Model\MagicalCapabilityModel;
 
