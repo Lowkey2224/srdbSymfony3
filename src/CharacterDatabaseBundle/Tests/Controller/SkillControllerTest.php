@@ -51,6 +51,25 @@ class SkillControllerTest extends AbstractEntityControllerTest
         );
     }
 
+    public function testCreateWithWrongJson2()
+    {
+        $client = static::createClient();
+        $this->loginAs($client, $this->username, $this->password);
+        $skillWithWrongAttributeId = [
+            'Name' => 'Hallo',
+            "type" => Skill::TYPE_ACTION_SKILL,
+            'attribute' => [
+                'id' => 0,
+                'name' => "gibt es nicht"
+            ]
+        ];
+        $client->request('PUT', $this->getRouteName(), [], [], [], json_encode($skillWithWrongAttributeId));
+        $this->assertTrue(
+            $client->getResponse()->isClientError(),
+            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode()
+        );
+    }
+
     public function testCreate()
     {
         $skills = [
