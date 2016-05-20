@@ -6,13 +6,14 @@
 namespace CharacterDatabaseBundle\Model;
 
 use CharacterDatabaseBundle\Entity\Attribute;
+use CharacterDatabaseBundle\Entity\NamedEntity;
 
 class AttributeModel extends AbstractModel
 {
     /**
      * Returns the current Model, as an Array representation, so it can be rendered as JSON.
      *
-     * @return array
+     * @return NamedEntity
      */
     public static function toArray($entity)
     {

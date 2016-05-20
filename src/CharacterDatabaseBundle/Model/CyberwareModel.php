@@ -22,10 +22,12 @@ class CyberwareModel extends AbstractModel
     public static function toArray($entity)
     {
         return [
+            'id' => $entity->getId(),
             'name' => $entity->getName(),
             'description' => $entity->getDescription(),
             'levels' => $entity->getLevels()->map(function (CyberwareLevel $level) {
                 return [
+                    'id' => $level->getId(),
                     'level' => $level->getLevel(),
                     'cost' => $level->getCost(),
                     'effect' => $level->getEffect(),
@@ -41,6 +43,6 @@ class CyberwareModel extends AbstractModel
      */
     public static function getArrayFields()
     {
-        return ['name', 'description', 'levels'];
+        return ['id','name', 'description', 'levels'];
     }
 }
