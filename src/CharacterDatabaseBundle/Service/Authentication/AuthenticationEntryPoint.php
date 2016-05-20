@@ -5,23 +5,15 @@
 
 namespace CharacterDatabaseBundle\Service\Authentication;
 
-use Psr\Log\LoggerInterface;
+use CharacterDatabaseBundle\Service\LoggerAwareService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
-class AuthenticationEntryPoint implements AuthenticationEntryPointInterface
+class AuthenticationEntryPoint extends LoggerAwareService implements AuthenticationEntryPointInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
 
-    public function __construct(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * Returns a response that directs the user to authenticate.

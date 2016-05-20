@@ -10,20 +10,11 @@ use CharacterDatabaseBundle\Entity\Character;
 use CharacterDatabaseBundle\Entity\CharacterToAttribute;
 use CharacterDatabaseBundle\Entity\CharacterToSkill;
 use CharacterDatabaseBundle\Entity\MagicalCapability;
+use CharacterDatabaseBundle\Service\LoggerAwareService;
 use Doctrine\Common\Persistence\ObjectManager;
-use Psr\Log\LoggerInterface;
 
-class Service
+class Service extends LoggerAwareService
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(LoggerInterface $loggerInterface)
-    {
-        $this->logger = $loggerInterface;
-    }
 
     /**
      * Checks if the associative array is a valid Character.

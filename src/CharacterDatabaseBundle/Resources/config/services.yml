@@ -2,6 +2,9 @@ services:
     character_database.character_service:
         class: CharacterDatabaseBundle\Service\CharacterService\Service
         arguments: ["@logger"]
+    character_database.cyberware_service:
+        class: CharacterDatabaseBundle\Service\Cyberware\Service
+        arguments: ["@logger"]
     character_database.authentication_entry_point:
         class: CharacterDatabaseBundle\Service\Authentication\AuthenticationEntryPoint
         arguments: ["@logger"]
