@@ -5,11 +5,13 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-class MagicalTraditionControllerTest extends AbstractEntityControllerTest
+
+class CyberwareControllerTest extends AbstractEntityControllerTest
 {
+
     protected function getRouteName()
     {
-        return '/tradition';
+        return "/cyberware";
     }
 
     /**
@@ -18,7 +20,9 @@ class MagicalTraditionControllerTest extends AbstractEntityControllerTest
      */
     protected function getInvalidJson()
     {
-        return [];
+        return [
+
+        ];
     }
 
     /**
@@ -47,6 +51,6 @@ class MagicalTraditionControllerTest extends AbstractEntityControllerTest
      */
     protected function fieldsForIndexTesting()
     {
-        return ['id', 'name'];
+        return [];
     }
 }

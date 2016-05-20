@@ -17,7 +17,7 @@ class UserControllerTest extends AbstractEntityControllerTest
     public $username = 'Loki';
     public $password = 'wuseldusel';
 
-    public function testedIndexFields()
+    public function fieldsForIndexTesting()
     {
         return ['id', 'username', 'email', 'character'];
     }
@@ -109,5 +109,34 @@ class UserControllerTest extends AbstractEntityControllerTest
 
         $this->assertTrue(json_decode($client->getResponse()->getContent()));
         $this->logout($client);
+    }
+
+    /**
+     * Returns an Invalid Array of Items
+     * @return array
+     */
+    protected function getInvalidJson()
+    {
+        return [];
+    }
+
+    /**
+     * Returns an Array Of Items which can be used for Creation
+     * @return array
+     */
+    protected function getValidCreationJson()
+    {
+        return [];
+    }
+
+    /**
+     * Returns an Array of Entity that will be updated.
+     * Preferably always n*2 Items, with first one as change, and second one with the original State
+     * this array must Contain an ID
+     * @return array
+     */
+    protected function getEntityUpdated()
+    {
+        return [];
     }
 }

@@ -11,7 +11,10 @@ class SkillControllerTest extends AbstractEntityControllerTest
 {
     private $skillThrowing = [
         'name' => 'Wurfwaffen',
-        'type' => Skill::TYPE_ACTION_SKILL,
+        'type' => [
+            'id' =>Skill::TYPE_ACTION_SKILL,
+            'name' => Skill::TYPE_ACTION_SKILL_NAME
+            ],
         'attribute' => [
             'id' => 2,
             'name' => 'Schnelligkeit',
@@ -20,7 +23,10 @@ class SkillControllerTest extends AbstractEntityControllerTest
 
     private $skillTHeimlichkeit = [
         'name' => 'Heimlichkeit ist gut',
-        'type' => Skill::TYPE_ACTION_SKILL,
+        'type' => [
+            'id' =>Skill::TYPE_ACTION_SKILL,
+            'name' => Skill::TYPE_ACTION_SKILL_NAME
+        ],
         'attribute' => [
             'id' => 2,
             'name' => 'Schnelligkeit',
@@ -29,7 +35,10 @@ class SkillControllerTest extends AbstractEntityControllerTest
 
     private $skillTHeimlichkeitOriginal = [
         'name' => 'Heimlichkeit',
-        'type' => Skill::TYPE_ACTION_SKILL,
+        'type' => [
+            'id' =>Skill::TYPE_ACTION_SKILL,
+            'name' => Skill::TYPE_ACTION_SKILL_NAME
+        ],
         'attribute' => [
             'id' => 2,
             'name' => 'Schnelligkeit',
@@ -41,70 +50,40 @@ class SkillControllerTest extends AbstractEntityControllerTest
         return '/skill';
     }
 
-    public function testCreateAnonymously()
+    protected function getInvalidJson()
     {
-        $client = static::createClient();
-        $client->request('PUT', $this->getRouteName());
-        $this->assertTrue($client->getResponse()->isClientError());
-        $this->assertEquals(401, $client->getResponse()->getStatusCode());
-    }
-
-    public function testCreateWithWrongJson()
-    {
-        $client = static::createClient();
-        $this->loginAs($client, $this->username, $this->password);
-        $client->request('PUT', $this->getRouteName(), [], [], [], json_encode(['Name' => 'Hallo']));
-        $this->assertTrue(
-            $client->getResponse()->isClientError(),
-            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode()
-        );
-    }
-
-    public function testCreateWithWrongJson2()
-    {
-        $client = static::createClient();
-        $this->loginAs($client, $this->username, $this->password);
-        $skillWithWrongAttributeId = [
-            'Name' => 'Hallo',
-            "type" => Skill::TYPE_ACTION_SKILL,
-            'attribute' => [
-                'id' => 0,
-                'name' => "gibt es nicht"
-            ]
+        return [
+            ['hallo' => "welt"],
+            [
+                'Name' => 'Hallo',
+                "type" => Skill::TYPE_ACTION_SKILL,
+                'attribute' => [
+                    'id' => 0,
+                    'name' => "gibt es nicht",
+                ],
+            ],
         ];
-        $client->request('PUT', $this->getRouteName(), [], [], [], json_encode($skillWithWrongAttributeId));
-        $this->assertTrue(
-            $client->getResponse()->isClientError(),
-            'Is not Clienterror, got Statuscode'.$client->getResponse()->getStatusCode()
-        );
+
     }
 
-    public function testCreate()
+    /**
+     * Returns an Array Of Items which can be used for Creation
+     * @return array
+     */
+    protected function getValidCreationJson()
     {
-        $skills = [
+        return [
             $this->skillThrowing,
         ];
-        $client = static::createClient();
-        $this->loginAs($client, $this->username, $this->password);
-        foreach ($skills as $skill) {
-            $client->request('PUT', $this->getRouteName(), [], [], [], json_encode($skill));
-            $response = $client->getResponse();
-            $this->assertTrue(
-                $response->isSuccessful(),
-                'Is not Successful for Character: '.$skill['name'].' with Errorcode: '.
-                $response->getStatusCode().' and Body: '.$response->getContent()
-            );
-            $response = json_decode($response->getContent(), true);
-            $this->assertEquals($skill['name'], $response['name']);
-            $this->assertEquals($skill['type'], $response['type']['id']);
-            $this->assertEquals($skill['attribute']['id'], $response['attribute']['id']);
-            $this->assertTrue(isset($response['id']));
-            $this->skillThrowing['id'] = $response['id'];
-        }
-        $this->logout($client);
     }
 
-    public function testUpdate()
+    /**
+     * Returns an Array of Entity that will be updated.
+     * Preferably always n*2 Items, with first one as change, and second one with the original State
+     * this array must Contain an ID
+     * @return array
+     */
+    protected function getEntityUpdated()
     {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
@@ -112,55 +91,23 @@ class SkillControllerTest extends AbstractEntityControllerTest
         $client = static::createClient();
         $this->loginAs($client, $this->username, $this->password);
 
-        $skill = $em->getRepository('CharacterDatabaseBundle:Skill')->findOneBy(['name' => 'Heimlichkeit']);
-        $client->request(
-            'PUT',
-            $this->getRouteName().'/'.$skill->getId(),
-            [],
-            [],
-            [],
-            json_encode($this->skillTHeimlichkeit)
-        );
-        $response = $client->getResponse();
-        $this->assertTrue(
-            $response->isSuccessful(),
-            'Is not Successful for Skill: '.$this->skillTHeimlichkeit['name'].' with Errorcode: '.
-            $response->getStatusCode().' and Body: '.$response->getContent()
-        );
-        $response = json_decode($response->getContent(), true);
-        $this->assertEquals($this->skillTHeimlichkeit['name'], $response['name']);
-        $this->assertEquals($this->skillTHeimlichkeit['type'], $response['type']['id']);
-        $this->assertEquals($this->skillTHeimlichkeit['attribute']['id'], $response['attribute']['id']);
-        $this->assertEquals($skill->getId(), $response['id']);
-        $client->request(
-            'PUT',
-            $this->getRouteName().'/'.$skill->getId(),
-            [],
-            [],
-            [],
-            json_encode($this->skillTHeimlichkeitOriginal)
-        );
-        $response = $client->getResponse();
-        $this->assertTrue(
-            $response->isSuccessful(),
-            'Is not Successful for Skill: '.$this->skillTHeimlichkeit['name'].' with Errorcode: '.
-            $response->getStatusCode().' and Body: '.$response->getContent()
-        );
-        $response = json_decode($response->getContent(), true);
-        $this->assertEquals($this->skillTHeimlichkeitOriginal['name'], $response['name']);
-        $this->assertEquals($this->skillTHeimlichkeitOriginal['type'], $response['type']['id']);
-        $this->assertEquals($this->skillTHeimlichkeitOriginal['attribute']['id'], $response['attribute']['id']);
-        $this->assertEquals($skill->getId(), $response['id']);
+        $skill = $em->getRepository('CharacterDatabaseBundle:Skill')
+            ->findOneBy(['name' => $this->skillTHeimlichkeitOriginal['name']]);
+        $this->skillTHeimlichkeitOriginal['id'] = $skill->getId();
+        $this->skillTHeimlichkeit['id'] = $skill->getId();
+
+        return [
+            $this->skillTHeimlichkeit,
+            $this->skillTHeimlichkeitOriginal,
+        ];
     }
 
-    public function testUpdateWithWrongId()
+    /**
+     * Returns an array of Fields/Keys in dot notation, that will be checked
+     * @return array
+     */
+    protected function fieldsForIndexTesting()
     {
-        $client = static::createClient();
-        $this->loginAs($client, $this->username, $this->password);
-        $char = $this->skillThrowing;
-        $client->request('PUT', $this->getRouteName().'/0', [], [], [], json_encode($char));
-//        $this->assertTrue($client->getResponse()->isClientError());
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->logout($client);
+        return ['name', 'type', 'attribute.id', 'attribute.name', 'type.id', 'type.name'];
     }
 }

@@ -14,9 +14,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
 
     private $jsonEntries = 19;
 
-    public function testedIndexFields()
+    public function fieldsForIndexTesting()
     {
-        return ['id', 'name', 'user'];
+        return ['id', 'name', 'user.id', "user.name"];
     }
 
     protected function getRouteName()
@@ -249,16 +249,6 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $this->logout($client);
     }
 
-    public function testUpdateWithWrongBody()
-    {
-        $client = static::createClient();
-        $this->loginAs($client, $this->username, $this->password);
-        $client->request('PUT', '/character/0', [], [], [], json_encode(['Hallo' => 'Welt']));
-        $this->assertTrue($client->getResponse()->isClientError());
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
-        $this->logout($client);
-    }
-
     private function containsSkill($needle, $haystack)
     {
         $count = 0;
@@ -272,5 +262,35 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         }
 
         return $count;
+    }
+
+    /**
+     * Returns an Invalid Array of Items
+     * @return array
+     */
+    protected function getInvalidJson()
+    {
+        // TODO: Implement getInvalidJson() method.
+        return [['Hallo' => 'Welt']];
+    }
+
+    /**
+     * Returns an Array Of Items which can be used for Creation
+     * @return array
+     */
+    protected function getValidCreationJson()
+    {
+        return [];
+    }
+
+    /**
+     * Returns an Array of Entity that will be updated.
+     * Preferably always n*2 Items, with first one as change, and second one with the original State
+     * this array must Contain an ID
+     * @return array
+     */
+    protected function getEntityUpdated()
+    {
+        return [];
     }
 }

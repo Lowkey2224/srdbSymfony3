@@ -14,8 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Skill extends NamedEntity
 {
     const TYPE_ACTION_SKILL = 1;
+    const TYPE_ACTION_SKILL_NAME = 'Aktionsfähigkeit';
     const TYPE_KNOWLEDGE_SKILL = 2;
+    const TYPE_KNOWLEDGE_SKILL_NAME = 'Wissensfähigkeit';
     const TYPE_LANGUAGE_SKILL = 3;
+    const TYPE_LANGUAGE_SKILL_NAME = 'Sprache';
 
     /**
      * @var int
@@ -43,12 +46,12 @@ class Skill extends NamedEntity
     public function getTypeName()
     {
         switch ($this->type) {
-            case 1:
-                return 'Aktionsfähigkeit';
-            case 2:
-                return 'Wissensfähigkeit';
-            case 3:
-                return 'Sprache';
+            case self::TYPE_ACTION_SKILL:
+                return self::TYPE_ACTION_SKILL_NAME;
+            case self::TYPE_KNOWLEDGE_SKILL:
+                return self::TYPE_KNOWLEDGE_SKILL_NAME;
+            case self::TYPE_LANGUAGE_SKILL:
+                return self::TYPE_LANGUAGE_SKILL_NAME;
         }
 
         return 'unbekannt';

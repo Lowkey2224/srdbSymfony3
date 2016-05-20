@@ -7,6 +7,7 @@ namespace CharacterDatabaseBundle\Controller;
 
 use CharacterDatabaseBundle\Entity\Skill;
 use CharacterDatabaseBundle\Model\SkillModel;
+use CharacterDatabaseBundle\Service\ArrayUtil;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +56,7 @@ class SkillController extends AbstractBaseController
 
         $skill->setAttribute($attribute);
         $skill->setName($jsonBody['name']);
-        $skill->setType($jsonBody['type']);
+        $skill->setType($jsonBody['type']['id']);
         $em->persist($skill);
         $em->flush();
 

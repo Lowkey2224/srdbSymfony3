@@ -39,6 +39,18 @@ skill_store:
     requirements:
         id:  \d+
 
+cyberware_list:
+    path: /cyberware
+    defaults: {_controller: CharacterDatabaseBundle:Cyberware:index }
+    methods: [GET]
+
+cyberware_store:
+    path:     /cyberware/{id}
+    defaults: { _controller: CharacterDatabaseBundle:Cyberware:store, id: null }
+    methods: [PUT]
+    requirements:
+        id:  \d+
+
 magical_tradition_list:
     path: /tradition
     defaults: {_controller: CharacterDatabaseBundle:MagicalTradition:index }
