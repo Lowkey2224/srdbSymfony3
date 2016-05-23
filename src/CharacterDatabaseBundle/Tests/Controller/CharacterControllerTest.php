@@ -31,7 +31,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'occupation' => 'Street-Sam',
         'karma' => '0',
         'reputation' => '0',
-        'type' => 'SC',
+        'type' => '1',
     ];
 
     private $characterArrayJose = [
@@ -41,7 +41,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'occupation' => 'Schamane',
         'karma' => '0',
         'reputation' => '0',
-        'type' => 'SC',
+        'type' => '1',
         'capability' => 'Vollmagier',
         'tradition' => 'Schamane',
         'totem' => 'Wildschwein',
@@ -55,7 +55,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'occupation' => 'Decker/Rigger',
         'karma' => '150',
         'reputation' => '150',
-        'type' => 'SC',
+        'type' => '1',
     ];
 
     private $characterArrayCowboy = [
@@ -65,7 +65,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'occupation' => 'Util-Mage',
         'karma' => '0',
         'reputation' => '0',
-        'type' => 'SC',
+        'type' => '1',
         'capability' => 'Vollmagier',
         'tradition' => 'Hermetiker',
     ];
@@ -77,7 +77,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'occupation' => 'Util-Mage',
         'karma' => '0',
         'reputation' => '0',
-        'type' => 'SC',
+        'type' => '1',
         'capability' => 'Vollmagier',
         'tradition' => 'Hermetiker',
         'skill' => [
