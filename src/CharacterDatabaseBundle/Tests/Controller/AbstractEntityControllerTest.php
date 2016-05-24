@@ -46,7 +46,6 @@ abstract class AbstractEntityControllerTest extends WebTestCase
                     );
                 }
             }
-
         }
         $this->logout($client);
     }
@@ -112,7 +111,6 @@ abstract class AbstractEntityControllerTest extends WebTestCase
                     "Field ".$field."  is different"
                 );
             }
-
         }
         $this->logout($client);
     }
@@ -167,13 +165,13 @@ abstract class AbstractEntityControllerTest extends WebTestCase
      * Returns an Invalid Array of Items
      * @return array
      */
-    protected abstract function getInvalidJson();
+    abstract protected function getInvalidJson();
 
     /**
      * Returns an Array Of Items which can be used for Creation
      * @return array
      */
-    protected abstract function getValidCreationJson();
+    abstract protected function getValidCreationJson();
 
     /**
      * Returns an Array of Entity that will be updated.
@@ -181,17 +179,17 @@ abstract class AbstractEntityControllerTest extends WebTestCase
      * this array must Contain an ID
      * @return array
      */
-    protected abstract function getEntityUpdated();
+    abstract protected function getEntityUpdated();
 
     /**
      * Returns the name of the Route which will be used for this Entitytest
      * @return string
      */
-    protected abstract function getRouteName();
+    abstract protected function getRouteName();
 
     /**
      * Returns an array of Fields/Keys in dot notation, that will be checked
      * @return array
      */
-    protected abstract function fieldsForIndexTesting();
+    abstract protected function fieldsForIndexTesting();
 }

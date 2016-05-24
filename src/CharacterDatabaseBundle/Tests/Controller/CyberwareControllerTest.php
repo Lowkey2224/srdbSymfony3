@@ -5,7 +5,6 @@
 
 namespace CharacterDatabaseBundle\Tests\Controller;
 
-
 class CyberwareControllerTest extends AbstractEntityControllerTest
 {
 

@@ -37,7 +37,6 @@ class CyberwareModel extends AbstractModel
                     return $arr;
                 })->toArray(),
             ];
-
         }
 
         return [];
