@@ -11,7 +11,7 @@ CharacterDatabaseBundle\Entity\Character:
         name: Nigel
         race: HSN
         occupation: Schamane
-        description: <text(30)>
+        description: <sentences(50,true)>
         type: 1
         user: "@user-loki2"
         magicalTradition: "@Schaman"
