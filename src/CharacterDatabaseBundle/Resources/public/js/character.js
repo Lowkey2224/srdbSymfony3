@@ -53,10 +53,8 @@
                 //Toggle the length of Description
                 characterDetail.toggleDescription = function () {
                     if (characterDetail.short) {
-                        if (characterDetail.characterDetails.description > 100) {
-                            characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
-                            characterDetail.short = false;
-                        }
+                        characterDetail.description = characterDetail.characterDetails.description.substring(0, 100) + "...";
+                        characterDetail.short = false;
                     } else {
                         characterDetail.description = characterDetail.characterDetails.description;
                         characterDetail.short = true;
