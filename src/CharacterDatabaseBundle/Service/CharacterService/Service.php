@@ -26,7 +26,7 @@ class Service extends LoggerAwareService
     public function validateJson($json)
     {
         $return = $this->validateJsonBasicInfo($json);
-        if (!isset($json['karma'])) {
+        if (!isset($json['goodKarma'])) {
             return false;
         }
         if (!isset($json['reputation'])) {
@@ -80,7 +80,8 @@ class Service extends LoggerAwareService
         $character->setRace($jsonBody['race']);
         $character->setOccupation($jsonBody['occupation']);
         $character->setDescription($jsonBody['description']);
-        $character->setGoodKarma($jsonBody['karma']);
+        $character->setDescriptionContentType($jsonBody['descriptionContentType']);
+        $character->setGoodKarma($jsonBody['goodKarma']);
         $character->setReputation($jsonBody['reputation']);
         $character->setType($jsonBody['type']);
         if (isset($jsonBody['capability'])) {

@@ -31,6 +31,34 @@ class CharacterController extends AbstractBaseController
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function mineAction()
+    {
+        return $this->showForUserAction($this->getUser()->getId());
+
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     */
+    public function showForUserAction($userId)
+    {
+        $characterRepo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:Character');
+        $userRepo = $this->getDoctrine()->getRepository('CharacterDatabaseBundle:User');
+        $user = $userRepo->find($userId);
+        $chars = $characterRepo->findBy(["user" => $user]);
+
+        return $this->render(
+            'CharacterDatabaseBundle:Character:index.json.twig',
+            ['characters' => $chars],
+            new JsonResponse()
+        );
+    }
+
+    /**
      * @param $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -79,6 +107,7 @@ class CharacterController extends AbstractBaseController
         $character = $characterService->updateCharacter($character, $jsonBody, $em);
         $em->persist($character);
         $em->flush();
+
         return $this->render(
             'CharacterDatabaseBundle:Character:show.json.twig',
             ['char' => $repo->find($character->getId())],

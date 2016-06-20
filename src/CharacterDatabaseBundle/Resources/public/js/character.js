@@ -9,19 +9,21 @@
     app.directive("characterList", function () {
         return {
             restrict: 'E',
-            controller: ['$http', 'userService', function ($http, userService) {
+            controller: ['CharacterService', '$routeParams', function (CharacterService, $routeParams) {
                 var character = this;
                 character.loading = true;
-                character.isLoggedIn = userService.isLoggedIn;
-                character.characters = [];
-                url = app.baseUrl + 'character';
-                $http.get(url).then(function (request) {
+
+                var user = $routeParams.userId;
+                var cb = function (request) {
                     character.characters = request.data;
                     character.loading = false;
-                }, function (request) {
-                    character.characters = {'code': request.status};
+                };
+                var errorCb = function (request) {
                     character.loading = false;
-                });
+                    character.characters = {'code': request.status};
+                };
+                CharacterService.getCharacters(cb, errorCb, user);
+                console.log("outside", character.characters);
             }],
             templateUrl: app.bundleDir + 'html/directives/character-list.html',
             controllerAs: 'characterController'

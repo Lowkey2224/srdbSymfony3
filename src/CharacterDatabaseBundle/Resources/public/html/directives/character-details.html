@@ -16,12 +16,15 @@
     </div>
 </div>
 <!--Show Character Details-->
-<div ng-hide="characterDetail.characterDetails.code" ng-show="characterDetail.characterDetails"
+<div ng-hide="characterDetail.characterDetails.code || characterDetails.loading" ng-show="characterDetail.characterDetails"
      class="list-group-item list-group-item-home">
     <div class="row">
         <h1>{{characterDetail.characterDetails.name}}
-            <small>by {{ characterDetail.characterDetails.user.name}}</small>
+            <a href="#/character/user/{{characterDetail.characterDetails.user.id}}"><small>by {{ characterDetail.characterDetails.user.name}}#</small></a>
+
+            <a href="#/edit/{{characterDetail.characterDetails.id}}"> <small class="pull-right">Bearbeiten<i class="fa fa-pencil"></i> </small></a>
         </h1>
+
     </div>
     <div class="row">
         <h4>{{characterDetail.characterDetails.occupation}}</h4>
@@ -31,6 +34,19 @@
         <br/><i ng-show="characterDetail.needsSubString " class="fa color-blue"
                 ng-class="characterDetail.short?'fa-chevron-up':'fa-chevron-down'"
                 ng-click="characterDetail.toggleDescription()"></i>
+    </div>
+    <div class="row">
+        <em class="show-more">dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+            dfsgdgfdgfsdgfsdgfskljhdgfklhdgfklshdgfskljhdgfskljhkljhgkljghkljhkldgfsh
+        </em>
     </div>
 
 

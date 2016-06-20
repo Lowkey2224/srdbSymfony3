@@ -15,6 +15,18 @@ character_show:
     requirements:
         id:  \d+
 
+character_show_mine:
+    path:     /character/mine
+    defaults: { _controller: CharacterDatabaseBundle:Character:mine }
+    methods: [GET]
+
+character_show_for_user:
+    path:     /character/user/{userId}
+    defaults: { _controller: CharacterDatabaseBundle:Character:showForUser }
+    methods: [GET]
+    requirements:
+        id:  \d+
+
 character_store:
     path:     /character/{id}
     defaults: { _controller: CharacterDatabaseBundle:Character:store, id: null }

@@ -34,6 +34,13 @@ class Character extends NamedEntity
     protected $description;
 
     /**
+     * markdown, plain, ....
+     * @var string
+     * @ORM\Column(type="text")
+     */
+    protected $descriptionContentType;
+
+    /**
      * @var int
      * @ORM\Column(type="integer")
      */
@@ -455,4 +462,22 @@ class Character extends NamedEntity
     {
         $this->cyberware = $cyberware;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescriptionContentType()
+    {
+        return $this->descriptionContentType;
+    }
+
+    /**
+     * @param mixed $descriptionContentType
+     */
+    public function setDescriptionContentType($descriptionContentType)
+    {
+        $this->descriptionContentType = $descriptionContentType;
+    }
+
+
 }

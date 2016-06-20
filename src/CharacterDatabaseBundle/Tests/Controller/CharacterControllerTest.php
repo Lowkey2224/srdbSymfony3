@@ -28,8 +28,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'name' => 'Neil',
         'race' => 'HSS',
         'description' => 'Kid-Stealth Cyberlegs Guy',
+        'descriptionContentType' => 'plain',
         'occupation' => 'Street-Sam',
-        'karma' => '0',
+        'goodKarma' => '0',
         'reputation' => '0',
         'type' => '1',
     ];
@@ -38,8 +39,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'name' => 'José',
         'race' => 'HSR',
         'description' => 'Pinoy Troll Schamane',
+        'descriptionContentType' => 'plain',
         'occupation' => 'Schamane',
-        'karma' => '0',
+        'goodKarma' => '0',
         'reputation' => '0',
         'type' => '1',
         'capability' => 'Vollmagier',
@@ -52,8 +54,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'name' => 'Lodur',
         'race' => 'HSS',
         'description' => 'Lässiger Konzerner mit Chip und Datenbuchsen',
+        'descriptionContentType' => 'plain',
         'occupation' => 'Decker/Rigger',
-        'karma' => '150',
+        'goodKarma' => '150',
         'reputation' => '150',
         'type' => '1',
     ];
@@ -62,8 +65,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'name' => 'Cowboy',
         'race' => 'HSS',
         'description' => 'Unnauffälliger Norm mit weißer Strähne',
+        'descriptionContentType' => 'plain',
         'occupation' => 'Util-Mage',
-        'karma' => '0',
+        'goodKarma' => '0',
         'reputation' => '0',
         'type' => '1',
         'capability' => 'Vollmagier',
@@ -74,8 +78,9 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         'name' => 'Cowboy',
         'race' => 'HSS',
         'description' => 'Unnauffälliger Norm mit weißer Strähne',
+        'descriptionContentType' => 'plain',
         'occupation' => 'Util-Mage',
-        'karma' => '0',
+        'goodKarma' => '0',
         'reputation' => '0',
         'type' => '1',
         'capability' => 'Vollmagier',
@@ -197,7 +202,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);
-        $this->assertEquals($char['karma'], $response['goodKarma']);
+        $this->assertEquals($char['goodKarma'], $response['goodgoodKarma']);
         $this->assertEquals($char['reputation'], $response['reputation']);
         $this->assertEquals($char['id'], $response['id']);
     }
@@ -220,7 +225,7 @@ class CharacterControllerTest extends AbstractEntityControllerTest
         $response = json_decode($response->getContent(), true);
         $this->assertEquals($char['name'], $response['name']);
         $this->assertEquals($char['description'], $response['description']);
-        $this->assertEquals($char['karma'], $response['goodKarma']);
+        $this->assertEquals($char['goodKarma'], $response['goodgoodKarma']);
         $this->assertEquals($char['reputation'], $response['reputation']);
         $this->assertArrayHasKey('skills', $response);
         foreach ($char['skill'] as $name => $level) {

@@ -4,9 +4,9 @@
     "race": "{{ char.race }}",
     "description": "{{ char.description }}",
     "occupation": "{{ char.occupation }}",
-    "goodKarma": "{{ char.goodKarma }}",
-    "reputation": "{{ char.reputation }}",
-    "type": "{{ (char.type == 1) ? 'SC' : 'NSC' }}",
+    "goodKarma": {{ char.goodKarma }},
+    "reputation": {{ char.reputation }},
+    "type": {{ (char.type) }},
     "images": [
         "images/gem-02.gif",
         "images/gem-05.gif",
@@ -19,12 +19,12 @@
         {% for att in char.attributes %}
         {
             "name": "{{ att.attribute.name }}",
-            "level": "{{ att.level}}"
+            "level": {{ att.level}}
         },
         {% endfor %}
         {
             "name": "Essenz",
-            "level": "{{ char.essence}}"
+            "level": {{ char.essence}}
         }
     ],
     "skills": [
@@ -32,13 +32,13 @@
         {
             "name": "{{ skill.skill.name }}",
             "type": "{{ skill.skill.typeName }}",
-            "level": "{{ skill.level}}"
+            "level": {{ skill.level}}
             {% if skill.specializations is not empty %},
             "specializations": [
                 {% for spec in skill.specializations %}
                 {
                     "name": "{{ spec.name }}",
-                    "level": "{{ spec.level }}"
+                    "level": {{ spec.level }}
                 }
                 {% if not loop.last %},
                 {% endif %}
@@ -57,7 +57,7 @@
         {
             "id": "{{ conn.character.id }}",
             "name": "{{ conn.target.name }}",
-            "level": "{{ conn.level }}"
+            "level": {{ conn.level }}
         }
         {% if not loop.last %},
         {% endif %}
@@ -67,7 +67,7 @@
         {% for conn in char.connectionsNotInDB%}
         {
             "name": "{{ conn.name }}",
-            "level": "{{ conn.level }}"
+            "level": {{ conn.level }}
         }
         {% if not loop.last %},
         {% endif %}
@@ -77,7 +77,7 @@
         {% for item in char.items%}
         {
             "name": "{{ item.name }}",
-            "amount": "{{ item.amount }}"
+            "amount": {{ item.amount }}
         }
         {% if not loop.last %},
         {% endif %}
@@ -85,6 +85,6 @@
     ],
     "user": {
         "name": "{{ char.user.username }}",
-        "id": "{{ char.user.id }}"
+        "id": {{ char.user.id }}
     }
 }

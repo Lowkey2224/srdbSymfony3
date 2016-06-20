@@ -3,14 +3,14 @@
     {
         "name": "{{ item.cyberware.cyberware.name }}",
         "description": "{{ item.cyberware.cyberware.description }}",
-        "level": "{{ item.cyberware.level}}",
+        "level": {{ item.cyberware.level}},
         "effect": "{{ item.cyberware.effect}}",
         "quality": {
-            "id": "{{ item.quality}}",
+            "id": {{ item.quality}},
             "name": "{{ item.qualityName }}",
             "code": "{{  item.qualityCode }}"
         },
-        "cost": "{{ item.getQualityFactor*item.cyberware.cost}}"
+        "cost": {{ item.getQualityFactor*item.cyberware.cost}}
     }
     {% if not loop.last %},
     {% endif %}

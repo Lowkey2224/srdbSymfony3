@@ -11,13 +11,31 @@
             controller: ['$http', '$routeParams', "$scope", "$location", function ($http, $routeParams, $scope, $location) {
                 var form = this;
                 form.loadStatus = 5;
+                console.log("Status 00", form.loadStatus);
                 form.count = 0;
+
                 form.needsRow = function (countPerRow) {
-                    val = form.count % countPerRow == 0;
+                    var val = form.count % countPerRow == 0;
                     form.count++;
                     return val;
                 };
-                form.character = {};
+                var url = "";
+                if ($routeParams.characterId > 0) {
+                    url = indexUrl + 'character/' + $routeParams.characterId;
+                    $http.get(url).then(function (request) {
+                        form.character = request.data;
+                        form.reformatCharacter(request.data);
+                        console.log(form.character);
+                        console.log(form.character.attributes);
+                        //form.loadStatus--;
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.character = {};
+                        //form.loadStatus--;
+                    });
+                    console.log("Load Character");
+                }
+                //form.character = {};
                 form.attributes = [];
                 form.totems = [];
                 form.capabilities = [];
@@ -48,46 +66,70 @@
                     }, function (request) {
                     });
                 };
-                var url = indexUrl + 'skill';
-                $http.get(url).then(function (request) {
-                    form.skills = request.data;
-                    form.loadStatus--;
-                }, function (request) {
-                    form.error = {'code': request.status};
-                    form.loadStatus--;
-                });
-                url = indexUrl + 'attribute';
-                $http.get(url).then(function (request) {
-                    form.attributes = request.data;
-                    form.loadStatus--;
-                }, function (request) {
-                    form.error = {'code': request.status};
-                    form.loadStatus--;
-                });
-                url = indexUrl + 'totem';
-                $http.get(url).then(function (request) {
-                    form.totems = request.data;
-                    form.loadStatus--;
-                }, function (request) {
-                    form.error = {'code': request.status};
-                    form.loadStatus--;
-                });
-                url = indexUrl + 'capability';
-                $http.get(url).then(function (request) {
-                    form.capabilities = request.data;
-                    form.loadStatus--;
-                }, function (request) {
-                    form.error = {'code': request.status};
-                    form.loadStatus--;
-                });
-                url = indexUrl + 'tradition';
-                $http.get(url).then(function (request) {
-                    form.traditions = request.data;
-                    form.loadStatus--;
-                }, function (request) {
-                    form.error = {'code': request.status};
-                    form.loadStatus--;
-                });
+
+
+
+                form.getVars = function () {
+                    url = indexUrl + 'skill';
+                    $http.get(url).then(function (request) {
+                        form.skills = request.data;
+                        form.loadStatus--;
+                        console.log("Status 11", form.loadStatus);
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.loadStatus--;
+                        console.log("Status 12", form.loadStatus);
+                    });
+                    url = indexUrl + 'attribute';
+                    $http.get(url).then(function (request) {
+                        form.attributes = request.data;
+                        form.loadStatus--;
+                        console.log("Status 21", form.loadStatus);
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.loadStatus--;
+                        console.log("Status 22", form.loadStatus);
+                    });
+                    url = indexUrl + 'totem';
+                    $http.get(url).then(function (request) {
+                        form.totems = request.data;
+                        form.loadStatus--;
+                        console.log("Status 31", form.loadStatus);
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.loadStatus--;
+                        console.log("Status 32", form.loadStatus);
+                    });
+                    url = indexUrl + 'capability';
+                    $http.get(url).then(function (request) {
+                        form.capabilities = request.data;
+                        form.loadStatus--;
+                        console.log("Status 41", form.loadStatus);
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.loadStatus--;
+                        console.log("Status 42", form.loadStatus);
+                    });
+                    url = indexUrl + 'tradition';
+                    $http.get(url).then(function (request) {
+                        form.traditions = request.data;
+                        form.loadStatus--;
+                        console.log("Status 51", form.loadStatus);
+                    }, function (request) {
+                        form.error = {'code': request.status};
+                        form.loadStatus--;
+                        console.log("Status 52", form.loadStatus);
+                    });
+                };
+                form.getVars();
+
+                form.reformatCharacter = function (char) {
+                    var atts = char.attributes;
+                    form.character.attributes = [];
+                    for (var i = 0; i < atts.length; i++) {
+                        form.character.attributes[atts[i].name] = atts[i].level;
+                    }
+                }
             }],
             controllerAs: 'form'
         };
@@ -97,7 +139,7 @@
         return {
             restrict: 'E',
             templateUrl: bundleDir + 'html/directives/skill-selector.html',
-            controller: ['$http', '$routeParams', "$scope", function ($http, $routeParams, $scope) {
+            controller: ['$http', function ($http) {
                 var skills = this;
                 skills.skills = [];
                 skills.formSkills = [];

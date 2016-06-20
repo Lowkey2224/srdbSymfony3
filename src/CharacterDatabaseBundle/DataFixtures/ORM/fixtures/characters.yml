@@ -4,6 +4,7 @@ CharacterDatabaseBundle\Entity\Character:
         race: HSS
         occupation: Decker/Rigger
         description: <sentences(50,true)>
+        descriptionContentType: plain
         type: 1
         user: "@superadmin-loki"
 
@@ -12,6 +13,7 @@ CharacterDatabaseBundle\Entity\Character:
         race: HSN
         occupation: Schamane
         description: <sentences(50,true)>
+        descriptionContentType: plain
         type: 1
         user: "@user-loki2"
         magicalTradition: "@Schaman"
